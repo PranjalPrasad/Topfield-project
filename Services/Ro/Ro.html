@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RO Plants – Topfield Water Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../header/header.css"/>
+  <link rel="stylesheet" href="../../footer/footer.css"/>
+  <style>
+    :root {
+      --bd: #0a2342; --bm: #1565a8; --bl: #3b9fd4;
+      --aq: #00c6d4; --tl: #00a896; --wh: #f8fbff;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--wh); color:var(--bd); overflow-x:hidden; }
+    h1,h2,h3,h4 { font-family:'Playfair Display',serif; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; min-height:65vh;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; padding:100px 2rem 80px;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:linear-gradient(135deg,#060f1e 0%,#0a2342 42%,#0d4a7a 72%,#0a7fa8 100%);
+    }
+    .ripple-field { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+    .ripple {
+      position:absolute; border-radius:50%;
+      border:1px solid rgba(0,198,212,0.13);
+      animation:rippleOut 7s ease-out infinite;
+    }
+    .ripple:nth-child(1){ width:200px;height:200px;left:10%;top:65%;animation-delay:0s; }
+    .ripple:nth-child(2){ width:380px;height:380px;left:10%;top:65%;animation-delay:1.8s; }
+    .ripple:nth-child(3){ width:560px;height:560px;left:10%;top:65%;animation-delay:3.6s; }
+    .ripple:nth-child(4){ width:180px;height:180px;left:82%;top:28%;animation-delay:2.5s; }
+    .ripple:nth-child(5){ width:350px;height:350px;left:82%;top:28%;animation-delay:5s; }
+    .ripple:nth-child(6){ width:130px;height:130px;left:55%;top:82%;animation-delay:1.2s; }
+    @keyframes rippleOut {
+      0%  { transform:translate(-50%,-50%) scale(0.2); opacity:0.7; }
+      100%{ transform:translate(-50%,-50%) scale(2); opacity:0; }
+    }
+    .vline {
+      position:absolute; width:1px;
+      background:linear-gradient(180deg,transparent,rgba(0,198,212,0.2),transparent);
+    }
+    .vline:nth-child(1){ height:100%;top:0;left:18%; }
+    .vline:nth-child(2){ height:70%;top:15%;right:20%; }
+
+    .hero-content { position:relative; z-index:2; text-align:center; max-width:700px; }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(0,198,212,0.1); border:1px solid rgba(0,198,212,0.3);
+      color:#7eeeff; font-size:0.67rem; font-weight:700;
+      letter-spacing:3px; text-transform:uppercase;
+      padding:7px 20px; border-radius:50px; margin-bottom:1.4rem;
+      animation:fdY 0.7s 0.2s both;
+    }
+    .bdot { width:6px;height:6px;border-radius:50%;background:var(--aq);animation:pulse 2s infinite; }
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+    .hero-tagline {
+      font-size:0.72rem; color:rgba(255,255,255,0.35);
+      letter-spacing:5px; text-transform:uppercase; margin-bottom:0.8rem;
+      animation:fdY 0.65s 0.35s both;
+    }
+    .hero h1 {
+      font-size:clamp(2.3rem,5.8vw,4.1rem); font-weight:900; color:#fff;
+      line-height:1.1; margin-bottom:1rem;
+      animation:fdY 0.75s 0.45s both;
+    }
+    .hero h1 em {
+      font-style:italic;
+      background:linear-gradient(90deg,#00c6d4,#7eeeff);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .hero-sub {
+      font-size:0.97rem; color:rgba(255,255,255,0.55);
+      max-width:500px; margin:0 auto 2rem; line-height:1.85; font-weight:300;
+      animation:fdY 0.65s 0.65s both;
+    }
+    .hero-pills {
+      display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap;
+      animation:fdY 0.6s 0.85s both;
+    }
+    .h-pill {
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13);
+      color:#fff; border-radius:50px; padding:7px 18px;
+      font-size:0.75rem; font-weight:500; backdrop-filter:blur(8px);
+    }
+    .h-pill b { color:#7eeeff; }
+    @keyframes fdY{from{opacity:0;transform:translateY(-22px)}to{opacity:1;transform:translateY(0)}}
+    .hero-wave { position:absolute; bottom:-2px; left:0; width:100%; z-index:3; }
+
+   
+    /* ── SECTIONS COMMON ── */
+    .container { max-width:1100px; margin:0 auto; padding:0 2rem; }
+    .sec-head { text-align:center; margin-bottom:3rem; }
+    .sec-label {
+      display:inline-block; font-size:0.67rem; font-weight:700;
+      letter-spacing:3.5px; text-transform:uppercase; color:var(--bl); margin-bottom:0.5rem;
+    }
+    .sec-title { font-size:clamp(1.7rem,3.5vw,2.6rem); font-weight:900; color:var(--bd); line-height:1.15; margin-bottom:0.6rem; }
+    .sec-title em { font-style:italic; color:var(--bm); }
+    .sec-desc { font-size:0.9rem; color:#6888a8; max-width:520px; margin:0 auto; line-height:1.75; }
+
+    /* ── ABOUT ── */
+    .about-band { background:#fff; padding:72px 0; }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    @media(max-width:760px){ .about-grid{grid-template-columns:1fr;gap:2.5rem;} }
+    .about-visual {
+      position:relative; border-radius:24px; overflow:hidden;
+      background:linear-gradient(135deg,#060f1e,#0a2342,#0d4a7a,#0a7fa8);
+      min-height:380px; display:flex; align-items:center; justify-content:center;
+    }
+    .hex-overlay {
+      position:absolute; inset:0; opacity:0.06;
+      background-image:
+        repeating-linear-gradient(60deg,#00c6d4 0,#00c6d4 1px,transparent 0,transparent 50%),
+        repeating-linear-gradient(120deg,#00c6d4 0,#00c6d4 1px,transparent 0,transparent 50%);
+      background-size:30px 52px;
+    }
+    .av-inner { position:relative; z-index:2; text-align:center; padding:2.5rem; }
+    .drop-anim { font-size:5rem; line-height:1; margin-bottom:1rem; animation:floatY 4s ease-in-out infinite; }
+    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    .av-inner h3 { font-size:1.65rem; color:#fff; margin-bottom:0.5rem; }
+    .av-inner p { font-size:0.82rem; color:rgba(255,255,255,0.48); line-height:1.7; }
+    .av-tags { display:flex; gap:0.7rem; flex-wrap:wrap; justify-content:center; margin-top:1.4rem; }
+    .av-tag {
+      background:rgba(0,198,212,0.12); border:1px solid rgba(0,198,212,0.25);
+      color:#7eeeff; font-size:0.67rem; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; padding:5px 14px; border-radius:50px;
+    }
+    .about-copy .sec-label { display:inline-block; margin-bottom:0.6rem; }
+    .about-copy h2 { font-size:clamp(1.7rem,3.2vw,2.5rem); font-weight:900; color:var(--bd); line-height:1.2; margin-bottom:1rem; }
+    .about-copy h2 em { font-style:italic; color:var(--bm); }
+    .about-copy p { font-size:0.9rem; color:#5a7a9a; line-height:1.85; margin-bottom:0.9rem; }
+    .feat-list { list-style:none; margin-top:1.2rem; display:flex; flex-direction:column; gap:0.6rem; }
+    .feat-list li { display:flex; align-items:flex-start; gap:0.7rem; font-size:0.88rem; color:#3a5a7a; line-height:1.5; }
+    .fck {
+      width:20px; height:20px; border-radius:5px; flex-shrink:0;
+      background:linear-gradient(135deg,var(--aq),var(--bm));
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.65rem; color:#fff; margin-top:2px;
+    }
+
+    /* ── SERVICES ── */
+    #services { background:#eef4f8; padding:72px 0; }
+    .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+    @media(max-width:900px){ .svc-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:560px){ .svc-grid{grid-template-columns:1fr;} }
+    .svc-card {
+      background:#fff; border-radius:18px; padding:2rem 1.6rem 1.8rem;
+      border:1.5px solid #dde8f2; position:relative; overflow:hidden;
+      transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .svc-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(10,35,66,0.1); border-color:var(--bl); }
+    .svc-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg,var(--aq),var(--bm));
+      transform:scaleX(0); transform-origin:left; transition:transform 0.3s;
+    }
+    .svc-card:hover::before { transform:scaleX(1); }
+    .svc-ico {
+      width:52px; height:52px; border-radius:12px;
+      background:linear-gradient(135deg,rgba(0,198,212,0.1),rgba(21,101,168,0.1));
+      border:1.5px solid rgba(0,198,212,0.18);
+      display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:1.1rem;
+    }
+    .svc-card h3 { font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; color:var(--bd); margin-bottom:0.5rem; }
+    .svc-card p { font-size:0.83rem; color:#6888a8; line-height:1.7; }
+    .svc-tag {
+      display:inline-block; margin-top:0.9rem;
+      background:rgba(10,35,66,0.05); color:var(--bm);
+      font-size:0.63rem; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; padding:4px 10px; border-radius:4px;
+    }
+
+    /* ── RO PROCESS ── */
+    #ro-process { background:#fff; padding:72px 0; }
+    .ro-flow { display:grid; grid-template-columns:repeat(4,1fr); }
+    @media(max-width:860px){ .ro-flow{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:480px){ .ro-flow{grid-template-columns:1fr;} }
+    .ro-step {
+      padding:2.4rem 1.6rem 2rem; text-align:center; position:relative;
+      border-right:1px dashed rgba(0,198,212,0.22);
+    }
+    .ro-step:last-child,.ro-step:nth-child(2):last-child { border-right:none; }
+    @media(max-width:860px){
+      .ro-step:nth-child(2){ border-right:none; }
+      .ro-step:nth-child(3){ border-right:1px dashed rgba(0,198,212,0.22); }
+      .ro-step:nth-child(4){ border-right:none; }
+    }
+    .ro-num {
+      font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:900; line-height:1;
+      color:#e4eff8; margin-bottom:0.3rem;
+    }
+    .ro-icon { font-size:2rem; margin-bottom:0.75rem; }
+    .ro-step h3 { font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:700; color:var(--bd); margin-bottom:0.4rem; }
+    .ro-step p { font-size:0.8rem; color:#7a9ab8; line-height:1.65; }
+    .ro-step:not(:last-child)::after {
+      content:'→'; position:absolute; right:-14px; top:45%;
+      color:var(--aq); font-size:1.3rem; z-index:2; line-height:1;
+    }
+    @media(max-width:860px){
+      .ro-step:nth-child(2)::after,.ro-step:nth-child(4)::after{ display:none; }
+    }
+
+    /* ── PRODUCTS ── */
+    #products { background:#eef4f8; padding:72px 0; }
+    .prod-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+    @media(max-width:860px){ .prod-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:520px){ .prod-grid{grid-template-columns:1fr;} }
+    .prod-card {
+      background:var(--bd); border-radius:16px; padding:1.8rem 1.5rem;
+      position:relative; overflow:hidden;
+      transition:transform 0.3s, box-shadow 0.3s;
+    }
+    .prod-card:hover { transform:translateY(-5px); box-shadow:0 14px 38px rgba(10,35,66,0.3); }
+    .prod-card::after {
+      content:''; position:absolute; bottom:0; right:0;
+      width:100px; height:100px; border-radius:50%;
+      background:rgba(0,198,212,0.06); transform:translate(30px,30px);
+    }
+    .prod-n { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:rgba(0,198,212,0.28); margin-bottom:0.8rem; }
+    .prod-icon { font-size:1.8rem; margin-bottom:0.7rem; }
+    .prod-card h3 { font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:0.4rem; }
+    .prod-card p { font-size:0.8rem; color:rgba(255,255,255,0.44); line-height:1.65; }
+    .prod-pill {
+      display:inline-flex; align-items:center; gap:5px; margin-top:0.9rem;
+      background:rgba(0,198,212,0.1); border:1px solid rgba(0,198,212,0.18);
+      color:#7eeeff; font-size:0.63rem; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; padding:4px 12px; border-radius:50px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background:#fff; padding:72px 0; }
+    .proj-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+    @media(max-width:960px){ .proj-grid{grid-template-columns:repeat(3,1fr);} }
+    @media(max-width:680px){ .proj-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:420px){ .proj-grid{grid-template-columns:1fr;} }
+    .proj-card {
+      background:#fff; border-radius:14px; padding:1.2rem 1rem;
+      border:1.5px solid #dde8f2;
+      display:flex; align-items:flex-start; gap:0;
+      transition:transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .proj-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(10,35,66,0.09); border-color:var(--bl); }
+    .p-num { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:900; color:#d4e6f1; line-height:1; min-width:38px; flex-shrink:0; padding-top:3px; }
+    .p-body { flex:1; }
+    .p-icon { font-size:1.1rem; margin-bottom:0.3rem; }
+    .p-name { font-size:0.85rem; font-weight:700; color:var(--bd); line-height:1.3; margin-bottom:0.2rem; }
+    .p-loc { font-size:0.72rem; color:#8aaac8; line-height:1.4; display:flex; align-items:center; gap:3px; }
+
+    /* ── CONTACT ── */
+    #contact { background:var(--bd); padding:62px 0; }
+    .ct-wrap { display:grid; grid-template-columns:1fr 1px 1fr; gap:3.5rem; align-items:center; }
+    @media(max-width:720px){ .ct-wrap{grid-template-columns:1fr;gap:2rem;text-align:center;} .ct-div{display:none;} }
+    .ct-left h2 { color:#fff; font-size:clamp(1.4rem,3vw,2rem); line-height:1.2; margin-bottom:0.6rem; }
+    .ct-left p { color:rgba(255,255,255,0.42); font-size:0.85rem; line-height:1.75; }
+    .ct-btn {
+      display:inline-flex; align-items:center; gap:8px; margin-top:1.2rem;
+      background:linear-gradient(135deg,var(--aq),var(--bm)); color:#fff;
+      padding:13px 28px; border-radius:50px; font-weight:600; font-size:0.9rem;
+      text-decoration:none; transition:transform 0.3s, box-shadow 0.3s;
+      box-shadow:0 6px 22px rgba(0,198,212,0.28);
+    }
+    .ct-btn:hover { transform:translateY(-3px); box-shadow:0 12px 34px rgba(0,198,212,0.42); }
+    .ct-div { background:rgba(255,255,255,0.08); height:90px; }
+    .ct-right { display:flex; flex-direction:column; gap:0.9rem; }
+    .ct-item { display:flex; align-items:flex-start; gap:0.75rem; }
+    .ct-ico {
+      width:38px; height:38px; border-radius:10px; flex-shrink:0;
+      background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.09);
+      display:flex; align-items:center; justify-content:center; font-size:1rem; margin-top:2px;
+    }
+    .ct-txt b { display:block; font-size:0.64rem; color:rgba(255,255,255,0.28); text-transform:uppercase; letter-spacing:1px; }
+    .ct-txt span { font-size:0.84rem; color:rgba(255,255,255,0.72); font-weight:500; }
+
+    /* scroll top */
+    #scrollTop {
+      position:fixed; bottom:2rem; right:2rem;
+      width:44px; height:44px;
+      background:linear-gradient(135deg,var(--bm),var(--bl));
+      color:#fff; border:none; border-radius:50%; cursor:pointer; font-size:1.1rem;
+      display:none; align-items:center; justify-content:center;
+      box-shadow:0 4px 18px rgba(21,101,168,0.38); z-index:999; transition:transform 0.3s;
+    }
+    #scrollTop.show { display:flex; }
+    #scrollTop:hover { transform:scale(1.1) translateY(-2px); }
+
+    /* reveal */
+    .rev { opacity:0; transform:translateY(24px); }
+  </style>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="ripple-field">
+    <div class="ripple"></div><div class="ripple"></div><div class="ripple"></div>
+    <div class="ripple"></div><div class="ripple"></div><div class="ripple"></div>
+  </div>
+  <div class="vline"></div><div class="vline"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="bdot"></div> Topfield Water Solutions <div class="bdot"></div></div>
+    <div class="hero-tagline">Water Is The Life</div>
+    <h1>Reverse Osmosis<br/><em>Plants &amp; Systems</em></h1>
+    <p class="hero-sub">Industry-leading RO plant design, erection, commissioning and AMC — from domestic purifiers to large-scale industrial installations across Pune.</p>
+    <div class="hero-pills">
+      <div class="h-pill"><b>23+</b> Projects</div>
+      <div class="h-pill"><b>Pune</b> Based</div>
+      <div class="h-pill"><b>RO · UV · UF</b></div>
+      <div class="h-pill"><b>AMC</b> Supported</div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 52" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,26 C400,52 1040,0 1440,26 L1440,52 L0,52 Z" fill="#ffffff"/>
+  </svg>
+</section>
+
+
+
+<!-- ABOUT -->
+<section class="about-band">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="hex-overlay"></div>
+        <div class="av-inner">
+          <div class="drop-anim">💧</div>
+          <h3>Pure Water.<br/>Engineered.</h3>
+          <p>Innovative · Customised · Cost-Effective<br/>Water Treatment Solutions, Pune</p>
+          <div class="av-tags">
+            <span class="av-tag">STP</span>
+            <span class="av-tag">WTP</span>
+            <span class="av-tag">RO</span>
+            <span class="av-tag">ETP</span>
+            <span class="av-tag">AMC</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-copy">
+        <span class="sec-label">Who We Are</span>
+        <h2>Innovative &amp; <em>Cost-Effective</em><br/>Water Solutions</h2>
+        <p>At Topfield Water Solutions, we believe in providing innovative, customised, practical and cost-effective solutions pertaining to water treatment and waste water treatment — with utmost dedication and transparency toward our work.</p>
+        <p>We design, erect, commission water treatment plants, waste water treatment plants &amp; reverse osmosis plants, and also take AMC for these systems by providing spares and services for all types of applications — from domestic equipment to industrial plants.</p>
+        <ul class="feat-list">
+          <li><div class="fck">✓</div> Full RO plant design, supply and installation</li>
+          <li><div class="fck">✓</div> Annual Maintenance Contracts with dedicated manpower</li>
+          <li><div class="fck">✓</div> Supply of RO membranes, FRP/MS vessels, media &amp; spares</li>
+          <li><div class="fck">✓</div> Repair &amp; refurbishment of existing RO / WTP / STP / ETP plants</li>
+          <li><div class="fck">✓</div> Tank cleaning for STP, WTP and ETP systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-label">What We Offer</span>
+      <h2 class="sec-title">Our RO &amp; Water<br/><em>Treatment Services</em></h2>
+      <p class="sec-desc">Comprehensive water treatment solutions backed by experienced engineers — designed, installed and maintained by Topfield.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card rev">
+        <div class="svc-ico">💧</div>
+        <h3>RO + UV Purifiers</h3>
+        <p>Drinking water filtration systems with Reverse Osmosis and UV disinfection for complete pathogen elimination.</p>
+        <span class="svc-tag">Residential · Commercial</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">🏭</div>
+        <h3>Industrial RO Plants</h3>
+        <p>Custom high-capacity RO plants for factories, complexes and large-scale purification from 500 LPH to several KLD.</p>
+        <span class="svc-tag">Industrial</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">🏥</div>
+        <h3>Hospital-Grade RO</h3>
+        <p>Medical-purity systems engineered for dialysis units, OTs and sensitive hospital environments.</p>
+        <span class="svc-tag">Healthcare</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">🌊</div>
+        <h3>Water Softening Plants</h3>
+        <p>Ion-exchange resin-based softening for hard water in housing societies, hotels and industrial processes.</p>
+        <span class="svc-tag">WTP · Hard Water</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">⚙️</div>
+        <h3>AMC &amp; Maintenance</h3>
+        <p>Annual Maintenance Contracts with well-equipped dedicated manpower and regular scheduled servicing.</p>
+        <span class="svc-tag">AMC · Spares</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">🧪</div>
+        <h3>Chemicals &amp; Consumables</h3>
+        <p>Supply of RO membranes, FRP/MS vessels, sand/carbon media, resin, cartridge filters, Anti-Scalant, SMBS, PAC &amp; more.</p>
+        <span class="svc-tag">Spares · Chemicals</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">🚰</div>
+        <h3>Pressure Sand &amp; Carbon Filters</h3>
+        <p>Pre-treatment pressure sand, activated carbon and dual media filtration systems for turbidity and chlorine removal.</p>
+        <span class="svc-tag">Pre-treatment</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">🏊</div>
+        <h3>Swimming Pool AMC</h3>
+        <p>Swimming pool and water bodies operation, chemical dosing and comprehensive maintenance services.</p>
+        <span class="svc-tag">Pool · Water Bodies</span>
+      </div>
+      <div class="svc-card rev">
+        <div class="svc-ico">🔧</div>
+        <h3>Repair &amp; Refurbishment</h3>
+        <p>Comprehensive overhaul, repair and upgrade of existing STP, WTP and ETP plants to restore peak performance.</p>
+        <span class="svc-tag">Repair · Upgrade</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RO PROCESS -->
+<section id="ro-process">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-label">How It Works</span>
+      <h2 class="sec-title">The RO <em>Purification</em> Process</h2>
+      <p class="sec-desc">Our multi-stage reverse osmosis process removes up to 99% of dissolved solids, bacteria and contaminants.</p>
+    </div>
+    <div class="ro-flow">
+      <div class="ro-step rev">
+        <div class="ro-num">01</div>
+        <div class="ro-icon">🪨</div>
+        <h3>Pre-Filtration</h3>
+        <p>Pressure sand &amp; activated carbon filters remove suspended particles, sediment and chlorine, protecting the RO membrane.</p>
+      </div>
+      <div class="ro-step rev">
+        <div class="ro-num">02</div>
+        <div class="ro-icon">🧪</div>
+        <h3>Chemical Dosing</h3>
+        <p>Anti-scalant and SMBS dosing prevents membrane scaling and biofouling for long service life and sustained efficiency.</p>
+      </div>
+      <div class="ro-step rev">
+        <div class="ro-num">03</div>
+        <div class="ro-icon">💧</div>
+        <h3>RO Membrane</h3>
+        <p>High-rejection semi-permeable membranes in MS/FRP vessels strip dissolved salts, heavy metals and pathogens.</p>
+      </div>
+      <div class="ro-step rev">
+        <div class="ro-num">04</div>
+        <div class="ro-icon">☀️</div>
+        <h3>UV Disinfection</h3>
+        <p>UV lamps eliminate 99.99% of remaining bacteria and viruses, delivering safe potable water at the point of use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-label">Product Range</span>
+      <h2 class="sec-title">Domestic <em>Purifiers</em> &amp; Systems</h2>
+      <p class="sec-desc">From under-sink purifiers to whole-building softeners — every product sourced, installed and maintained by our team.</p>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card rev">
+        <div class="prod-n">01 /</div>
+        <div class="prod-icon">💧</div>
+        <h3>RO + UV Purifier</h3>
+        <p>Dual-stage protection combining RO rejection with UV disinfection for perfectly safe drinking water at home.</p>
+        <div class="prod-pill">⭐ Most Popular</div>
+      </div>
+      <div class="prod-card rev">
+        <div class="prod-n">02 /</div>
+        <div class="prod-icon">🌀</div>
+        <h3>UF Purifier</h3>
+        <p>Ultra-filtration membrane systems ideal for low-TDS water sources where pathogen removal is the primary need.</p>
+        <div class="prod-pill">🏘️ Housing Societies</div>
+      </div>
+      <div class="prod-card rev">
+        <div class="prod-n">03 /</div>
+        <div class="prod-icon">⬆️</div>
+        <h3>Alkaline Purifiers</h3>
+        <p>pH-enhancing systems that mineralise RO-purified water for health-optimised alkaline drinking water.</p>
+        <div class="prod-pill">🌿 Wellness</div>
+      </div>
+      <div class="prod-card rev">
+        <div class="prod-n">04 /</div>
+        <div class="prod-icon">🏺</div>
+        <h3>7-Stage Gravity Model</h3>
+        <p>Non-electric gravity-fed multi-stage purifier — perfect for areas with irregular power supply or low pressure.</p>
+        <div class="prod-pill">⚡ No Electricity</div>
+      </div>
+      <div class="prod-card rev">
+        <div class="prod-n">05 /</div>
+        <div class="prod-icon">🔩</div>
+        <h3>Residential Softeners</h3>
+        <p>Ion-exchange resin water softeners for residential flats — protects pipes, appliances and skin from hard water.</p>
+        <div class="prod-pill">🏡 Residential</div>
+      </div>
+      <div class="prod-card rev">
+        <div class="prod-n">06 /</div>
+        <div class="prod-icon">🏭</div>
+        <h3>Industrial &amp; Bulk RO</h3>
+        <p>Large-format multi-stage RO plants from 500 LPH to several KLD for factories, hospitals and complexes.</p>
+        <div class="prod-pill">⚙️ Industrial Scale</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-label">Portfolio</span>
+      <h2 class="sec-title">Projects We've <em>Delivered</em></h2>
+      <p class="sec-desc">23 completed projects across Pune — premium societies, hospitals and commercial complexes trust Topfield.</p>
+    </div>
+    <div class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="ct-wrap">
+      <div class="ct-left">
+        <h2>Ready to Install Your<br/>RO Plant?</h2>
+        <p>Get a free site visit, water testing and customised quotation for your reverse osmosis or water treatment requirement — domestic to industrial scale.</p>
+        <a href="mailto:topfield0505@gmail.com" class="ct-btn">Get Free Quote →</a>
+      </div>
+      <div class="ct-div"></div>
+      <div class="ct-right">
+        <div class="ct-item">
+          <div class="ct-ico">📍</div>
+          <div class="ct-txt"><b>Office</b><span>C-410, 3rd Floor, Mega-Centre, Pune–Solapur Road, Hadapsar, Pune – 411028</span></div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-ico">📞</div>
+          <div class="ct-txt"><b>Prem Adhe</b><span>9673850505 / 7499726540</span></div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-ico">📞</div>
+          <div class="ct-txt"><b>Akash Chavan</b><span>7262-899298</span></div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-ico">✉️</div>
+          <div class="ct-txt"><b>Email</b><span>topfield0505@gmail.com / premadhe11@gmail.com</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  /* ── header / footer ── */
+  fetch('../../header/header.html').then(r=>r.text()).then(html=>{
+    document.getElementById('header-placeholder').innerHTML=html;
+    const s=document.createElement('script');s.src='../../header/header.js';document.head.appendChild(s);
+  }).catch(()=>{});
+  fetch('../../footer/footer.html').then(r=>r.text()).then(html=>{
+    document.getElementById('footer-placeholder').innerHTML=html;
+    const s=document.createElement('script');s.src='../../footer/footer.js';document.head.appendChild(s);
+  }).catch(()=>{});
+  /* projects data */
+  const projects = [
+    { name:'Marvel Zypher',           loc:'Kharadi, Pune',       icon:'🏗️', detail:'STP · WTP' },
+    { name:'Marvel Friya',            loc:'Wagholi, Pune',        icon:'💧', detail:'WTP · RO' },
+    { name:'Vishwaraj Hospital',      loc:'Loni, Pune',           icon:'🏥', detail:'RO · Purification' },
+    { name:'One North Condominium',   loc:'Magarpatta, Pune',     icon:'🏢', detail:'STP · AMC' },
+    { name:'The Orchard',             loc:'Handewadi, Pune',      icon:'🏡', detail:'STP · WTP' },
+    { name:'Grand Bay',               loc:'Pune',                 icon:'🌊', detail:'RO Plant' },
+    { name:'Rohan Lehar',             loc:'Baner, Pune',          icon:'🏢', detail:'STP + AMC' },
+    { name:'Vijay Vihar AWHO',        loc:'Wagholi, Pune',        icon:'🏘️', detail:'Water Treatment' },
+    { name:'Nyati Envision',          loc:'Tingare Nagar, Pune',  icon:'🏬', detail:'RO · WTP' },
+    { name:'Kalpataru Serenity',      loc:'Manjari, Pune',        icon:'🏞️', detail:'STP · AMC' },
+    { name:'Guru Vista',              loc:'Kharadi, Pune',        icon:'🏗️', detail:'WTP · RO' },
+    { name:'Chesterfield Society',    loc:'Dhanori, Pune',        icon:'🏛️', detail:'STP' },
+    { name:'Shriram Paradise',        loc:'Wagholi, Pune',        icon:'🏡', detail:'RO System' },
+    { name:'Konark Meadows',          loc:'Wagholi, Pune',        icon:'🌳', detail:'STP + RO' },
+    { name:'Genesis Society',         loc:'Dighi, Pune',          icon:'🏘️', detail:'WTP' },
+    { name:'B A Vermont Society',     loc:'Wagholi, Pune',        icon:'🏡', detail:'STP · AMC' },
+    { name:'Wildwoods Society',       loc:'Pune',                 icon:'🌲', detail:'Water Purification' },
+    { name:'Rahul East View',         loc:'Handewadi, Pune',      icon:'🏢', detail:'STP + RO' },
+    { name:'BA Iris Society',         loc:'Wagholi, Pune',        icon:'🏘️', detail:'WTP' },
+    { name:'Swaraj Capital',          loc:'Moshi, Pune',          icon:'🏬', detail:'STP · AMC' },
+    { name:'Marvel Enigma Society',   loc:'Kharadi, Pune',        icon:'🏗️', detail:'RO Plant' },
+    { name:'Anjani Amores',           loc:'Undri, Pune',          icon:'🏡', detail:'STP' },
+    { name:'Vishwraj Hospital',       loc:'Loni, Pune',           icon:'🏥', detail:'RO · Purification' },
+  ];
+
+  const pinSvg = `<svg width="9" height="10" viewBox="0 0 10 11" fill="none"><circle cx="5" cy="4.5" r="2" stroke="#3b9fd4" stroke-width="1.3"/><path d="M5 10.5C5 10.5 1.5 7 1.5 4.5C1.5 2.567 3.015 1 5 1C6.985 1 8.5 2.567 8.5 4.5C8.5 7 5 10.5 5 10.5Z" stroke="#3b9fd4" stroke-width="1.3" fill="none"/></svg>`;
+
+  const grid = document.getElementById('projGrid');
+  projects.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'proj-card rev';
+    const num = String(i + 1).padStart(2, '0');
+    card.innerHTML = `
+      <div class="p-num">${num}</div>
+      <div class="p-body">
+        <div class="p-icon">${p.icon}</div>
+        <div class="p-name">${p.name}</div>
+        <div class="p-loc">${pinSvg} ${p.loc} · ${p.detail}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  /* scroll reveal */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, idx) => {
+      if (e.isIntersecting) {
+        const delay = parseFloat(e.target.style.transitionDelay) || 0;
+        setTimeout(() => {
+          e.target.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, delay * 1000);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.rev').forEach((el, i) => {
+    el.style.transitionDelay = ((i % 4) * 0.07) + 's';
+    io.observe(el);
+  });
+
+  /* scroll top */
+  const stBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => stBtn.classList.toggle('show', scrollY > 500));
+</script>
+</body>
+</html>

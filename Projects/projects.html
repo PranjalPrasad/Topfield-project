@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects – Topfield Water Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --bd: #0a2342; --bm: #1565a8; --bl: #3b9fd4;
+      --aq: #00c6d4; --tl: #00a896; --wh: #f8fbff;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--wh); color:var(--bd); overflow-x:hidden; }
+    h1,h2,h3,h4 { font-family:'Playfair Display',serif; }
+
+    /* ══ HERO ══ */
+    .hero {
+      position:relative; min-height:58vh;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; padding:90px 2rem 65px;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:linear-gradient(135deg,#060f1e 0%,#0a2342 42%,#0d4a7a 72%,#0a7fa8 100%);
+    }
+    .hero-rings { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+    .ring {
+      position:absolute; border-radius:50%;
+      border:1px solid rgba(0,198,212,0.1);
+      transform:translate(-50%,-50%) scale(0); opacity:0;
+    }
+    .ring:nth-child(1){ width:280px; height:280px; left:15%; top:65%; }
+    .ring:nth-child(2){ width:460px; height:460px; left:15%; top:65%; }
+    .ring:nth-child(3){ width:640px; height:640px; left:15%; top:65%; }
+    .ring:nth-child(4){ width:240px; height:240px; left:82%; top:28%; }
+    .ring:nth-child(5){ width:420px; height:420px; left:82%; top:28%; }
+    .hero-vline {
+      position:absolute; top:0; right:18%;
+      width:1px; height:100%;
+      background:linear-gradient(180deg,transparent,rgba(0,198,212,0.2),transparent);
+    }
+    .hero-content { position:relative; z-index:2; text-align:center; max-width:680px; }
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:9px;
+      background:rgba(0,198,212,0.12); border:1px solid rgba(0,198,212,0.32);
+      color:#7eeeff; font-size:0.68rem; font-weight:700;
+      letter-spacing:3px; text-transform:uppercase;
+      padding:6px 18px; border-radius:50px; margin-bottom:1.3rem;
+      opacity:0; transform:translateY(-20px);
+    }
+    .hero-eyebrow span { width:5px; height:5px; border-radius:50%; background:var(--aq); display:inline-block; }
+    .hero h1 {
+      font-size:clamp(2.2rem,5.5vw,3.9rem); font-weight:900; color:#fff;
+      line-height:1.1; margin-bottom:0.9rem; opacity:0; transform:translateY(-20px);
+    }
+    .hero h1 em {
+      font-style:italic;
+      background:linear-gradient(90deg,#00c6d4,#7eeeff);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .hero-sub {
+      font-size:0.95rem; color:rgba(255,255,255,0.58);
+      max-width:460px; margin:0 auto 1.8rem; line-height:1.8; font-weight:300;
+      opacity:0; transform:translateY(-20px);
+    }
+    .hero-pills {
+      display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap;
+      opacity:0; transform:translateY(-20px);
+    }
+    .hero-pill {
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13);
+      color:#fff; border-radius:50px; padding:7px 18px;
+      font-size:0.75rem; font-weight:500; backdrop-filter:blur(8px);
+    }
+    .hero-pill b { color:#7eeeff; }
+    .hero-wave { position:absolute; bottom:-2px; left:0; width:100%; z-index:3; }
+
+    /* ══ COUNTER STRIP ══ */
+    .strip { background:var(--bd); }
+    .strip-inner {
+      max-width:1100px; margin:0 auto; padding:0 2rem;
+      display:grid; grid-template-columns:repeat(4,1fr);
+    }
+    .strip-item {
+      padding:1.8rem 1.2rem; text-align:center;
+      border-right:1px solid rgba(255,255,255,0.06);
+      position:relative;
+    }
+    .strip-item:last-child { border-right:none; }
+    .strip-item::after {
+      content:''; position:absolute; bottom:0; left:22%; right:22%; height:2px;
+      background:linear-gradient(90deg,transparent,var(--aq),transparent);
+      transform:scaleX(0); transition:transform 0.6s ease;
+    }
+    .strip-item.lit::after { transform:scaleX(1); }
+    .strip-num {
+      font-family:'Playfair Display',serif;
+      font-size:2.4rem; font-weight:900; color:#7eeeff; line-height:1;
+    }
+    .strip-lbl {
+      font-size:0.68rem; color:rgba(255,255,255,0.4);
+      letter-spacing:2px; text-transform:uppercase; margin-top:4px;
+    }
+
+    /* ══ PROJECTS SECTION ══ */
+    #projects { background:#eef4f8; padding:65px 0 75px; }
+    .container { max-width:1100px; margin:0 auto; padding:0 2rem; }
+
+    .sec-head { text-align:center; margin-bottom:3rem; }
+    .sec-label {
+      display:inline-block; font-size:0.67rem; font-weight:700;
+      letter-spacing:3.5px; text-transform:uppercase; color:var(--bl); margin-bottom:0.5rem;
+    }
+    .sec-title {
+      font-size:clamp(1.7rem,3.5vw,2.6rem); font-weight:900;
+      color:var(--bd); line-height:1.15; margin-bottom:0.6rem;
+    }
+    .sec-title em { font-style:italic; color:var(--bm); }
+    .sec-desc { font-size:0.9rem; color:#6888a8; max-width:500px; margin:0 auto; line-height:1.75; }
+
+    /* ══════════════════════════════════════════
+       SCREENSHOT-STYLE FEATURED CARDS (unchanged)
+    ══════════════════════════════════════════ */
+    .feat-section {
+      background:#e8f0f7;
+      border-radius:20px;
+      padding:2.8rem 2rem 2.2rem;
+      margin-bottom:2.5rem;
+      position:relative;
+    }
+
+    /* dashed curved arrow row — SVG overlaid */
+    .feat-arrow-row {
+      position:absolute;
+      top: 0; left:0; right:0;
+      height:54px;
+      pointer-events:none;
+      overflow:visible;
+    }
+
+    /* 4-column card row */
+    .feat-row {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1.4rem;
+      align-items:start;
+    }
+    @media(max-width:960px){ .feat-row { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:520px){ .feat-row { grid-template-columns:1fr; } }
+
+    /* each card wrapper — number sits outside-left */
+    .sc-wrap {
+      display:flex;
+      align-items:flex-start;
+      gap:0;
+      opacity:0;
+      transform:translateY(30px);
+    }
+
+    /* large number floated to left */
+    .sc-num {
+      font-family:'Playfair Display',serif;
+      font-size:2rem; font-weight:900;
+      line-height:1;
+      min-width:44px;
+      padding-top:6px;
+      flex-shrink:0;
+    }
+    /* color per card matching screenshot gradient */
+    .sc-wrap:nth-child(1) .sc-num { color:#0e1b6d; }
+    .sc-wrap:nth-child(2) .sc-num { color:#0e1b6d; }
+    .sc-wrap:nth-child(3) .sc-num { color:#0e1b6d; }
+    .sc-wrap:nth-child(4) .sc-num { color:#0e1b6d; }
+
+    /* the bordered card box */
+    .sc-card {
+      flex:1;
+      border-radius:14px;
+      padding:1.3rem 1.1rem 1.2rem;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+      transition:transform 0.3s, box-shadow 0.3s;
+      min-height:185px;
+    }
+    .sc-card:hover { transform:translateY(-5px); box-shadow:0 12px 32px rgba(0,0,0,0.10); }
+
+    /* colored borders per card — matching screenshot */
+    .sc-wrap:nth-child(1) .sc-card { border:2px solid #0e1b6d; }
+    .sc-wrap:nth-child(2) .sc-card { border:2px solid #0e1b6d; }
+    .sc-wrap:nth-child(3) .sc-card { border:2px solid #0e1b6d; }
+    .sc-wrap:nth-child(4) .sc-card { border:2px solid #0e1b6d;}
+
+    /* icon circle at top of card */
+    .sc-icon {
+      width:48px; height:48px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem; margin-bottom:0.85rem;
+    }
+    .sc-wrap:nth-child(1) .sc-icon { background:rgba(74,172,90,0.1); }
+    .sc-wrap:nth-child(2) .sc-icon { background:rgba(58,175,169,0.1); }
+    .sc-wrap:nth-child(3) .sc-icon { background:rgba(43,158,212,0.1); }
+    .sc-wrap:nth-child(4) .sc-icon { background:rgba(86,104,194,0.1); }
+
+    .sc-name {
+      font-family:'DM Sans',sans-serif;
+      font-size:0.95rem; font-weight:700; color:var(--bd);
+      margin-bottom:0.4rem; line-height:1.3;
+    }
+    .sc-loc {
+      font-size:0.78rem; color:#7a9ab8;
+      line-height:1.55; font-weight:400;
+    }
+
+    /* ══════════════════════════════════════════
+       UPDATED: ALL 23 CARDS USE THE BORDERED CARD DESIGN (screenshot style)
+       now .proj-card mimics .sc-card but with dynamic colors per index
+    ══════════════════════════════════════════ */
+    .proj-grid {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:0.9rem;
+    }
+    @media(max-width:960px){ .proj-grid { grid-template-columns:repeat(3,1fr); } }
+    @media(max-width:680px){ .proj-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:420px){ .proj-grid { grid-template-columns:1fr; } }
+
+    /* wrapper: number + card – same as .sc-wrap */
+    .proj-card {
+      display:flex;
+      align-items:flex-start;
+      gap:0;
+      opacity:0;
+      transform:translateY(22px);
+      /* no background/border here — all on .proj-card-inner */
+    }
+
+    .proj-num {
+      font-family:'Playfair Display',serif;
+      font-size:2rem; font-weight:900;
+      line-height:1;
+      min-width:44px;
+      padding-top:6px;
+      flex-shrink:0;
+      /* color applied inline via style attribute */
+    }
+
+    .proj-card-inner {
+      flex:1;
+      border-radius:14px;
+      padding:1.1rem 1rem 1rem;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+      transition:transform 0.3s, box-shadow 0.3s;
+      border:2px solid;  /* color set inline */
+    }
+    .proj-card-inner:hover { transform:translateY(-4px); box-shadow:0 10px 26px rgba(0,0,0,0.1); }
+
+    .proj-icon {
+      width:42px; height:42px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem; margin-bottom:0.75rem;
+      background:rgba(10,35,66,0.05); /* fallback, but inline style overrides */
+    }
+
+    .proj-name {
+      font-family:'DM Sans',sans-serif;
+      font-size:0.9rem; font-weight:700; color:var(--bd);
+      margin-bottom:0.2rem; line-height:1.3;
+    }
+    .proj-loc {
+      font-size:0.75rem; color:#7a9ab8;
+      line-height:1.45; font-weight:400;
+      display:flex; align-items:center; gap:3px; margin-top:3px;
+    }
+    .proj-loc svg { width:10px; height:11px; flex-shrink:0; }
+
+    /* ══ CONTACT STRIP ══ */
+    #cstrip { background:var(--bd); padding:55px 0; }
+    .cs-wrap {
+      max-width:1100px; margin:0 auto; padding:0 2rem;
+      display:grid; grid-template-columns:1fr 1px 1fr; gap:3rem; align-items:center;
+    }
+    @media(max-width:720px){
+      .cs-wrap { grid-template-columns:1fr; gap:1.8rem; text-align:center; }
+      .cs-divider { display:none; }
+    }
+    .cs-left h2 { color:#fff; font-size:clamp(1.3rem,3vw,1.9rem); margin-bottom:0.45rem; }
+    .cs-left p { color:rgba(255,255,255,0.42); font-size:0.83rem; line-height:1.7; }
+    .cs-divider { background:rgba(255,255,255,0.09); height:80px; width:1px; }
+    .cs-right { display:flex; flex-direction:column; gap:0.75rem; }
+    .cs-item { display:flex; align-items:center; gap:0.75rem; }
+    .cs-ico {
+      width:36px; height:36px; border-radius:9px; flex-shrink:0;
+      background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.09);
+      display:flex; align-items:center; justify-content:center; font-size:0.95rem;
+    }
+    .cs-txt b { display:block; font-size:0.67rem; color:rgba(255,255,255,0.32); text-transform:uppercase; letter-spacing:1px; }
+    .cs-txt span { font-size:0.85rem; color:rgba(255,255,255,0.75); font-weight:500; }
+    .cs-btn {
+      display:inline-flex; align-items:center; gap:7px;
+      background:linear-gradient(135deg,var(--aq),var(--bm));
+      color:#fff; padding:12px 26px; border-radius:50px;
+      font-weight:600; font-size:0.88rem; text-decoration:none;
+      transition:transform 0.3s,box-shadow 0.3s;
+      box-shadow:0 5px 20px rgba(0,198,212,0.28); margin-top:0.9rem;
+    }
+    .cs-btn:hover { transform:translateY(-3px); box-shadow:0 10px 32px rgba(0,198,212,0.42); }
+
+    /* scroll top */
+    #scrollTop {
+      position:fixed; bottom:2rem; right:2rem;
+      width:42px; height:42px;
+      background:linear-gradient(135deg,var(--bm),var(--bl));
+      color:#fff; border:none; border-radius:50%;
+      cursor:pointer; font-size:1.05rem;
+      display:none; align-items:center; justify-content:center;
+      box-shadow:0 4px 18px rgba(21,101,168,0.38); z-index:999; transition:transform 0.3s;
+    }
+    #scrollTop:hover { transform:scale(1.1) translateY(-2px); }
+    #scrollTop.show { display:flex; }
+
+    @media(max-width:480px){ .strip-inner { grid-template-columns:repeat(2,1fr); } }
+  </style>
+  <link rel="stylesheet" href="../../header/header.css"/>
+  <link rel="stylesheet" href="../../footer/footer.css"/>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rings">
+    <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    <div class="ring"></div><div class="ring"></div>
+  </div>
+  <div class="hero-vline"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span></span> Our Completed Projects <span></span></div>
+    <h1>Where Water Meets<br/><em>Expert Engineering</em></h1>
+    <p class="hero-sub">Over 23 landmark projects across Pune — delivering clean water to thousands of homes, hospitals and commercial spaces.</p>
+    <div class="hero-pills">
+      <div class="hero-pill"><b>23+</b> Projects</div>
+      <div class="hero-pill"><b>Pune</b> Based</div>
+      <div class="hero-pill"><b>STP · WTP · RO</b></div>
+      <div class="hero-pill"><b>AMC</b> Supported</div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 52" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,26 C400,52 1040,0 1440,26 L1440,52 L0,52 Z" fill="#0a2342"/>
+  </svg>
+</section>
+
+<!-- ══ COUNTER STRIP ══ -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item"><div class="strip-num" data-target="23">0</div><div class="strip-lbl">Projects Delivered</div></div>
+    <div class="strip-item"><div class="strip-num" data-target="8">0</div><div class="strip-lbl">Plant Types</div></div>
+    <div class="strip-item"><div class="strip-num" data-target="10">0</div><div class="strip-lbl">Years Experience</div></div>
+    <div class="strip-item"><div class="strip-num" data-target="100">0</div><div class="strip-lbl">% Customised</div></div>
+  </div>
+</div>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="container">
+
+    <div class="sec-head">
+      <span class="sec-label">Portfolio</span>
+      <h2 class="sec-title">Projects We've <em>Delivered</em></h2>
+      <p class="sec-desc">Every project reflects our commitment to innovative, cost-effective and reliable water treatment — from premium societies to healthcare facilities across Pune.</p>
+    </div>
+
+    <!-- ══ SCREENSHOT-STYLE FEATURED 4 CARDS (unchanged) ══ -->
+    <div class="feat-section">
+
+      <!-- dashed curved arrow — top connecting all 4 cards -->
+      <svg class="feat-arrow-row" viewBox="0 0 1000 54" preserveAspectRatio="none"
+           xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-26px;left:4%;width:92%;height:54px;overflow:visible;">
+        <!-- arrow going right: from card1 top → card2 top → card3 top → card4 top -->
+        <path d="M 60,44 C 120,10 200,10 260,44"
+              fill="none" stroke="#aec8dc" stroke-width="1.6"
+              stroke-dasharray="5,4" marker-end="url(#arr)"/>
+        <path d="M 380,44 C 440,10 520,10 580,44"
+              fill="none" stroke="#aec8dc" stroke-width="1.6"
+              stroke-dasharray="5,4" marker-end="url(#arr)"/>
+        <path d="M 700,44 C 760,10 840,10 900,44"
+              fill="none" stroke="#aec8dc" stroke-width="1.6"
+              stroke-dasharray="5,4" marker-end="url(#arr)"/>
+        <defs>
+          <marker id="arr" markerWidth="7" markerHeight="7" refX="4" refY="3.5" orient="auto">
+            <polygon points="0 0, 7 3.5, 0 7" fill="#aec8dc"/>
+          </marker>
+        </defs>
+      </svg>
+
+      <div class="feat-row">
+
+        <!-- Card 1 — green -->
+        <div class="sc-wrap">
+          <div class="sc-num">01</div>
+          <div class="sc-card">
+            <div class="sc-icon">🏗️</div>
+            <div class="sc-name">Marvel Zypher</div>
+            <div class="sc-loc">STP · Water Treatment<br/>Kharadi, Pune</div>
+          </div>
+        </div>
+
+        <!-- Card 2 — teal -->
+        <div class="sc-wrap">
+          <div class="sc-num">02</div>
+          <div class="sc-card">
+            <div class="sc-icon">💧</div>
+            <div class="sc-name">Marvel Friya</div>
+            <div class="sc-loc">WTP · RO Plant<br/>Wagholi, Pune</div>
+          </div>
+        </div>
+
+        <!-- Card 3 — blue -->
+        <div class="sc-wrap">
+          <div class="sc-num">03</div>
+          <div class="sc-card">
+            <div class="sc-icon">🏥</div>
+            <div class="sc-name">Vishwaraj Hospital</div>
+            <div class="sc-loc">RO · Purification System<br/>Loni, Pune</div>
+          </div>
+        </div>
+
+        <!-- Card 4 — indigo -->
+        <div class="sc-wrap">
+          <div class="sc-num">04</div>
+          <div class="sc-card">
+            <div class="sc-icon">🏢</div>
+            <div class="sc-name">One North Condominium</div>
+            <div class="sc-loc">STP · AMC Services<br/>Magarpatta, Pune</div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /.feat-section -->
+
+    <!-- ══ REMAINING PROJECTS GRID – all cards now use bordered design with icons and colors ══ -->
+    <div class="proj-grid" id="projGrid"></div>
+
+  </div>
+</section>
+
+<!-- ══ CONTACT STRIP ══ -->
+<section id="cstrip">
+  <div class="cs-wrap">
+    <div class="cs-left">
+      <h2>Ready to Start<br/>Your Project?</h2>
+      <p>Get a free consultation and customised quote for your water treatment requirement — domestic to industrial scale.</p>
+      <a href="mailto:topfield0505@gmail.com" class="cs-btn">Get Free Quote →</a>
+    </div>
+    <div class="cs-divider"></div>
+    <div class="cs-right">
+      <div class="cs-item">
+        <div class="cs-ico">📍</div>
+        <div class="cs-txt"><b>Office</b><span>C-410, Mega-Centre, Hadapsar, Pune – 411028</span></div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-ico">📞</div>
+        <div class="cs-txt"><b>Prem Adhe</b><span>9673850505 / 7499726540</span></div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-ico">📞</div>
+        <div class="cs-txt"><b>Akash Chavan</b><span>7262-899298</span></div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-ico">✉️</div>
+        <div class="cs-txt"><b>Email</b><span>topfield0505@gmail.com</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  /* ── header / footer ── */
+  fetch('../../header/header.html').then(r=>r.text()).then(html=>{
+    document.getElementById('header-placeholder').innerHTML=html;
+    const s=document.createElement('script');s.src='../../header/header.js';document.head.appendChild(s);
+  }).catch(()=>{});
+  fetch('../../footer/footer.html').then(r=>r.text()).then(html=>{
+    document.getElementById('footer-placeholder').innerHTML=html;
+    const s=document.createElement('script');s.src='../../footer/footer.js';document.head.appendChild(s);
+  }).catch(()=>{});
+
+  /* ── remaining project data (05 → 23) with extended info for screenshot style ── */
+  const projects = [
+    { name:'The Orchard',              loc:'Handewadi, Pune', type:'🏡', detail:'STP · WTP' },
+    { name:'Grand Bay',                loc:'Pune', type:'🌊', detail:'RO Plant' },
+    { name:'Rohan Lehar',              loc:'Baner, Pune', type:'🏢', detail:'STP + AMC' },
+    { name:'Vijay Vihar AWHO Society', loc:'Wagholi, Pune', type:'🏘️', detail:'Water Treatment' },
+    { name:'Nyati Envision',           loc:'Tingare Nagar, Pune', type:'🏬', detail:'RO · WTP' },
+    { name:'Kalpataru Serenity',       loc:'Manjari, Pune', type:'🏞️', detail:'STP · AMC' },
+    { name:'Guru Vista',               loc:'Kharadi, Pune', type:'🏗️', detail:'WTP · RO' },
+    { name:'Chesterfield Society',     loc:'Dhanori, Pune', type:'🏛️', detail:'STP' },
+    { name:'Shriram Paradise Society', loc:'Wagholi, Pune', type:'🏡', detail:'RO System' },
+    { name:'Konark Meadows Society',   loc:'Wagholi, Pune', type:'🌳', detail:'STP + RO' },
+    { name:'Genesis Society',          loc:'Dighi, Pune', type:'🏘️', detail:'WTP' },
+    { name:'B A Vermont Society',      loc:'Wagholi, Pune', type:'🏡', detail:'STP · AMC' },
+    { name:'Wildwoods Society',        loc:'Pune', type:'🌲', detail:'Water Purification' },
+    { name:'Rahul East View',          loc:'Handewadi, Pune', type:'🏢', detail:'STP + RO' },
+    { name:'BA Iris Society',          loc:'Wagholi, Pune', type:'🏘️', detail:'WTP' },
+    { name:'Swaraj Capital',           loc:'Moshi, Pune', type:'🏬', detail:'STP · AMC' },
+    { name:'Marvel Enigma Society',    loc:'Kharadi, Pune', type:'🏗️', detail:'RO Plant' },
+    { name:'Anjani Amores',            loc:'Undri, Pune', type:'🏡', detail:'STP' },
+    { name:'Vishwraj Hospital',        loc:'Loni, Pune', type:'🏥', detail:'RO · Purification' },
+  ];
+
+  // color palette for the 19 cards (cycling through similar shades)
+  const colors = [
+    '#0e1b6d', '#0e1b6d', '#0e1b6d', '#0e1b6d', '#0e1b6d',
+    '#0e1b6d', '#0e1b6d', '#0e1b6d', '#0e1b6d', '#0e1b6d',
+   '#0e1b6d', '#0e1b6d', '#0e1b6d', '#0e1b6d', '#0e1b6d',
+    '#0e1b6d', '#0e1b6d', '#0e1b6d', '#0e1b6d'
+  ];
+
+  const pinSvg = `<svg width="10" height="11" viewBox="0 0 10 11" fill="none"><circle cx="5" cy="4.5" r="2" stroke="#3b9fd4" stroke-width="1.2"/><path d="M5 10.5C5 10.5 1.5 7 1.5 4.5C1.5 2.567 3.015 1 5 1C6.985 1 8.5 2.567 8.5 4.5C8.5 7 5 10.5 5 10.5Z" stroke="#3b9fd4" stroke-width="1.2" fill="none"/></svg>`;
+
+  const grid = document.getElementById('projGrid');
+  projects.forEach((p, idx) => {
+    const card = document.createElement('div');
+    card.className = 'proj-card';
+
+    const num = String(idx+5).padStart(2,'0');
+    const color = colors[idx % colors.length];
+    // icon background slightly lighter
+    const iconBg = color + '1A'; // 10% opacity
+
+    card.innerHTML = `
+      <div class="proj-num" style="color:${color}">${num}</div>
+      <div class="proj-card-inner" style="border-color:${color}">
+        <div class="proj-icon" style="background:${iconBg}">${p.type}</div>
+        <div class="proj-name">${p.name}</div>
+        <div class="proj-loc">${pinSvg} ${p.loc} · ${p.detail}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  /* ── GSAP ── */
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* hero entrance */
+  gsap.timeline({ delay:0.15 })
+    .to('.hero-eyebrow', {opacity:1, y:0, duration:0.65, ease:'power2.out'}, 0.2)
+    .to('.hero h1',      {opacity:1, y:0, duration:0.75, ease:'power2.out'}, 0.4)
+    .to('.hero-sub',     {opacity:1, y:0, duration:0.65, ease:'power2.out'}, 0.62)
+    .to('.hero-pills',   {opacity:1, y:0, duration:0.55, ease:'power2.out'}, 0.82);
+
+  /* rings pulse */
+  document.querySelectorAll('.ring').forEach((r,i)=>{
+    gsap.to(r,{scale:1,opacity:0.55,duration:3.5+i*0.7,repeat:-1,delay:i*0.8,ease:'sine.inOut',yoyo:true});
+  });
+
+  /* counters */
+  gsap.utils.toArray('.strip-num').forEach(el=>{
+    const target=+el.dataset.target;
+    ScrollTrigger.create({
+      trigger:el, start:'top 88%', once:true,
+      onEnter:()=>{
+        el.closest('.strip-item').classList.add('lit');
+        gsap.to({v:0},{v:target,duration:1.8,ease:'power2.out',
+          onUpdate:function(){ el.textContent=Math.round(this.targets()[0].v)+(target===100?'%':'+'); }
+        });
+      }
+    });
+  });
+
+  /* featured screenshot-style cards */
+  gsap.utils.toArray('.sc-wrap').forEach((el,i)=>{
+    ScrollTrigger.create({trigger:el, start:'top 88%', once:true,
+      onEnter:()=>gsap.to(el,{opacity:1,y:0,duration:0.65,delay:i*0.12,ease:'power2.out'})
+    });
+  });
+
+  /* all remaining project cards (new design) */
+  gsap.utils.toArray('.proj-card').forEach((el,i)=>{
+    ScrollTrigger.create({trigger:el,start:'top 92%',once:true,
+      onEnter:()=>gsap.to(el,{opacity:1,y:0,duration:0.5,delay:(i%4)*0.06,ease:'power2.out'})
+    });
+  });
+
+  /* section heading */
+  gsap.from('.sec-head',{opacity:0,y:28,duration:0.8,ease:'power2.out',
+    scrollTrigger:{trigger:'.sec-head',start:'top 84%',once:true}});
+
+  /* contact strip */
+  gsap.from('.cs-left', {opacity:0,x:-28,duration:0.8,ease:'power2.out',
+    scrollTrigger:{trigger:'#cstrip',start:'top 80%',once:true}});
+  gsap.from('.cs-right',{opacity:0,x:28,duration:0.8,ease:'power2.out',
+    scrollTrigger:{trigger:'#cstrip',start:'top 80%',once:true}});
+
+  /* scroll to top */
+  const stBtn=document.getElementById('scrollTop');
+  window.addEventListener('scroll',()=>stBtn.classList.toggle('show',scrollY>500));
+</script>
+</body>
+</html>

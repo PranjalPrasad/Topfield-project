@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Annual Maintenance Contract – Topfield Water Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue-deep: #0a2342;
+      --blue-mid:  #1565a8;
+      --blue-light:#3b9fd4;
+      --aqua:      #00c6d4;
+      --teal:      #00a896;
+      --white:     #f8fbff;
+      --card-img-h:  140px;          /* reduced */
+      --card-radius: 16px;            /* smaller */
+      --card-gap:    1rem;             /* compact */
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--blue-deep);
+      overflow-x: hidden;
+      font-size: 14px;                /* smaller base */
+    }
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    /* ── HERO (compact) ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 55vh;                /* reduced */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 1.2rem 40px;       /* smaller */
+    }
+
+    .hero-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0a1628 0%, #0d3a6e 50%, #0a7fa8 100%);
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(8,20,45,0.72) 0%,
+        rgba(10,50,100,0.60) 50%,
+        rgba(0,100,140,0.45) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 20% 80%, rgba(0,198,212,0.18) 0%, transparent 60%);
+      animation: shimmer 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes shimmer {
+      0%   { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1;   transform: scale(1.08); }
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 0 1.2rem;
+      max-width: 720px;                 /* narrower */
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0,198,212,0.2);
+      border: 1px solid rgba(0,198,212,0.5);
+      color: #7eeeff;
+      font-size: 0.65rem;                /* smaller */
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;                 /* smaller */
+      border-radius: 30px;
+      margin-bottom: 1rem;                /* less */
+      animation: fadeSlideDown 1s ease 0.2s both;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.6rem, 3.8vw, 3rem);  /* smaller */
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;                 /* reduced */
+      animation: fadeSlideDown 1s ease 0.4s both;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #00c6d4, #7eeeff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.8rem, 1.6vw, 0.95rem);  /* smaller */
+      color: rgba(255,255,255,0.75);
+      max-width: 520px;                        /* reduced */
+      margin: 0 auto 1.2rem;                    /* less */
+      line-height: 1.6;
+      font-weight: 300;
+      animation: fadeSlideDown 1s ease 0.6s both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 0.6rem;                           /* smaller */
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeSlideDown 1s ease 0.8s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00c6d4, #0a7fa8);
+      color: #fff;
+      padding: 8px 24px;                     /* compact */
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.85rem;                    /* smaller */
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 16px rgba(0,198,212,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,198,212,0.6); }
+
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #fff;
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;                           /* reduced */
+      flex-wrap: wrap;
+      margin-top: 1.8rem;                     /* less */
+      padding: 1rem 1.5rem;                   /* compact */
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;                     /* smaller */
+      backdrop-filter: blur(12px);
+      animation: fadeSlideDown 1s ease 1s both;
+    }
+
+    .hero-stat { text-align: center; color: #fff; }
+    .hero-stat .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;                      /* smaller */
+      font-weight: 700;
+      color: #7eeeff;
+      line-height: 1;
+    }
+    .hero-stat .lbl {
+      font-size: 0.65rem;                       /* smaller */
+      opacity: 0.7;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .hero-stat-divider {
+      width: 1px;
+      height: 32px;                            /* shorter */
+      background: rgba(255,255,255,0.2);
+      align-self: center;
+    }
+
+    /* ── SHARED SECTION (compact) ── */
+    section { padding: 40px 0; }                /* reduced from 70px */
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 1.2rem; }
+
+    .section-label {
+      display: block;
+      font-size: 0.62rem;                       /* smaller */
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 0.3rem;                     /* less */
+    }
+    .section-title {
+      font-size: clamp(1.4rem, 2.8vw, 2rem);     /* reduced */
+      font-weight: 700;
+      color: var(--blue-deep);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;                     /* less */
+    }
+    .section-desc {
+      color: #5a7a9a;
+      font-size: 0.85rem;                         /* smaller */
+      max-width: 500px;                           /* narrower */
+      line-height: 1.6;
+    }
+
+    /* ══ WHAT WE COVER — service cards (compact) ══ */
+    #covers { background: #eaf3fb; padding: 40px 0 50px; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--card-gap);
+      margin-top: 2rem;                           /* less */
+      align-items: stretch;
+    }
+    @media (max-width: 1100px) { .services-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 580px)  { .services-grid { grid-template-columns: 1fr; } }
+
+    .service-card {
+      background: #ffffff;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      border: 1px solid rgba(10,35,66,0.06);
+      box-shadow: 0 2px 10px rgba(10,35,66,0.07);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(36px);               /* less */
+      transition:
+        opacity    0.6s ease,
+        transform  0.6s cubic-bezier(0.23,1,0.32,1),
+        box-shadow 0.35s ease;
+    }
+    .service-card.visible { opacity: 1; transform: translateY(0); }
+    .service-card:hover   { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(10,35,66,0.15); }
+
+    .card-img {
+      position: relative;
+      width: 100%;
+      height: var(--card-img-h);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .card-img-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
+    }
+    .service-card:hover .card-img-bg { transform: scale(1.05); }
+
+    .bg-stp    { background: linear-gradient(145deg, #052244 0%, #0f6096 45%, #00b4cc 100%); }
+    .bg-wtp    { background: linear-gradient(145deg, #043d56 0%, #0882aa 45%, #36d2e8 100%); }
+    .bg-ro     { background: linear-gradient(145deg, #0a2342 0%, #1462a0 45%, #3daad4 100%); }
+    .bg-pool   { background: linear-gradient(145deg, #064f66 0%, #059ab8 45%, #80e0f0 100%); }
+    .bg-chem   { background: linear-gradient(145deg, #073650 0%, #0972a2 45%, #5ecae8 100%); }
+    .bg-repair { background: linear-gradient(145deg, #0b2548 0%, #1952a0 45%, #5b9ede 100%); }
+    .bg-tank   { background: linear-gradient(145deg, #063347 0%, #0b6898 45%, #3bc5e8 100%); }
+    .bg-spares { background: linear-gradient(145deg, #081e3e 0%, #1542c0 45%, #6ba8f0 100%); }
+
+    .card-img-bg::before {
+      content: '';
+      position: absolute; bottom: -25px; left: -25px;
+      width: 150px; height: 150px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .card-img-bg::after {
+      content: '';
+      position: absolute; top: -20px; right: -14px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .card-icon-wrap {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3;
+      transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+    }
+    .service-card:hover .card-icon-wrap { transform: translateY(-5px); }
+
+    .card-icon {
+      width: 48px; height: 48px;               /* smaller */
+      border-radius: 12px;
+      background: rgba(255,255,255,0.17);
+      border: 1.5px solid rgba(255,255,255,0.36);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;                       /* smaller */
+      box-shadow: 0 5px 18px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.28);
+    }
+
+    .card-badge {
+      position: absolute; top: 8px; right: 8px; z-index: 4;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-radius: 22px; padding: 3px 10px;
+      text-align: right; box-shadow: 0 2px 6px rgba(0,0,0,0.1); line-height: 1;
+    }
+    .card-badge b     { display: block; font-size: 0.65rem; font-weight: 700; color: var(--blue-deep); line-height: 1.2; }
+    .card-badge small { display: block; font-size: 0.5rem;  font-weight: 400; color: #7a9ab8; line-height: 1.2; }
+
+    .card-dots {
+      position: absolute; bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 3px; z-index: 4;
+    }
+    .card-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.45); }
+    .card-dot.active { background: #fff; width: 12px; border-radius: 2px; }
+
+    .card-wave {
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; z-index: 2; line-height: 0;
+    }
+
+    .card-body {
+      padding: 0.9rem 1rem 1.1rem;              /* tighter */
+      display: flex; flex-direction: column; flex: 1;
+    }
+    .card-body h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 700;     /* smaller */
+      color: var(--blue-deep); line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+    .card-body p {
+      font-size: 0.72rem; color: #6a8daa;       /* smaller */
+      line-height: 1.5; flex: 1; margin-bottom: 0.7rem;
+    }
+    .card-divider {
+      height: 1px;
+      background: linear-gradient(90deg, #ddeaf5, transparent);
+      margin-bottom: 0.6rem;
+    }
+    .card-cta {
+      display: block; width: 100%;
+      background: var(--blue-deep);
+      color: #fff; text-align: center;
+      padding: 7px; border-radius: 8px;          /* smaller */
+      font-size: 0.75rem; font-weight: 600;
+      text-decoration: none; letter-spacing: 0.3px;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 3px 8px rgba(10,35,66,0.18); flex-shrink: 0;
+    }
+    .card-cta:hover {
+      background: var(--blue-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(21,101,168,0.3);
+    }
+
+    /* ══ WHAT'S INCLUDED — checklist cards (compact) ══ */
+    #included { background: #fff; padding: 40px 0; }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 900px) { .included-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 580px) { .included-grid { grid-template-columns: 1fr; } }
+
+    .included-card {
+      background: #f0f8ff;
+      border: 1px solid #d8ecf8;
+      border-radius: 16px;
+      padding: 1.3rem 1.2rem;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s, border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .included-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--aqua), var(--blue-mid));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .included-card:hover { border-color: #a8d4f0; box-shadow: 0 8px 24px rgba(10,35,66,0.1); }
+    .included-card:hover::before { transform: scaleX(1); }
+    .included-card.visible { opacity: 1; transform: translateY(0); }
+
+    .included-card-icon {
+      width: 44px; height: 44px; border-radius: 12px;   /* smaller */
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 0.7rem;
+      box-shadow: 0 4px 12px rgba(21,101,168,0.25);
+    }
+    .included-card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 700;            /* smaller */
+      color: var(--blue-deep); margin-bottom: 0.6rem;
+    }
+    .included-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .included-list li {
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      font-size: 0.72rem; color: #5a7a9a; line-height: 1.4;
+    }
+    .included-list li::before {
+      content: '✓';
+      color: var(--aqua); font-weight: 700; font-size: 0.75rem;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ══ HOW IT WORKS (compact) ══ */
+    #how { background: #eaf3fb; }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .how-grid::before {
+      content: '';
+      position: absolute;
+      top: 30px; left: 12.5%; right: 12.5%; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,198,212,0.35), rgba(0,198,212,0.35), transparent);
+    }
+    @media (max-width: 768px) { .how-grid { grid-template-columns: repeat(2,1fr); } .how-grid::before { display: none; } }
+    @media (max-width: 480px) { .how-grid { grid-template-columns: 1fr; } }
+
+    .how-step {
+      text-align: center;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .how-step.visible { opacity: 1; transform: translateY(0); }
+    .how-bubble {
+      width: 60px; height: 60px; border-radius: 50%;    /* smaller */
+      margin: 0 auto 1rem;
+      background: rgba(0,198,212,0.1);
+      border: 2px solid rgba(0,198,212,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 0 5px rgba(0,198,212,0.06);
+      transition: all 0.3s;
+    }
+    .how-step:hover .how-bubble {
+      background: rgba(0,198,212,0.2);
+      box-shadow: 0 0 0 8px rgba(0,198,212,0.1), 0 6px 18px rgba(0,198,212,0.3);
+    }
+    .how-num { font-size: 0.5rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 0.2rem; }
+    .how-step h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 0.3rem;
+    }
+    .how-step p { color: #6a8daa; font-size: 0.72rem; line-height: 1.5; }
+
+    /* ══ WHY US (dark) — 3 per row, minimized ══ */
+    #why {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #0d3a6e 100%);
+      position: relative; overflow: hidden;
+    }
+    #why::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300c6d4' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    #why .section-title { color: #fff; }
+    #why .section-label { color: #7eeeff; }
+    #why .section-desc  { color: rgba(255,255,255,0.6); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);        /* exactly 3 per row */
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 800px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .why-grid { grid-template-columns: 1fr; } }
+
+    .why-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; 
+      padding: 1.2rem 1rem;                         /* compact */
+      text-align: center;
+      transition: all 0.3s; 
+      backdrop-filter: blur(10px);
+    }
+    .why-card:hover { 
+      background: rgba(0,198,212,0.12); 
+      border-color: rgba(0,198,212,0.4); 
+      transform: translateY(-3px); 
+    }
+    .why-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,198,212,0.2), rgba(0,198,212,0.05));
+      border: 1px solid rgba(0,198,212,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin: 0 auto 0.8rem;
+    }
+    .why-card h3 { 
+      color: #fff; 
+      font-size: 0.85rem; 
+      margin-bottom: 0.4rem; 
+    }
+    .why-card p  { 
+      color: rgba(255,255,255,0.55); 
+      font-size: 0.72rem; 
+      line-height: 1.5; 
+    }
+
+    /* ══ ABOUT — compact ══ */
+    #about {
+      background: #f0f8ff;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+    .about-left { display: flex; flex-direction: column; justify-content: flex-start; }
+    .about-left .section-label { margin-bottom: 0.3rem; }
+    .about-left .section-title { margin-bottom: 0.6rem; font-size: clamp(1.2rem, 2.4vw, 1.8rem); }
+
+    .about-desc-item { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .about-desc-dot {
+      width: 7px; height: 10px; flex-shrink: 0; margin-top: 3px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: linear-gradient(180deg, var(--aqua), var(--blue-mid));
+      animation: dropPulse 2s ease-in-out infinite;
+    }
+    @keyframes dropPulse {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50%       { transform: scaleY(1.2); opacity: 0.7; }
+    }
+    .about-desc-item p { font-size: 0.8rem; color: #5a7a9a; line-height: 1.5; }
+
+    .about-cta-wrap { margin-top: 1rem; position: relative; display: inline-block; }
+    .about-cta-wrap .btn-primary { position: relative; overflow: hidden; }
+    .about-cta-wrap .btn-primary::after {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transform: skewX(-20deg);
+      animation: btnShimmer 3s ease-in-out infinite;
+    }
+    @keyframes btnShimmer { 0% { left:-100%; } 60% { left:150%; } 100% { left:150%; } }
+
+    .about-card-main {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #1565a8 100%);
+      border-radius: 14px; padding: 1.2rem 1.4rem; color: #fff;
+      position: relative; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(10,35,66,0.2);
+      animation: cardEntrance 1s ease 0.6s both;
+      margin-bottom: 0.6rem;
+    }
+    @keyframes cardEntrance {
+      from { opacity: 0; transform: translateY(30px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .about-card-main::before {
+      content: '"'; position: absolute; top: -20px; right: 14px;
+      font-size: 7rem; font-family: 'Playfair Display', serif;
+      color: rgba(0,198,212,0.1); line-height: 1;
+    }
+    .about-card-main p { font-size: 0.8rem; line-height: 1.6; opacity: 0.9; font-style: italic; position: relative; z-index: 1; }
+
+    .about-founder-row { margin-top: 0.8rem; display: flex; align-items: center; gap: 0.6rem; position: relative; z-index: 1; }
+    .about-founder-avatar {
+      width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%;
+      background: linear-gradient(135deg, #00c6d4, #0a7fa8);
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+      animation: avatarPulse 3s ease-in-out infinite;
+      box-shadow: 0 0 0 0 rgba(0,198,212,0.4);
+    }
+    @keyframes avatarPulse {
+      0%   { box-shadow: 0 0 0 0   rgba(0,198,212,0.4); }
+      50%  { box-shadow: 0 0 0 6px rgba(0,198,212,0); }
+      100% { box-shadow: 0 0 0 0   rgba(0,198,212,0); }
+    }
+    .about-founder-name  { font-weight: 600; font-size: 0.8rem; color: #fff; }
+    .about-founder-title { font-size: 0.68rem; opacity: 0.6; color: #fff; margin-top: 2px; }
+
+    .about-accent-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .about-accent-card {
+      background: #fff; border-radius: 10px; padding: 0.7rem 0.6rem; text-align: center;
+      box-shadow: 0 2px 10px rgba(10,35,66,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .about-accent-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--aqua), var(--blue-mid));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .about-accent-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(10,35,66,0.13); }
+    .about-accent-card:hover::before { transform: scaleX(1); }
+    .about-accent-card .icon { font-size: 1.1rem; display: block; margin-bottom: 0.2rem; }
+    .about-accent-card .val {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+      color: var(--blue-mid); display: block; line-height: 1.2;
+    }
+    .about-accent-card .key {
+      font-size: 0.6rem; color: #7a9ab8;
+      text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 2px;
+    }
+
+    /* ══ CONTACT — MINIMIZED & COMPACT (modified only this section) ══ */
+    #contact { background: #f0f8ff; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 1.5rem;                    /* reduced from 2rem */
+      margin-top: 1.5rem;              /* reduced from 2rem */
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 1.2rem; } }
+
+    .contact-info-item { 
+      display: flex; 
+      gap: 0.6rem;                    /* smaller */
+      align-items: flex-start; 
+      margin-bottom: 0.9rem;           /* reduced */
+    }
+    .contact-info-item .icon-wrap {
+      width: 32px; height: 32px;       /* smaller */
+      border-radius: 6px;              /* smaller */
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;               /* smaller */
+      flex-shrink: 0;
+    }
+    .contact-info-item .text strong { 
+      display: block; 
+      font-size: 0.65rem;              /* smaller */
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+      color: #9ab8d0; 
+      margin-bottom: 1px; 
+    }
+    .contact-info-item .text span  { 
+      font-size: 0.75rem;              /* smaller */
+      color: var(--blue-deep); 
+      font-weight: 500; 
+    }
+
+    .contact-form {
+      background: #fff; 
+      border-radius: 14px;              /* smaller */
+      padding: 1.2rem;                  /* reduced from 1.5rem */
+      box-shadow: 0 4px 16px rgba(10,35,66,0.08);
+    }
+    .contact-form h3 { 
+      font-size: 1.1rem;                /* smaller */
+      margin-bottom: 0.8rem;            /* less */
+      color: var(--blue-deep); 
+    }
+    .form-group { margin-bottom: 0.6rem; }  /* reduced */
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; 
+      padding: 8px 10px;                 /* smaller */
+      border: 1.5px solid #d0e4f0; 
+      border-radius: 6px;                /* smaller */
+      font-family: 'DM Sans', sans-serif; 
+      font-size: 0.75rem;                /* smaller */
+      color: var(--blue-deep); 
+      background: #f8fbff; 
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--blue-light);
+      box-shadow: 0 0 0 3px rgba(59,159,212,0.15);
+      background: #fff;
+    }
+    .form-group textarea { 
+      resize: vertical; 
+      min-height: 60px;                  /* shorter */
+    }
+    .form-row { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 0.5rem;                       /* smaller */
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+      color: #fff; 
+      padding: 8px;                       /* smaller */
+      border-radius: 6px;                  /* smaller */
+      border: none;
+      font-family: 'DM Sans', sans-serif; 
+      font-size: 0.8rem;                   /* smaller */
+      font-weight: 600;
+      cursor: pointer; 
+      transition: all 0.3s; 
+      margin-top: 0.4rem;                   /* reduced */
+    }
+    .btn-submit:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 4px 10px rgba(21,101,168,0.35); 
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── SCROLL TO TOP (compact) ── */
+    #scrollTop {
+      position: fixed; bottom: 1.2rem; right: 1.2rem;
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+      color: #fff; border: none; border-radius: 50%;
+      cursor: pointer; font-size: 0.9rem;
+      display: none; align-items: center; justify-content: center;
+      box-shadow: 0 3px 12px rgba(21,101,168,0.4);
+      z-index: 999; transition: transform 0.3s;
+    }
+    #scrollTop:hover { transform: scale(1.1) translateY(-2px); }
+    #scrollTop.show  { display: flex; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-stats { gap: 0.8rem; }
+      .hero-stat-divider { display: none; }
+    }
+    @media (max-width: 480px) { section { padding: 32px 0; } }
+  </style>
+
+  <link rel="stylesheet" href="../../header/header.css"/>
+  <link rel="stylesheet" href="../../footer/footer.css"/>
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-fallback"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🔧 Annual Maintenance Contract</div>
+      <h1>Keep Your Plants<br/><span>Running Perfectly</span></h1>
+      <p class="hero-sub">Comprehensive Annual Maintenance Contracts for STP, WTP, ETP, RO Plants, Swimming Pools &amp; Waterbodies — dedicated manpower, spares and 24/7 support, all year round.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Get AMC Quote</a>
+        <a href="#covers" class="btn-outline">What We Cover</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">25+</div><div class="lbl">Plants Under AMC</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="num">24/7</div><div class="lbl">Support Available</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="num">100%</div><div class="lbl">Uptime Focus</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="num">Fast</div><div class="lbl">Response Time</div></div>
+      </div>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#eaf3fb"/>
+    </svg>
+  </section>
+
+  <!-- ══════════════════════════════════════ WHAT WE COVER ════════════════════════════ -->
+  <section id="covers">
+    <div class="container">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-label">AMC Coverage</span>
+        <h2 class="section-title">Systems We Maintain</h2>
+        <p class="section-desc" style="margin: 0 auto;">We provide Annual Maintenance Contracts for all types of water treatment systems — keeping them operating at peak performance throughout the year.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- STP -->
+        <div class="service-card" style="transition-delay: 0.05s">
+          <div class="card-img"><div class="card-img-bg bg-stp"></div><div class="card-icon-wrap"><div class="card-icon">🏭</div></div><div class="card-badge"><b>STP</b><small>AMC Available</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>Sewage Treatment Plants (STP)</h3><p>Regular inspection, cleaning, chemical dosing, sludge management and equipment servicing to keep your STP compliant and efficient all year.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Get STP AMC →</a></div>
+        </div>
+        <!-- WTP -->
+        <div class="service-card" style="transition-delay: 0.10s">
+          <div class="card-img"><div class="card-img-bg bg-wtp"></div><div class="card-icon-wrap"><div class="card-icon">💧</div></div><div class="card-badge"><b>WTP</b><small>AMC Available</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>Water Softening Plants (WTP)</h3><p>Resin regeneration, valve servicing, salt management and performance testing — ensuring consistent soft water delivery without interruption.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Get WTP AMC →</a></div>
+        </div>
+        <!-- ETP -->
+        <div class="service-card" style="transition-delay: 0.15s">
+          <div class="card-img"><div class="card-img-bg bg-repair"></div><div class="card-icon-wrap"><div class="card-icon">⚗️</div></div><div class="card-badge"><b>ETP</b><small>AMC Available</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>Effluent Treatment Plants (ETP)</h3><p>Chemical dosing calibration, equipment checks, effluent quality monitoring and compliance support to maintain CPCB standards at all times.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Get ETP AMC →</a></div>
+        </div>
+        <!-- RO -->
+        <div class="service-card" style="transition-delay: 0.20s">
+          <div class="card-img"><div class="card-img-bg bg-ro"></div><div class="card-icon-wrap"><div class="card-icon">🔵</div></div><div class="card-badge"><b>RO</b><small>AMC Available</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>RO Reverse Osmosis Plants</h3><p>Membrane performance checks, filter replacements, antiscalant dosing and water quality testing — maintaining pure water output every day.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Get RO AMC →</a></div>
+        </div>
+      </div>
+
+      <div class="services-grid" style="margin-top: var(--card-gap);">
+        <!-- Pool -->
+        <div class="service-card" style="transition-delay: 0.05s">
+          <div class="card-img"><div class="card-img-bg bg-pool"></div><div class="card-icon-wrap"><div class="card-icon">🏊</div></div><div class="card-badge"><b>POOL</b><small>AMC Available</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>Swimming Pool &amp; Waterbodies</h3><p>Regular chemical balancing, filter backwashing, pump servicing and water quality testing — crystal-clear, hygienic water for residents every day.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Get Pool AMC →</a></div>
+        </div>
+        <!-- Tank Cleaning -->
+        <div class="service-card" style="transition-delay: 0.10s">
+          <div class="card-img"><div class="card-img-bg bg-tank"></div><div class="card-icon-wrap"><div class="card-icon">🚿</div></div><div class="card-badge"><b>TANK</b><small>Cleaning Included</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>Tank Cleaning Services</h3><p>Scheduled professional tank cleaning for STP, WTP and ETP systems — with well-equipped, dedicated manpower for thorough, safe cleaning.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Get Tank AMC →</a></div>
+        </div>
+        <!-- Repair & Refurbishment -->
+        <div class="service-card" style="transition-delay: 0.15s">
+          <div class="card-img"><div class="card-img-bg bg-chem"></div><div class="card-icon-wrap"><div class="card-icon">🔩</div></div><div class="card-badge"><b>R&amp;R</b><small>Repair Included</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>Repair &amp; Refurbishment</h3><p>Breakdown response, equipment repair and refurbishment of STP, WTP and ETP plants — restoring optimal performance and extending operational life.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Get Repair AMC →</a></div>
+        </div>
+        <!-- Spares Supply -->
+        <div class="service-card" style="transition-delay: 0.20s">
+          <div class="card-img"><div class="card-img-bg bg-spares"></div><div class="card-icon-wrap"><div class="card-icon">⚙️</div></div><div class="card-badge"><b>SPARE</b><small>Parts Included</small></div><div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div><svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div>
+          <div class="card-body"><h3>Spares &amp; Consumables Supply</h3><p>Supply of all required spares — RO membranes, cartridge filters, resin, sand media, carbon media, chemicals and more — as part of your AMC plan.</p><div class="card-divider"></div><a href="#contact" class="card-cta">Know More →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ WHAT'S INCLUDED ══════════════════════════ -->
+  <section id="included">
+    <div class="container">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-label">AMC Benefits</span>
+        <h2 class="section-title">What's Included in<br/>Your AMC Plan</h2>
+        <p class="section-desc" style="margin: 0 auto;">Every AMC plan is comprehensive — covering routine maintenance, emergency response, chemical supply and dedicated manpower.</p>
+      </div>
+      <div class="included-grid">
+        <div class="included-card" style="transition-delay:0.05s">
+          <div class="included-card-icon">🔍</div>
+          <h3>Regular Inspections</h3>
+          <ul class="included-list">
+            <li>Scheduled monthly site visits</li>
+            <li>Equipment performance checks</li>
+            <li>Water quality testing &amp; reporting</li>
+            <li>Compliance monitoring</li>
+            <li>Written inspection reports</li>
+          </ul>
+        </div>
+        <div class="included-card" style="transition-delay:0.10s">
+          <div class="included-card-icon">🔧</div>
+          <h3>Preventive Maintenance</h3>
+          <ul class="included-list">
+            <li>Pump &amp; motor servicing</li>
+            <li>Valve &amp; actuator checks</li>
+            <li>Filter backwashing &amp; cleaning</li>
+            <li>Pipe &amp; fitting inspection</li>
+            <li>Control panel checks</li>
+          </ul>
+        </div>
+        <div class="included-card" style="transition-delay:0.15s">
+          <div class="included-card-icon">🧪</div>
+          <h3>Chemical Management</h3>
+          <ul class="included-list">
+            <li>Chemical dosing calibration</li>
+            <li>Sodium Hypochlorite supply</li>
+            <li>Anti-scalant &amp; SMBS dosing</li>
+            <li>PAC &amp; coagulant management</li>
+            <li>pH &amp; chlorine balancing</li>
+          </ul>
+        </div>
+        <div class="included-card" style="transition-delay:0.20s">
+          <div class="included-card-icon">⚡</div>
+          <h3>Breakdown &amp; Emergency</h3>
+          <ul class="included-list">
+            <li>Priority breakdown response</li>
+            <li>Emergency repair visits</li>
+            <li>Temporary standby arrangements</li>
+            <li>24/7 phone support</li>
+            <li>Fast spare parts sourcing</li>
+          </ul>
+        </div>
+        <div class="included-card" style="transition-delay:0.25s">
+          <div class="included-card-icon">👷</div>
+          <h3>Dedicated Manpower</h3>
+          <ul class="included-list">
+            <li>Trained plant operators</li>
+            <li>Well-equipped service team</li>
+            <li>On-site attendance as required</li>
+            <li>Sludge &amp; waste management</li>
+            <li>Tank cleaning with manpower</li>
+          </ul>
+        </div>
+        <div class="included-card" style="transition-delay:0.30s">
+          <div class="included-card-icon">📋</div>
+          <h3>Spares &amp; Components</h3>
+          <ul class="included-list">
+            <li>RO membranes &amp; cartridge filters</li>
+            <li>Resin &amp; sand / carbon media</li>
+            <li>MS &amp; FRP vessel spares</li>
+            <li>Pump seals &amp; impellers</li>
+            <li>UV lamps &amp; quartz sleeves</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ HOW IT WORKS ══════════════════════════════ -->
+  <section id="how">
+    <div class="container">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-label">Our Process</span>
+        <h2 class="section-title">How the AMC<br/>Process Works</h2>
+        <p class="section-desc" style="margin: 0 auto;">A simple, transparent process — from signing your contract to year-round hassle-free maintenance.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-step" style="transition-delay:0.05s">
+          <div class="how-bubble">📋</div>
+          <div class="how-num">Step 01</div>
+          <h3>Site Survey</h3>
+          <p>Our engineers visit, inspect your plant and understand your specific maintenance needs.</p>
+        </div>
+        <div class="how-step" style="transition-delay:0.15s">
+          <div class="how-bubble">📝</div>
+          <div class="how-num">Step 02</div>
+          <h3>Custom AMC Plan</h3>
+          <p>We tailor an AMC plan with the right frequency, scope and spares for your system.</p>
+        </div>
+        <div class="how-step" style="transition-delay:0.25s">
+          <div class="how-bubble">🤝</div>
+          <div class="how-num">Step 03</div>
+          <h3>Contract Sign-off</h3>
+          <p>Transparent agreement covering all services, visits, chemicals and response times.</p>
+        </div>
+        <div class="how-step" style="transition-delay:0.35s">
+          <div class="how-bubble">🛡️</div>
+          <div class="how-num">Step 04</div>
+          <h3>Year-Round Care</h3>
+          <p>Scheduled visits, 24/7 support and fast emergency response — all year, every year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ WHY US — 3 per row, minimized ════════════ -->
+  <section id="why">
+    <div class="container">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-label">Why Choose Us</span>
+        <h2 class="section-title">What Makes Our<br/>AMC Different</h2>
+        <p class="section-desc" style="margin: 0 auto;">Not just a contract — a genuine partnership to keep your water systems running flawlessly, year after year.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card"><div class="why-icon">⚡</div><h3>Rapid Response</h3><p>Emergency support within hours, not days — minimising downtime and disruption.</p></div>
+        <div class="why-card"><div class="why-icon">👥</div><h3>Dedicated Team</h3><p>You get the same experienced team every time — they know your plant inside out.</p></div>
+        <div class="why-card"><div class="why-icon">📦</div><h3>Genuine Spares</h3><p>All spares used are original, high‑quality components — no cheap alternatives.</p></div>
+        <div class="why-card"><div class="why-icon">📊</div><h3>Transparent Reporting</h3><p>Detailed visit reports, maintenance logs and water quality records shared regularly.</p></div>
+        <div class="why-card"><div class="why-icon">💧</div><h3>Chemical Expertise</h3><p>Precise chemical dosing handled by trained operators — optimal water quality always.</p></div>
+        <div class="why-card"><div class="why-icon">🛠️</div><h3>Full Refurbishment</h3><p>If your plant needs an overhaul, we handle complete refurbishment as part of AMC.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ CONTACT — MINIMIZED & COMPACT ════════════ -->
+  <section id="contact">
+    <div class="container">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-label">Get In Touch</span>
+        <h2 class="section-title">Request an AMC<br/>Quote Today</h2>
+        <p class="section-desc" style="margin: 0 auto;">Tell us about your plant and we'll prepare a custom Annual Maintenance Contract proposal — covering everything you need.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal-left">
+          <div class="contact-info-item"><div class="icon-wrap">📍</div><div class="text"><strong>Office Address</strong><span>Office No. C-410, 3rd Floor, Mega Center,<br/>Pune Solapur Road, Hadapsar, Pune – 411028</span></div></div>
+          <div class="contact-info-item"><div class="icon-wrap">📞</div><div class="text"><strong>Prem Adhe</strong><span>9673850505 / 7499726540</span></div></div>
+          <div class="contact-info-item"><div class="icon-wrap">📱</div><div class="text"><strong>Akash Chavan</strong><span>7262-899298</span></div></div>
+          <div class="contact-info-item"><div class="icon-wrap">✉️</div><div class="text"><strong>Email</strong><span>topfield0505@gmail.com<br/>premadhe11@gmail.com</span></div></div>
+        </div>
+        <div class="contact-form reveal-right">
+          <h3>Send AMC Enquiry</h3>
+          <div class="form-row"><div class="form-group"><input type="text" placeholder="Your Name"/></div><div class="form-group"><input type="tel" placeholder="Phone Number"/></div></div>
+          <div class="form-group"><input type="email" placeholder="Email Address"/></div>
+          <div class="form-group">
+            <select>
+              <option value="" disabled selected>Select Plant Type</option>
+              <option>STP – Sewage Treatment Plant</option>
+              <option>WTP – Water Softening Plant</option>
+              <option>RO – Reverse Osmosis Plant</option>
+              <option>ETP – Effluent Treatment Plant</option>
+              <option>Swimming Pool / Waterbody</option>
+              <option>Multiple / Other</option>
+            </select>
+          </div>
+          <div class="form-group"><textarea placeholder="Tell us about your plant (capacity, age, current issues…)"></textarea></div>
+          <button class="btn-submit">Request AMC Quote →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- ══════════════════════════════════════ SCRIPTS ════════════════════════════════ -->
+  <script>
+    // Load header
+    fetch('../../header/header.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+        const s = document.createElement('script'); s.src = '../../header/header.js'; document.head.appendChild(s);
+      }).catch(() => {});
+
+    // Load footer
+    fetch('../../footer/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+        const s = document.createElement('script'); s.src = '../../footer/footer.js'; document.head.appendChild(s);
+      }).catch(() => {});
+
+    // ── SCROLL REVEAL ──
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .service-card, .included-card, .how-step');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseFloat(entry.target.style.transitionDelay || '0') * 1000;
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── SCROLL TO TOP ──
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 500));
+  </script>
+</body>
+</html>

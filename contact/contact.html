@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – Topfield Water Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+
+  <link rel="stylesheet" href="../../header/header.css"/>
+  <link rel="stylesheet" href="../../footer/footer.css"/>
+
+  <style>
+    :root {
+      --blue-deep:  #0a2342;
+      --blue-mid:   #1565a8;
+      --blue-light: #3b9fd4;
+      --aqua:       #00c6d4;
+      --teal:       #00a896;
+      --white:      #f8fbff;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--blue-deep);
+      overflow-x: hidden;
+      font-size: 14px;                /* smaller base */
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* ═══════════════════════════════════
+       FLOATING CANVAS BACKGROUND
+    ═══════════════════════════════════ */
+    #float-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    /* ═══════════════════════════════════
+       HERO SECTION (balanced size - not too small)
+    ═══════════════════════════════════ */
+    .contact-hero {
+      position: relative;
+      min-height: 60vh;                /* increased for proper banner presence */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 70px 1.5rem 50px;       /* comfortable padding */
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #050f1f 0%, #0a2342 40%, #0d4a7a 75%, #0a7fa8 100%);
+      z-index: 1;
+    }
+
+    /* Animated mesh blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .blob-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,198,212,0.22) 0%, transparent 70%);
+      top: -100px; left: -100px;
+    }
+    .blob-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(21,101,168,0.3) 0%, transparent 70%);
+      bottom: -80px; right: -60px;
+    }
+    .blob-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,168,150,0.18) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Floating particles in hero */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0,198,212,0.6);
+      box-shadow: 0 0 8px rgba(0,198,212,0.8);
+    }
+
+    /* Water drop SVG floaters */
+    .drop-floater {
+      position: absolute;
+      z-index: 3;
+      opacity: 0;
+    }
+
+    /* Wave bottom */
+    .hero-wave {
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 100%; z-index: 5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 6;
+      text-align: center;
+      max-width: 780px;                 /* restored width */
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0,198,212,0.15);
+      border: 1px solid rgba(0,198,212,0.45);
+      color: #7eeeff;
+      font-size: 0.7rem;                /* slightly larger than before */
+      font-weight: 600;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 40px;
+      margin-bottom: 1.2rem;
+      opacity: 0;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);  /* increased for banner */
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.08;
+      margin-bottom: 1rem;
+      opacity: 0;
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(90deg, #00c6d4, #7eeeff, #00c6d4);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textShimmer 4s linear infinite;
+    }
+
+    @keyframes textShimmer {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .hero-sub {
+      font-size: clamp(0.85rem, 1.6vw, 1rem);  /* comfortable */
+      color: rgba(255,255,255,0.68);
+      max-width: 520px;
+      margin: 0 auto 1.8rem;
+      line-height: 1.7;
+      font-weight: 300;
+      opacity: 0;
+    }
+
+    /* Stat pills */
+    .hero-pills {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+    .hero-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      border-radius: 40px;
+      padding: 6px 16px;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    .hero-pill span { color: #7eeeff; font-weight: 700; }
+
+    /* ═══════════════════════════════════
+       FLOATING ELEMENTS LAYER
+    ═══════════════════════════════════ */
+    .float-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .float-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,198,212,0.25);
+      animation: ringPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50%       { transform: scale(1.08); opacity: 0.7; }
+    }
+
+    .float-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0,198,212,0.7);
+      box-shadow: 0 0 10px rgba(0,198,212,0.9), 0 0 20px rgba(0,198,212,0.4);
+    }
+
+    .float-hex {
+      position: absolute;
+      opacity: 0.12;
+    }
+
+    /* ═══════════════════════════════════
+       MAIN CONTACT SECTION (compact)
+    ═══════════════════════════════════ */
+    #contact-main {
+      position: relative;
+      z-index: 10;
+      background: #f0f8ff;
+      padding: 60px 0 70px;               /* reduced */
+      overflow: hidden;
+    }
+
+    /* Flowing background pattern */
+    #contact-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 0% 50%, rgba(0,198,212,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 100% 20%, rgba(21,101,168,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1060px;                   /* narrower */
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 0.65rem;                  /* smaller */
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);  /* reduced */
+      font-weight: 700;
+      color: var(--blue-deep);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-desc {
+      color: #5a7a9a;
+      font-size: 0.88rem;                     /* smaller */
+      line-height: 1.7;
+      max-width: 450px;
+    }
+
+    /* ── Contact Layout ── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 2.5rem;                            /* reduced */
+      margin-top: 2.5rem;                      /* less */
+      align-items: start;
+    }
+    @media (max-width: 900px) { .contact-layout { grid-template-columns: 1fr; gap: 2rem; } }
+
+    /* ── Info Cards (compact) ── */
+    .info-stack { display: flex; flex-direction: column; gap: 0.8rem; }
+
+    .info-card {
+      background: #fff;
+      border-radius: 16px;                     /* smaller */
+      padding: 1rem 1.2rem;                     /* compact */
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      border: 1px solid rgba(10,35,66,0.06);
+      box-shadow: 0 2px 12px rgba(10,35,66,0.06);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--aqua), var(--blue-mid));
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.5s ease;
+    }
+    .info-card:hover::before { transform: scaleY(1); }
+    .info-card:hover { box-shadow: 0 5px 20px rgba(10,35,66,0.12); }
+
+    .info-icon {
+      width: 42px; height: 42px; flex-shrink: 0;   /* smaller */
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(21,101,168,0.25);
+    }
+
+    .info-text strong {
+      display: block;
+      font-size: 0.65rem;                          /* smaller */
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9ab8d0;
+      margin-bottom: 2px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .info-text span {
+      font-size: 0.82rem;                           /* smaller */
+      color: var(--blue-deep);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* Map placeholder card */
+    .map-card {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #1060a0 100%);
+      border-radius: 16px;
+      padding: 1.3rem;
+      position: relative;
+      overflow: hidden;
+      margin-top: 0.2rem;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    .map-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      background: rgba(0,198,212,0.1);
+    }
+    .map-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: -30px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .map-card h4 {
+      color: #7eeeff;
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      position: relative; z-index: 1;
+    }
+    .map-card p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      position: relative; z-index: 1;
+    }
+    .map-pin-anim {
+      position: relative; z-index: 1;
+      font-size: 2rem;                           /* smaller */
+      margin-top: 0.6rem;
+      display: inline-block;
+    }
+
+    /* ── FORM CARD (compact) ── */
+    .form-card {
+      background: #fff;
+      border-radius: 20px;                         /* smaller */
+      padding: 2rem;                                /* reduced */
+      box-shadow: 0 12px 40px rgba(10,35,66,0.1);
+      border: 1px solid rgba(10,35,66,0.05);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;      /* thinner */
+      background: linear-gradient(90deg, var(--aqua), var(--blue-mid), var(--aqua));
+      background-size: 200% auto;
+      animation: gradientShift 3s linear infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* Floating orbs inside form card */
+    .form-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.06;
+    }
+    .form-orb-1 {
+      width: 200px; height: 200px;                 /* smaller */
+      background: var(--aqua);
+      top: -70px; right: -70px;
+    }
+    .form-orb-2 {
+      width: 150px; height: 150px;
+      background: var(--blue-mid);
+      bottom: -50px; left: -50px;
+    }
+
+    .form-header { margin-bottom: 1.5rem; position: relative; z-index: 1; }
+    .form-header h3 { font-size: 1.3rem; color: var(--blue-deep); margin-bottom: 0.3rem; }
+    .form-header p  { font-size: 0.8rem; color: #7a9ab8; }
+
+    /* Form fields */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;                                   /* smaller */
+      position: relative; z-index: 1;
+    }
+    @media (max-width: 560px) { .form-grid-2 { grid-template-columns: 1fr; } }
+
+    .field-group {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.9rem;                         /* less */
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.7rem;                             /* smaller */
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #8aa8c0;
+      margin-bottom: 0.35rem;
+    }
+
+    .field-input,
+    .field-select,
+    .field-textarea {
+      width: 100%;
+      padding: 10px 14px;                             /* smaller */
+      border: 1.5px solid #dceaf5;
+      border-radius: 10px;                             /* smaller */
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;                              /* smaller */
+      color: var(--blue-deep);
+      background: #f6fbff;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s, transform 0.2s;
+    }
+    .field-input:focus,
+    .field-select:focus,
+    .field-textarea:focus {
+      border-color: var(--aqua);
+      box-shadow: 0 0 0 3px rgba(0,198,212,0.12);
+      background: #fff;
+      transform: translateY(-1px);
+    }
+    .field-textarea { resize: vertical; min-height: 90px; } /* shorter */
+
+    /* Input icons */
+    .field-wrap {
+      position: relative;
+    }
+    .field-wrap .field-icon {
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+    .field-wrap .field-input { padding-left: 36px; }
+
+    /* Submit button */
+    .btn-submit {
+      width: 100%;
+      padding: 12px;                                    /* smaller */
+      background: linear-gradient(135deg, var(--blue-mid) 0%, var(--aqua) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;                                /* smaller */
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      z-index: 1;
+      letter-spacing: 0.5px;
+      margin-top: 0.4rem;
+    }
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--aqua) 0%, var(--blue-mid) 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,198,212,0.45); }
+    .btn-submit:hover::before { opacity: 1; }
+    .btn-submit span { position: relative; z-index: 1; }
+
+    /* Shimmer on button */
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: skewX(-20deg);
+      animation: btnShimmer 3s ease-in-out infinite;
+      z-index: 2;
+    }
+    @keyframes btnShimmer { 0% { left:-100%; } 60% { left:150%; } 100% { left:150%; } }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 1.5rem;                            /* smaller */
+      position: relative; z-index: 1;
+    }
+    .success-icon {
+      width: 60px; height: 60px; border-radius: 50%;   /* smaller */
+      background: linear-gradient(135deg, var(--aqua), var(--blue-mid));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin: 0 auto 1rem;
+      box-shadow: 0 0 0 0 rgba(0,198,212,0.4);
+    }
+    .form-success h3 { font-size: 1.2rem; color: var(--blue-deep); margin-bottom: 0.3rem; }
+    .form-success p { color: #7a9ab8; font-size: 0.82rem; }
+
+    /* ═══════════════════════════════════
+       FLOATING ELEMENTS – CONTACT SECTION
+    ═══════════════════════════════════ */
+    .float-contact-el {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══════════════════════════════════
+       QUICK CONTACT STRIP (compact)
+    ═══════════════════════════════════ */
+    #quick-strip {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #0d3a6e 100%);
+      padding: 36px 0;                                   /* reduced */
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+    #quick-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%2300c6d4' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .strip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      position: relative; z-index: 1;
+    }
+    @media (max-width: 700px) { .strip-grid { grid-template-columns: 1fr; gap: 1rem; } }
+
+    .strip-item {
+      text-align: center;
+      padding: 0 1.2rem;                                /* smaller */
+      border-right: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+    }
+    .strip-item:last-child { border-right: none; }
+
+    .strip-icon { font-size: 1.6rem; margin-bottom: 0.4rem; display: block; }
+    .strip-label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(0,198,212,0.8);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .strip-value {
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════
+       SCROLL TO TOP (compact)
+    ═══════════════════════════════════ */
+    #scrollTop {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+      color: #fff; border: none; border-radius: 50%;
+      cursor: pointer; font-size: 1rem;
+      display: none; align-items: center; justify-content: center;
+      box-shadow: 0 3px 16px rgba(21,101,168,0.4);
+      z-index: 999; transition: transform 0.3s;
+    }
+    #scrollTop:hover { transform: scale(1.1) translateY(-2px); }
+    #scrollTop.show  { display: flex; }
+
+    /* ═══════════════════════════════════
+       CURSOR GLOW
+    ═══════════════════════════════════ */
+    .cursor-glow {
+      position: fixed;
+      width: 220px; height: 220px;                     /* smaller */
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,198,212,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+    }
+
+    /* ═══════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════ */
+    @media (max-width: 768px) {
+      .form-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor glow effect -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Fixed floating canvas -->
+  <canvas id="float-canvas"></canvas>
+
+  <div id="header-placeholder"></div>
+
+  <!-- ═══════════════════════════════════════════ HERO (balanced size) ═══════════════════ -->
+  <section class="contact-hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-blob blob-3"></div>
+
+    <!-- Floating layer -->
+    <div class="float-layer" id="heroFloatLayer">
+      <!-- Rings (balanced sizes) -->
+      <div class="float-ring" style="width:110px;height:110px;top:15%;left:8%;animation-delay:0s;"></div>
+      <div class="float-ring" style="width:55px;height:55px;top:70%;left:15%;animation-delay:1.5s;"></div>
+      <div class="float-ring" style="width:80px;height:80px;top:20%;right:10%;animation-delay:0.8s;"></div>
+      <div class="float-ring" style="width:130px;height:130px;top:60%;right:5%;animation-delay:2s;"></div>
+      <!-- Glowing dots -->
+      <div class="float-dot" style="width:4px;height:4px;top:25%;left:20%;"></div>
+      <div class="float-dot" style="width:2px;height:2px;top:60%;left:12%;"></div>
+      <div class="float-dot" style="width:5px;height:5px;top:40%;right:18%;"></div>
+      <div class="float-dot" style="width:3px;height:3px;top:75%;right:25%;"></div>
+      <div class="float-dot" style="width:4px;height:4px;top:15%;right:35%;"></div>
+      <!-- SVG hex grid -->
+      <svg class="float-hex" style="top:5%;left:55%;width:70px;" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 2L97 27.5V77.5L50 103L3 77.5V27.5L50 2Z" stroke="#00c6d4" stroke-width="2"/>
+      </svg>
+      <svg class="float-hex" style="top:65%;left:3%;width:45px;" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 2L97 27.5V77.5L50 103L3 77.5V27.5L50 2Z" stroke="#00c6d4" stroke-width="2"/>
+      </svg>
+      <svg class="float-hex" style="top:50%;right:3%;width:60px;" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 2L97 27.5V77.5L50 103L3 77.5V27.5L50 2Z" stroke="rgba(0,198,212,0.5)" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <!-- Animated water drops -->
+    <div id="dropContainer" class="float-layer"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge" id="heroBadge">💧 Get In Touch</div>
+      <h1 class="hero-title" id="heroTitle">
+        Let's Build Your<br/>
+        <span class="accent">Water Solution</span>
+      </h1>
+      <p class="hero-sub" id="heroSub">
+        Reach out to us for customized water treatment plants, AMC services,
+        domestic purifiers and more. We respond fast and visit your site personally.
+      </p>
+      <div class="hero-pills" id="heroPills">
+        <div class="hero-pill">📍 <span>Hadapsar, Pune</span></div>
+        <div class="hero-pill">⚡ <span>Fast Response</span></div>
+        <div class="hero-pill">🔧 <span>Free Site Survey</span></div>
+      </div>
+    </div>
+
+    <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f0f8ff"/>
+    </svg>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ QUICK STRIP (compact) ═════════════════ -->
+  <div id="quick-strip">
+    <div class="container">
+      <div class="strip-grid">
+        <div class="strip-item" id="strip1">
+          <span class="strip-icon">📞</span>
+          <div class="strip-label">Call Us</div>
+          <div class="strip-value">Prem: 9673850505<br/>Akash: 7262-899298</div>
+        </div>
+        <div class="strip-item" id="strip2">
+          <span class="strip-icon">✉️</span>
+          <div class="strip-label">Email Us</div>
+          <div class="strip-value">topfield0505@gmail.com<br/>premadhe11@gmail.com</div>
+        </div>
+        <div class="strip-item" id="strip3">
+          <span class="strip-icon">⏰</span>
+          <div class="strip-label">Response Time</div>
+          <div class="strip-value">Within 24 Hours<br/>Site Visit Available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ CONTACT MAIN (compact) ════════════════ -->
+  <section id="contact-main">
+
+    <!-- Floating background decorations (smaller) -->
+    <div class="float-contact-el" style="top:5%;left:-30px;">
+      <svg width="120" height="120" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="80" cy="80" r="78" stroke="rgba(0,198,212,0.1)" stroke-width="2" stroke-dasharray="8 6"/>
+      </svg>
+    </div>
+    <div class="float-contact-el" style="bottom:10%;right:-40px;">
+      <svg width="160" height="160" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="110" cy="110" r="108" stroke="rgba(21,101,168,0.08)" stroke-width="2" stroke-dasharray="12 8"/>
+      </svg>
+    </div>
+    <div class="float-contact-el" style="top:40%;left:50%;transform:translateX(-50%);">
+      <svg width="220" height="220" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.03">
+        <path d="M150 20L280 95V205L150 280L20 205V95L150 20Z" fill="#1565a8"/>
+      </svg>
+    </div>
+
+    <div class="container">
+      <div style="text-align:center; margin-bottom:0.5rem;" id="contactHeader">
+        <span class="section-eyebrow">Contact Us</span>
+        <h2 class="section-title">Request a Quote or<br/>Free Site Survey</h2>
+        <p class="section-desc" style="margin:0 auto;">Tell us about your water treatment need — we design, install and maintain the perfect solution at the most competitive price.</p>
+      </div>
+
+      <div class="contact-layout">
+        <!-- Left: Info cards -->
+        <div class="info-stack">
+          <div class="info-card" id="infoCard1">
+            <div class="info-icon">📍</div>
+            <div class="info-text">
+              <strong>Office Address</strong>
+              <span>Office No. C-410, 3rd Floor,<br/>Mega Center, Pune Solapur Road,<br/>Hadapsar, Pune – 411028</span>
+            </div>
+          </div>
+          <div class="info-card" id="infoCard2">
+            <div class="info-icon">📞</div>
+            <div class="info-text">
+              <strong>Prem Adhe</strong>
+              <span>9673850505 / 7499726540</span>
+            </div>
+          </div>
+          <div class="info-card" id="infoCard3">
+            <div class="info-icon">📱</div>
+            <div class="info-text">
+              <strong>Akash Chavan</strong>
+              <span>7262-899298</span>
+            </div>
+          </div>
+          <div class="info-card" id="infoCard4">
+            <div class="info-icon">✉️</div>
+            <div class="info-text">
+              <strong>Email</strong>
+              <span>topfield0505@gmail.com<br/>premadhe11@gmail.com</span>
+            </div>
+          </div>
+
+          <div class="map-card" id="mapCard">
+            <h4>📍 Find Us</h4>
+            <p>Mega Center, Pune Solapur Road,<br/>Hadapsar, Pune – 411028</p>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="form-card" id="formCard">
+          <div class="form-orb form-orb-1"></div>
+          <div class="form-orb form-orb-2"></div>
+
+          <div class="form-header">
+            <h3>Send Us a Message</h3>
+            <p>We'll get back to you within 24 hours with a personalized proposal.</p>
+          </div>
+
+          <div id="formBody">
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label">Your Name</label>
+                <div class="field-wrap">
+                  <span class="field-icon">👤</span>
+                  <input class="field-input" type="text" placeholder="Full name"/>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Phone Number</label>
+                <div class="field-wrap">
+                  <span class="field-icon">📞</span>
+                  <input class="field-input" type="tel" placeholder="Mobile number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Email Address</label>
+              <div class="field-wrap">
+                <span class="field-icon">✉️</span>
+                <input class="field-input" type="email" placeholder="your@email.com"/>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Service Required</label>
+              <select class="field-select">
+                <option value="" disabled selected>Select a service…</option>
+                <option>Sewage Treatment Plant (STP)</option>
+                <option>Water Softening Plant (WTP)</option>
+                <option>RO / Reverse Osmosis Plant</option>
+                <option>Effluent Treatment Plant (ETP)</option>
+                <option>STP with UF / MBR</option>
+                <option>Swimming Pool / Waterbody AMC</option>
+                <option>Annual Maintenance Contract (AMC)</option>
+                <option>Domestic Purifier / Softener</option>
+                <option>Chemical Dosing System</option>
+                <option>Tank Cleaning / Repair</option>
+                <option>Other / Multiple Services</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Your Requirement</label>
+              <textarea class="field-textarea" placeholder="Describe your need — capacity, location, application, current problem…"></textarea>
+            </div>
+
+            <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">
+              <span>Send Enquiry →</span>
+            </button>
+          </div>
+
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon" id="successIcon">✅</div>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. Our team will contact you within 24 hours with a tailored proposal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- ═══════════════════════════════════════════ SCRIPTS ═══════════════════════════════ -->
+  <script>
+    // ── Header / Footer ──
+    fetch('../../header/header.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+        const s = document.createElement('script'); s.src = '../../header/header.js'; document.head.appendChild(s);
+      }).catch(() => {});
+    fetch('../../footer/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+        const s = document.createElement('script'); s.src = '../../footer/footer.js'; document.head.appendChild(s);
+      }).catch(() => {});
+
+    // ── Cursor glow ──
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', e => {
+      gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 0.6, ease: 'power2.out' });
+    });
+
+    // ══════════════════════════════════════
+    // CANVAS FLOATING PARTICLES (background)
+    // ══════════════════════════════════════
+    const canvas = document.getElementById('float-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x  = Math.random() * W;
+        this.y  = Math.random() * H;
+        this.r  = Math.random() * 2 + 0.5;          /* smaller */
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.life   = 0;
+        this.maxLife = Math.random() * 150 + 80;    /* shorter */
+        this.type = Math.random() > 0.7 ? 'ring' : 'dot';
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life++;
+        if (this.life > this.maxLife) this.reset();
+      }
+      draw() {
+        const t = this.life / this.maxLife;
+        const alpha = t < 0.2 ? t / 0.2 : t > 0.8 ? (1 - t) / 0.2 : 1;
+        ctx.save();
+        if (this.type === 'dot') {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,198,212,${alpha * 0.5})`;
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = 'rgba(0,198,212,0.6)';
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * 3, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(59,159,212,${alpha * 0.3})`;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 60; i++) particles.push(new Particle());  /* fewer particles */
+
+    // Water drop class (smaller)
+    class WaterDrop {
+      constructor() { this.reset(); }
+      reset() {
+        this.x  = Math.random() * W;
+        this.y  = -20;
+        this.size = Math.random() * 5 + 3;
+        this.speed = Math.random() * 1.2 + 0.5;
+        this.wobble = Math.random() * Math.PI * 2;
+        this.wobbleSpeed = Math.random() * 0.04 + 0.01;
+        this.alpha = Math.random() * 0.3 + 0.1;
+        this.active = false;
+      }
+      update() {
+        this.y += this.speed;
+        this.wobble += this.wobbleSpeed;
+        this.x += Math.sin(this.wobble) * 0.5;
+        if (this.y > H + 20) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.translate(this.x, this.y);
+        ctx.beginPath();
+        ctx.moveTo(0, -this.size * 1.2);
+        ctx.bezierCurveTo(this.size, -this.size * 0.2, this.size, this.size * 0.8, 0, this.size);
+        ctx.bezierCurveTo(-this.size, this.size * 0.8, -this.size, -this.size * 0.2, 0, -this.size * 1.2);
+        ctx.fillStyle = 'rgba(0,198,212,0.6)';
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const drops = Array.from({length: 12}, () => {  /* fewer drops */
+      const d = new WaterDrop();
+      d.y = Math.random() * H;
+      return d;
+    });
+
+    function animCanvas() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => { p.update(); p.draw(); });
+      drops.forEach(d => { d.update(); d.draw(); });
+      requestAnimationFrame(animCanvas);
+    }
+    animCanvas();
+
+    // ══════════════════════════════════════
+    // GSAP ANIMATIONS (unchanged logic)
+    // ══════════════════════════════════════
+    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+    // ── Hero entrance ──
+    const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    heroTL
+      .to('#heroBadge', { opacity: 1, y: 0, duration: 0.8, delay: 0.3 })
+      .to('#heroTitle',  { opacity: 1, y: 0, duration: 1,   stagger: 0.1 }, '-=0.4')
+      .to('#heroSub',    { opacity: 1, y: 0, duration: 0.8 }, '-=0.5')
+      .to('#heroPills',  { opacity: 1, y: 0, duration: 0.7 }, '-=0.4');
+
+    gsap.set(['#heroBadge','#heroTitle','#heroSub','#heroPills'], { y: -30 });
+
+    // ── Floating rings in hero (GSAP) ──
+    document.querySelectorAll('.float-ring').forEach((ring, i) => {
+      gsap.to(ring, {
+        y: `${(i % 2 === 0 ? -1 : 1) * (18 + i * 5)}`,
+        x: `${(i % 3 === 0 ? 1 : -1) * (10 + i * 3)}`,
+        rotation: 360,
+        duration: 7 + i * 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: i * 0.5
+      });
+    });
+
+    // ── Floating dots ──
+    document.querySelectorAll('.float-dot').forEach((dot, i) => {
+      gsap.to(dot, {
+        y: `${(i % 2 === 0 ? -25 : 25)}`,
+        x: `${(i % 2 === 0 ? 12 : -12)}`,
+        duration: 3 + i * 0.7,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut',
+        delay: i * 0.3
+      });
+    });
+
+    // ── Hex floaters ──
+    document.querySelectorAll('.float-hex').forEach((hex, i) => {
+      gsap.to(hex, {
+        rotation: i % 2 === 0 ? 18 : -18,
+        y: i % 2 === 0 ? -22 : 22,
+        duration: 6 + i * 1.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: i * 1
+      });
+    });
+
+    // ── Hero blobs ──
+    gsap.to('.blob-1', { x: 50,  y: 40,  duration: 8,  repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.blob-2', { x: -40, y: -35, duration: 10, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.blob-3', { x: 30,  y: 45,  duration: 7,  repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+    // ── Map pin bounce ──
+    gsap.to('#mapPin', {
+      y: -7,
+      duration: 0.7,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut'
+    });
+
+    // ── Quick strip items ──
+    gsap.to(['#strip1','#strip2','#strip3'], {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#quick-strip',
+        start: 'top 85%'
+      }
+    });
+    gsap.set(['#strip1','#strip2','#strip3'], { y: 25 });
+
+    // ── Contact header ──
+    gsap.from('#contactHeader', {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#contactHeader',
+        start: 'top 85%'
+      }
+    });
+
+    // ── Info cards stagger ──
+    const infoCards = ['#infoCard1','#infoCard2','#infoCard3','#infoCard4','#mapCard'];
+    gsap.to(infoCards, {
+      opacity: 1,
+      x: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#infoCard1',
+        start: 'top 80%'
+      }
+    });
+
+    // ── Form card ──
+    gsap.to('#formCard', {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#formCard',
+        start: 'top 80%'
+      }
+    });
+
+    // ── Form fields stagger entrance ──
+    gsap.from('.field-group', {
+      opacity: 0,
+      y: 15,
+      duration: 0.4,
+      stagger: 0.06,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#formCard',
+        start: 'top 70%'
+      }
+    });
+
+    // ── Floating contact background elements ──
+    document.querySelectorAll('.float-contact-el').forEach((el, i) => {
+      gsap.to(el, {
+        rotation: i % 2 === 0 ? 12 : -12,
+        y: i % 2 === 0 ? -25 : 25,
+        duration: 7 + i * 2.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: i * 1.2
+      });
+    });
+
+    // ── Animated water drop path in hero (GSAP MotionPath) ──
+    function createHeroDrops() {
+      const container = document.getElementById('dropContainer');
+      for (let i = 0; i < 6; i++) {
+        const drop = document.createElement('div');
+        drop.innerHTML = `<svg width="14" height="18" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 0C8 0 0 9 0 13C0 17.4 3.6 20 8 20C12.4 20 16 17.4 16 13C16 9 8 0 8 0Z" fill="rgba(0,198,212,0.6)"/>
+        </svg>`;
+        drop.style.cssText = `position:absolute;opacity:0;left:${10 + i * 17}%;top:${18 + i * 8}%;z-index:5;`;
+        container.appendChild(drop);
+
+        gsap.to(drop, {
+          opacity: 0.7,
+          y: 35 + i * 18,
+          x: `${(i % 2 === 0 ? 1 : -1) * (12 + i * 5)}`,
+          duration: 3 + i * 0.8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut',
+          delay: i * 0.5
+        });
+
+        gsap.to(drop, {
+          rotation: 15,
+          duration: 2 + i * 0.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: i * 0.3
+        });
+      }
+    }
+    createHeroDrops();
+
+    // ── Form field focus micro-animation ──
+    document.querySelectorAll('.field-input, .field-select, .field-textarea').forEach(field => {
+      field.addEventListener('focus', () => {
+        gsap.to(field.closest('.field-group'), { scale: 1.01, duration: 0.2, ease: 'power2.out' });
+      });
+      field.addEventListener('blur', () => {
+        gsap.to(field.closest('.field-group'), { scale: 1, duration: 0.2, ease: 'power2.out' });
+      });
+    });
+
+    // ── Submit button pulse ──
+    gsap.to('#submitBtn', {
+      boxShadow: '0 0 25px rgba(0,198,212,0.5)',
+      duration: 1.2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    // ── Form submit handler ──
+    function handleSubmit() {
+      const btn = document.getElementById('submitBtn');
+      gsap.to(btn, { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 });
+      setTimeout(() => {
+        gsap.to('#formBody', {
+          opacity: 0,
+          y: -15,
+          duration: 0.4,
+          ease: 'power2.in',
+          onComplete: () => {
+            document.getElementById('formBody').style.display = 'none';
+            const success = document.getElementById('formSuccess');
+            success.style.display = 'block';
+            gsap.from(success, { opacity: 0, y: 20, duration: 0.5, ease: 'back.out(1.4)' });
+            gsap.to('#successIcon', {
+              rotation: 360,
+              scale: 1.2,
+              duration: 0.5,
+              ease: 'back.out(1.7)',
+              onComplete: () => gsap.to('#successIcon', { scale: 1, duration: 0.2 })
+            });
+            // Confetti-like particles from submit
+            for (let i = 0; i < 15; i++) {
+              const dot = document.createElement('div');
+              dot.style.cssText = `position:absolute;width:6px;height:6px;border-radius:50%;background:${i%2===0?'#00c6d4':'#1565a8'};top:50%;left:50%;pointer-events:none;z-index:10;`;
+              document.getElementById('formCard').appendChild(dot);
+              gsap.to(dot, {
+                x: (Math.random() - 0.5) * 300,
+                y: (Math.random() - 0.5) * 220,
+                opacity: 0,
+                scale: Math.random() * 1.3,
+                duration: 1,
+                ease: 'power2.out',
+                onComplete: () => dot.remove()
+              });
+            }
+          }
+        });
+      }, 300);
+    }
+    window.handleSubmit = handleSubmit;
+
+    // ── Scroll to top ──
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 400));
+  </script>
+</body>
+</html>

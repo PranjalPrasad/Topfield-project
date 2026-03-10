@@ -7,44 +7,50 @@
       this.header = document.querySelector('.tf-header');
       this.mobileTrigger = document.querySelector('.tf-mobile-trigger');
       this.nav = document.querySelector('.tf-nav');
+      this.navClose = document.querySelector('.tf-nav-close');
       this.dropdowns = document.querySelectorAll('.tf-dropdown');
       this.floatingDrops = document.querySelector('.tf-floating-drops');
-      
+
       this.init();
     }
-    
+
     init() {
       this.setActiveLink();
       this.setupEventListeners();
       this.createWaterRipple();
       this.setupSmoothScrolling();
     }
-    
+
     setupEventListeners() {
       // Mobile menu toggle
       if (this.mobileTrigger && this.nav) {
         this.mobileTrigger.addEventListener('click', (e) => this.toggleMobileMenu(e));
       }
-      
+
+      // Nav close button inside panel
+      if (this.navClose) {
+        this.navClose.addEventListener('click', (e) => this.toggleMobileMenu(e));
+      }
+
       // Dropdown handling for all devices
       this.setupDropdowns();
-      
+
       // Window resize
       window.addEventListener('resize', () => this.handleResize());
-      
+
       // Click outside to close menu
       document.addEventListener('click', (e) => this.handleClickOutside(e));
-      
+
       // Scroll effect
       window.addEventListener('scroll', () => this.handleScroll());
     }
-    
+
     toggleMobileMenu(e) {
       e.stopPropagation();
       this.mobileTrigger.classList.toggle('active');
       this.nav.classList.toggle('active');
       document.body.classList.toggle('menu-open');
-      
+
       // Animate hamburger
       const spans = this.mobileTrigger.querySelectorAll('span');
       if (this.mobileTrigger.classList.contains('active')) {
@@ -57,19 +63,20 @@
         spans[2].style.transform = 'none';
       }
     }
-    
+
     setupDropdowns() {
       this.dropdowns.forEach(dropdown => {
         const link = dropdown.querySelector('.tf-nav-link');
-        
-        // Remove any existing click listeners
-        link.removeEventListener('click', this.dropdownClickHandler);
-        
+
+        // Use a flag to prevent adding duplicate listeners on resize
+        if (link.dataset.dropdownInit === 'true') return;
+        link.dataset.dropdownInit = 'true';
+
         // Add click handler
         link.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          
+
           // For mobile (<= 992px) - toggle dropdown
           if (window.innerWidth <= 992) {
             // Close other dropdowns first
@@ -78,7 +85,7 @@
                 d.classList.remove('active');
               }
             });
-            
+
             // Toggle current dropdown
             dropdown.classList.toggle('active');
           }
@@ -98,21 +105,21 @@
         });
       });
     }
-    
+
     setActiveLink() {
       const currentPath = window.location.pathname;
       const navLinks = document.querySelectorAll('.tf-nav-link');
-      
+
       navLinks.forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href');
-        
+
         if (href === '#home' && (currentPath === '/' || currentPath === '')) {
           link.classList.add('active');
         }
       });
     }
-    
+
     createWaterRipple() {
       // Add dynamic water ripple effect on header hover
       if (this.header) {
@@ -130,16 +137,16 @@
           ripple.style.zIndex = '9999';
           ripple.style.transform = 'translate(-50%, -50%)';
           ripple.style.animation = 'rippleExpand 1s ease-out';
-          
+
           document.body.appendChild(ripple);
-          
+
           setTimeout(() => {
             ripple.remove();
           }, 1000);
         });
       }
     }
-    
+
     setupSmoothScrolling() {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -152,7 +159,7 @@
                 behavior: 'smooth',
                 block: 'start'
               });
-              
+
               // Close mobile menu if open
               if (this.nav && this.nav.classList.contains('active')) {
                 this.toggleMobileMenu(e);
@@ -162,7 +169,7 @@
         });
       });
     }
-    
+
     handleClickOutside(e) {
       if (window.innerWidth <= 992) {
         // Close mobile menu if clicking outside
@@ -171,7 +178,7 @@
             this.toggleMobileMenu(e);
           }
         }
-        
+
         // Close dropdowns when clicking outside
         let clickedInsideDropdown = false;
         this.dropdowns.forEach(dropdown => {
@@ -179,7 +186,7 @@
             clickedInsideDropdown = true;
           }
         });
-        
+
         if (!clickedInsideDropdown) {
           this.dropdowns.forEach(dropdown => {
             dropdown.classList.remove('active');
@@ -187,7 +194,7 @@
         }
       }
     }
-    
+
     handleResize() {
       if (window.innerWidth > 992) {
         // Reset mobile states
@@ -199,17 +206,20 @@
           spans[1].style.opacity = '1';
           spans[2].style.transform = 'none';
         }
-        
+
+        // Remove body lock
+        document.body.classList.remove('menu-open');
+
         // Reset dropdowns but keep hover functionality
         this.dropdowns.forEach(dropdown => {
           dropdown.classList.remove('active');
         });
       }
-      
+
       // Reinitialize dropdowns for new screen size
       this.setupDropdowns();
     }
-    
+
     handleScroll() {
       // Add shadow on scroll
       if (window.scrollY > 10) {
@@ -219,7 +229,7 @@
       }
     }
   }
-  
+
   // Add keyframe animation for ripple
   const style = document.createElement('style');
   style.textContent = `
@@ -229,7 +239,7 @@
     }
   `;
   document.head.appendChild(style);
-  
+
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {

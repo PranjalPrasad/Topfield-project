@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sewage Treatment Plants (STP) – Topfield Water Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Bootstrap & AOS for the new process design (added without breaking existing) -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <link rel="stylesheet" href="../../header/header.css"/>
+  <link rel="stylesheet" href="../../footer/footer.css"/>
+
+  <style>
+    :root {
+      --blue-deep:  #0a2342;
+      --blue-mid:   #1565a8;
+      --blue-light: #3b9fd4;
+      --aqua:       #00c6d4;
+      --teal:       #00a896;
+      --white:      #f8fbff;
+      --card-radius: 18px;
+      --card-gap:    1.2rem;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans', sans-serif;
+      background:var(--white);
+      color:var(--blue-deep);
+      overflow-x:hidden;
+      font-size:15px;
+    }
+    h1,h2,h3,h4 { font-family:'Playfair Display', serif; }
+
+    /* ===== HERO & existing styles (unchanged) ===== */
+    #hero {
+      position:relative;
+      width:100%;
+      min-height:85vh;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    #three-canvas {
+      position:absolute;
+      inset:0;
+      width:100% !important;
+      height:100% !important;
+      z-index:0;
+    }
+    .hero-overlay {
+      position:absolute;
+      inset:0;
+      background:linear-gradient(160deg,rgba(5,12,28,0.82) 0%,rgba(10,35,66,0.70) 45%,rgba(0,100,140,0.45) 100%);
+      z-index:1;
+    }
+    .hero-overlay::after {
+      content:'';
+      position:absolute;
+      bottom:0; left:0; right:0; height:30%;
+      background:linear-gradient(to top, rgba(5,12,28,0.9), transparent);
+    }
+    .hero-scanline {
+      position:absolute;
+      inset:0;
+      z-index:2;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,198,212,0.015) 2px,rgba(0,198,212,0.015) 4px);
+      pointer-events:none;
+    }
+    .hero-wave {
+      position:absolute;
+      bottom:-2px; left:0;
+      width:100%; z-index:5;
+    }
+    .hero-content {
+      position:relative;
+      z-index:6;
+      text-align:center;
+      max-width:820px;
+      padding:0 1.8rem;
+      padding-top:60px;
+    }
+    .hero-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:0.4rem;
+      background:rgba(0,198,212,0.12);
+      border:1px solid rgba(0,198,212,0.4);
+      color:#7eeeff;
+      font-size:0.65rem;
+      font-weight:700;
+      letter-spacing:2.5px;
+      text-transform:uppercase;
+      padding:6px 18px;
+      border-radius:40px;
+      margin-bottom:1.2rem;
+      opacity:0;
+    }
+    .hero-title {
+      font-size:clamp(2.2rem, 5vw, 3.8rem);
+      font-weight:900;
+      color:#fff;
+      line-height:1.1;
+      margin-bottom:0.9rem;
+      opacity:0;
+    }
+    .hero-title .line2 {
+      background:linear-gradient(90deg,#00c6d4,#7eeeff,#3b9fd4);
+      background-size:200% auto;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      animation:shimText 4s linear infinite;
+    }
+    @keyframes shimText { 0%{background-position:0%}100%{background-position:200%} }
+    .hero-sub {
+      font-size:clamp(0.85rem,1.5vw,1rem);
+      color:rgba(255,255,255,0.65);
+      max-width:520px;
+      margin:0 auto 1.8rem;
+      line-height:1.7;
+      font-weight:300;
+      opacity:0;
+    }
+    .hero-ctas {
+      display:flex;
+      gap:0.8rem;
+      justify-content:center;
+      flex-wrap:wrap;
+      opacity:0;
+    }
+    .btn-primary {
+      background:linear-gradient(135deg,#00c6d4,#0a7fa8);
+      color:#fff;
+      padding:10px 28px;
+      border-radius:40px;
+      font-weight:600;
+      font-size:0.9rem;
+      text-decoration:none;
+      transition:transform 0.3s, box-shadow 0.3s;
+      box-shadow:0 5px 20px rgba(0,198,212,0.4);
+    }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,198,212,0.6); }
+    .btn-outline {
+      border:2px solid rgba(255,255,255,0.45);
+      color:#fff;
+      padding:10px 28px;
+      border-radius:40px;
+      font-weight:600;
+      font-size:0.9rem;
+      text-decoration:none;
+      transition:all 0.3s;
+      backdrop-filter:blur(10px);
+    }
+    .btn-outline:hover { background:rgba(255,255,255,0.12); border-color:#fff; }
+    .hero-stats {
+      display:flex;
+      justify-content:center;
+      gap:1.5rem;
+      flex-wrap:wrap;
+      margin-top:2.2rem;
+      padding:1rem 1.8rem;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:16px;
+      backdrop-filter:blur(14px);
+      opacity:0;
+    }
+    .hero-stat { text-align:center; color:#fff; }
+    .hero-stat .num {
+      font-family:'Playfair Display', serif;
+      font-size:1.7rem; font-weight:700;
+      color:#7eeeff; line-height:1;
+    }
+    .hero-stat .lbl {
+      font-size:0.65rem; opacity:0.65;
+      letter-spacing:1.2px; text-transform:uppercase; margin-top:3px;
+    }
+    .stat-div { width:1px; height:36px; background:rgba(255,255,255,0.15); align-self:center; }
+
+    section { padding:50px 0; }
+    .container { max-width:1080px; margin:0 auto; padding:0 1.8rem; }
+
+    .section-label {
+      display:block;
+      font-size:0.65rem; font-weight:600;
+      letter-spacing:2.5px; text-transform:uppercase;
+      color:var(--blue-light); margin-bottom:0.4rem;
+    }
+    .section-title {
+      font-size:clamp(1.5rem,3vw,2.2rem);
+      font-weight:700; color:var(--blue-deep);
+      line-height:1.2; margin-bottom:0.6rem;
+    }
+    .section-desc {
+      color:#5a7a9a; font-size:0.9rem;
+      max-width:540px; line-height:1.7;
+    }
+
+    /* WHAT section */
+    #what { background:#eaf3fb; }
+    .what-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:2.5rem;
+      align-items:center;
+      margin-top:0.8rem;
+    }
+    @media(max-width:800px){ .what-grid{ grid-template-columns:1fr; gap:2rem; } }
+    .what-desc p { font-size:0.88rem; color:#5a7a9a; line-height:1.7; margin-bottom:0.8rem; }
+    .stp-diagram {
+      position:relative;
+      background:linear-gradient(135deg,var(--blue-deep),#0f4f8a);
+      border-radius:20px;
+      padding:1.8rem 1.5rem;
+      overflow:hidden;
+      box-shadow:0 15px 40px rgba(10,35,66,0.25);
+    }
+    .stp-diagram::before {
+      content:'';
+      position:absolute; inset:0;
+      background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,198,212,0.08) 0%, transparent 70%);
+    }
+    .diagram-title {
+      color:#7eeeff;
+      font-size:0.65rem;
+      letter-spacing:2.5px;
+      text-transform:uppercase;
+      font-family:'DM Sans', sans-serif;
+      font-weight:700;
+      margin-bottom:1rem;
+      position:relative; z-index:1;
+    }
+    .diagram-stages {
+      display:flex;
+      flex-direction:column;
+      gap:0.4rem;
+      position:relative;
+      z-index:1;
+    }
+    .diag-stage {
+      display:flex;
+      align-items:center;
+      gap:0.8rem;
+      padding:0.7rem 0.8rem;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:10px;
+      transition:all 0.3s;
+      cursor:default;
+      opacity:0;
+      transform:translateX(-15px);
+    }
+    .diag-stage:hover {
+      background:rgba(0,198,212,0.12);
+      border-color:rgba(0,198,212,0.35);
+      transform:translateX(4px) !important;
+    }
+    .diag-num {
+      width:28px; height:28px; flex-shrink:0;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--aqua),var(--blue-mid));
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.7rem; font-weight:700; color:#fff;
+      box-shadow:0 4px 10px rgba(0,198,212,0.3);
+    }
+    .diag-info h4 {
+      font-family:'DM Sans', sans-serif;
+      font-size:0.78rem; font-weight:700;
+      color:#fff; margin-bottom:2px;
+    }
+    .diag-info p { font-size:0.68rem; color:rgba(255,255,255,0.55); line-height:1.4; }
+    .diag-arrow {
+      text-align:center;
+      color:rgba(0,198,212,0.5);
+      font-size:0.9rem;
+      line-height:0.8;
+      margin:2px 0;
+      animation:arrowPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes arrowPulse { 0%,100%{opacity:0.4;transform:translateY(0)}50%{opacity:1;transform:translateY(3px)} }
+    .flow-bar {
+      height:3px;
+      background:rgba(255,255,255,0.06);
+      border-radius:2px;
+      margin-top:1rem;
+      overflow:hidden;
+      position:relative;
+      z-index:1;
+    }
+    .flow-bar-fill {
+      height:100%;
+      background:linear-gradient(90deg,var(--aqua),var(--blue-light),var(--aqua));
+      background-size:200% auto;
+      border-radius:2px;
+      animation:flowAnim 2.5s linear infinite;
+      width:0%;
+      transition:width 1.5s ease;
+    }
+    @keyframes flowAnim { 0%{background-position:0%}100%{background-position:200%} }
+
+    /* TYPES section (unchanged) */
+    #types { background:#fff; }
+    .types-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.2rem;
+      margin-top:2rem;
+    }
+    @media(max-width:900px){ .types-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:560px){ .types-grid{ grid-template-columns:1fr; } }
+    .type-card {
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid rgba(10,35,66,0.07);
+      box-shadow:0 4px 14px rgba(10,35,66,0.07);
+      transition:transform 0.3s cubic-bezier(0.23,1,0.32,1), box-shadow 0.3s;
+      opacity:0;
+      transform:translateY(35px);
+      cursor:default;
+    }
+    .type-card:hover { transform:translateY(-6px); box-shadow:0 18px 40px rgba(10,35,66,0.15); }
+    .type-card-top {
+      height:110px;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .tc-bg { position:absolute; inset:0; }
+    .bg-mbr    { background:linear-gradient(145deg,#052244,#0f6096 50%,#00b4cc); }
+    .bg-sbb    { background:linear-gradient(145deg,#0a2342,#1462a0 50%,#3daad4); }
+    .bg-mbbr   { background:linear-gradient(145deg,#063347,#0b6898 50%,#3bc5e8); }
+    .bg-ext    { background:linear-gradient(145deg,#043d56,#0882aa 50%,#36d2e8); }
+    .bg-stp_uv { background:linear-gradient(145deg,#064f66,#059ab8 50%,#80e0f0); }
+    .bg-civil  { background:linear-gradient(145deg,#0b2548,#1952a0 50%,#5b9ede); }
+    .tc-bg::before {
+      content:'';
+      position:absolute; bottom:-36px; left:-36px;
+      width:140px; height:140px; border-radius:50%;
+      background:rgba(255,255,255,0.05);
+    }
+    .tc-icon-wrap {
+      position:relative; z-index:2;
+      width:52px; height:52px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.15);
+      border:1.5px solid rgba(255,255,255,0.3);
+      backdrop-filter:blur(12px);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.7rem;
+      box-shadow:0 6px 18px rgba(0,0,0,0.2);
+      transition:transform 0.3s cubic-bezier(0.23,1,0.32,1);
+    }
+    .type-card:hover .tc-icon-wrap { transform:translateY(-6px) scale(1.05); }
+    .tc-badge {
+      position:absolute; top:10px; right:10px; z-index:3;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(8px);
+      border-radius:24px; padding:3px 10px;
+    }
+    .tc-badge b { font-size:0.62rem; font-weight:700; color:var(--blue-deep); }
+    .tc-wave {
+      position:absolute; bottom:0; left:0;
+      width:100%; z-index:3; line-height:0;
+    }
+    .type-card-body { padding:1rem 1.2rem 1.3rem; }
+    .type-card-body h3 {
+      font-family:'DM Sans', sans-serif;
+      font-size:0.85rem; font-weight:700;
+      color:var(--blue-deep); margin-bottom:0.4rem;
+    }
+    .type-card-body p { font-size:0.75rem; color:#6a8daa; line-height:1.6; margin-bottom:0.8rem; }
+    .tc-tags { display:flex; flex-wrap:wrap; gap:0.3rem; }
+    .tc-tag {
+      background:#eaf3fb;
+      border:1px solid #c8dff0;
+      border-radius:18px;
+      padding:2px 8px;
+      font-size:0.65rem;
+      font-weight:600;
+      color:var(--blue-mid);
+    }
+
+    /* ===== NEW PROCESS SECTION – using the attached design ===== */
+    #process-3d {
+      background:linear-gradient(135deg,var(--blue-deep) 0%,#0d3a6e 100%);
+      position:relative;
+      overflow:hidden;
+      padding:30px 0;
+    }
+    #process-3d::before {
+      content:''; position:absolute; inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%2300c6d4' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    #process-3d .section-title { color:#fff; }
+    #process-3d .section-label { color:#7eeeff; }
+    #process-3d .section-desc  { color:rgba(255,255,255,0.6); }
+
+    /* custom styles for the stepped process – adapted from the provided design */
+    .work-process { padding-bottom:1rem; }
+    .process-box {
+      background: #fff;
+      padding: 10px;
+      border-radius: 15px;
+      position: relative;
+      box-shadow: 2px 2px 7px 0 #00000057;
+    }
+    .process-left:after {
+      content: "";
+      border-top: 15px solid #ffffff;
+      border-bottom: 15px solid #ffffff;
+      border-left: 15px solid #ffffff;
+      border-right: 15px solid #ffffff;
+      display: inline-grid;
+      position: absolute;
+      right: -15px;
+      top: 42%;
+      transform: rotate(45deg);
+      box-shadow: 3px -2px 3px 0px #00000036;
+      z-index: 1;
+    }
+    .process-right:after {
+      content: "";
+      border-top: 15px solid #ffffff00;
+      border-bottom: 15px solid #ffffff;
+      border-left: 15px solid #ffffff;
+      border-right: 15px solid #ffffff00;
+      display: inline-grid;
+      position: absolute;
+      left: -15px;
+      top: 42%;
+      transform: rotate(45deg);
+      box-shadow: -1px 1px 3px 0px #0000001a;
+      z-index: 1;
+    }
+    .process-step {
+      background: #00BCD4;
+      text-align: center;
+      width: 80%;
+      margin: 0 auto;
+      color: #fff;
+      height: 100%;
+      padding-top: 8px;
+      position: relative;
+      top: -26px;
+      border-radius: 0px 0px 10px 10px;
+      box-shadow: -6px 8px 0px 0px #00000014;
+    }
+    .process-point-right {
+      background: #ffffff;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 8px solid #00bcd4;
+      box-shadow: 0 0 0px 4px #5c5c5c;
+      margin: auto 0;
+      position: absolute;
+      bottom: 40px;
+      left: -63px;
+    }
+    .process-point-right:before {
+      content: "";
+      height: 144px;
+      width: 11px;
+      background: #5c5c5c;
+      display: inline-grid;
+      transform: rotate(36deg);
+      position: relative;
+      left: -50px;
+      top: -0px;
+    }
+    .process-point-left {
+      background: #ffffff;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 8px solid #00bcd4;
+      box-shadow: 0 0 0px 4px #5c5c5c;
+      margin: auto 0;
+      position: absolute;
+      bottom: 40px;
+      right: -63px;
+    }
+    .process-point-left:before {
+      content: "";
+      height: 144px;
+      width: 11px;
+      background: #5c5c5c;
+      display: inline-grid;
+      transform: rotate(-38deg);
+      position: relative;
+      left: 50px;
+      top: 0px;
+    }
+    .process-last:before { display: none; }
+    .process-box p { z-index: 9; }
+    .process-step p { font-size: 18px; margin-bottom:0; }
+    .process-step h2 { font-size: 34px; margin-top:-5px; }
+    .process-step:after {
+      content: "";
+      border-top: 8px solid #04889800;
+      border-bottom: 8px solid #048898;
+      border-left: 8px solid #04889800;
+      border-right: 8px solid #048898;
+      display: inline-grid;
+      position: absolute;
+      left: -16px;
+      top: 0;
+    }
+    .process-step:before {
+      content: "";
+      border-top: 8px solid #ff000000;
+      border-bottom: 8px solid #048898;
+      border-left: 8px solid #048898;
+      border-right: 8px solid #ff000000;
+      display: inline-grid;
+      position: absolute;
+      right: -16px;
+      top: 0;
+    }
+    .process-line-l {
+      background: white;
+      height: 4px;
+      position: absolute;
+      width: 136px;
+      right: -153px;
+      top: 64px;
+      z-index: 9;
+    }
+    .process-line-r {
+      background: white;
+      height: 4px;
+      position: absolute;
+      width: 136px;
+      left: -153px;
+      top: 63px;
+      z-index: 9;
+    }
+    /* content inside process box */
+    .process-box h5 {
+      font-family:'DM Sans', sans-serif;
+      font-weight:700;
+      font-size:0.95rem;
+      color:var(--blue-deep);
+      margin-bottom:2px;
+    }
+    .process-box p small {
+      font-size:0.75rem;
+      color:#5a7a9a;
+    }
+    /* remove extra container padding inside bootstrap row for alignment */
+    .work-process .row { margin:0; align-items:center; }
+    .work-process .col-md-5, .work-process .col-md-2 { padding:0 5px; }
+    .process-point-right, .process-point-left { position:relative; bottom:auto; top:auto; }
+    .process-point-right { left:0; margin-left:auto; margin-right:0; }
+    .process-point-left { right:0; margin-right:auto; margin-left:0; }
+    /* fix line positioning inside the grid */
+    .process-line-l, .process-line-r { top: 50%; transform:translateY(-50%); }
+    .process-line-l { right: -120px; width: 100px; }
+    .process-line-r { left: -120px; width: 100px; }
+    .process-point-right:before, .process-point-left:before { height: 110px; } /* fit smaller height */
+    .process-last:before { display:none; }
+    @media (max-width: 768px) { .process-line-l, .process-line-r { display:none; } }
+    /* ===== end new process styles ===== */
+
+    /* APPLICATIONS, SPECS, CTA (unchanged) */
+    #applications { background:#eaf3fb; }
+    .apps-grid {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:0.9rem;
+      margin-top:2rem;
+    }
+    @media(max-width:900px){ .apps-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:480px){ .apps-grid{ grid-template-columns:1fr; } }
+    .app-card {
+      background:#fff;
+      border-radius:16px;
+      padding:1.4rem 1.1rem;
+      text-align:center;
+      border:1px solid rgba(10,35,66,0.06);
+      box-shadow:0 2px 10px rgba(10,35,66,0.06);
+      transition:all 0.3s;
+      opacity:0;
+      transform:scale(0.92);
+      position:relative;
+      overflow:hidden;
+    }
+    .app-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--aqua),var(--blue-mid));
+      transform:scaleX(0); transform-origin:left;
+      transition:transform 0.4s;
+    }
+    .app-card:hover { transform:translateY(-4px) scale(1); box-shadow:0 12px 30px rgba(10,35,66,0.13); }
+    .app-card:hover::before { transform:scaleX(1); }
+    .app-card.visible { opacity:1; transform:scale(1); }
+    .app-icon {
+      width:48px; height:48px; border-radius:50%;
+      background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem; margin:0 auto 0.7rem;
+      box-shadow:0 5px 14px rgba(21,101,168,0.25);
+    }
+    .app-card h3 {
+      font-family:'DM Sans', sans-serif;
+      font-size:0.82rem; font-weight:700;
+      color:var(--blue-deep); margin-bottom:0.3rem;
+    }
+    .app-card p { font-size:0.72rem; color:#7a9ab8; line-height:1.5; }
+    #specs { background:#fff; }
+    .specs-layout {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:2.2rem;
+      margin-top:2rem;
+      align-items:start;
+    }
+    @media(max-width:800px){ .specs-layout{ grid-template-columns:1fr; } }
+    .spec-table {
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0 0.4rem;
+    }
+    .spec-table tr {
+      opacity:0;
+      transform:translateX(-15px);
+    }
+    .spec-table td {
+      padding:0.7rem 1rem;
+      background:#f0f8ff;
+      font-size:0.82rem;
+      color:var(--blue-deep);
+    }
+    .spec-table td:first-child {
+      border-radius:10px 0 0 10px;
+      font-weight:600;
+      color:#7a9ab8;
+      font-size:0.7rem;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+      white-space:nowrap;
+      width:40%;
+    }
+    .spec-table td:last-child {
+      border-radius:0 10px 10px 0;
+      font-weight:500;
+    }
+    .spec-table tr:hover td { background:#e2f0fb; }
+    .compliance-badges {
+      display:flex;
+      flex-direction:column;
+      gap:0.7rem;
+    }
+    .comp-badge {
+      background:linear-gradient(135deg,var(--blue-deep),#1060a0);
+      border-radius:14px;
+      padding:1rem 1.2rem;
+      display:flex;
+      align-items:center;
+      gap:0.8rem;
+      opacity:0;
+      transform:translateX(15px);
+    }
+    .comp-badge-icon {
+      width:40px; height:40px; flex-shrink:0;
+      border-radius:10px;
+      background:rgba(0,198,212,0.15);
+      border:1px solid rgba(0,198,212,0.3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem;
+    }
+    .comp-badge-text h4 {
+      font-family:'DM Sans', sans-serif;
+      font-size:0.8rem; font-weight:700;
+      color:#fff; margin-bottom:2px;
+    }
+    .comp-badge-text p { font-size:0.7rem; color:rgba(255,255,255,0.55); }
+    .water-drops-layer {
+      position:absolute; inset:0;
+      pointer-events:none; overflow:hidden; z-index:0;
+    }
+    .w-drop {
+      position:absolute;
+      border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+      background:linear-gradient(180deg,rgba(0,198,212,0.30),rgba(59,159,212,0.10));
+      animation:dropFloat linear infinite;
+    }
+    @keyframes dropFloat {
+      0%   { transform:translateY(100%) rotate(-6deg) scaleX(0.85); opacity:0; }
+      10%  { opacity:0.8; }
+      90%  { opacity:0.5; }
+      100% { transform:translateY(-60px) rotate(8deg) scaleX(1.1); opacity:0; }
+    }
+    .pipe-flow {
+      position:relative; height:4px;
+      background:rgba(10,35,66,0.08);
+      border-radius:2px; overflow:hidden; margin:1rem 0;
+    }
+    .pipe-flow-inner {
+      height:100%; width:0%; border-radius:2px;
+      background:linear-gradient(90deg,var(--aqua),var(--blue-light),var(--aqua));
+      background-size:200% auto;
+      animation:pipeAnim 2.5s linear infinite;
+      transition:width 2s ease;
+    }
+    @keyframes pipeAnim {
+      0%  { background-position:0% center; }
+      100%{ background-position:200% center; }
+    }
+    .bubble-rise {
+      position:absolute; border-radius:50%;
+      background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.7),rgba(0,198,212,0.3));
+      border:1px solid rgba(0,198,212,0.4);
+      pointer-events:none;
+      animation:bubbleRise ease-in infinite;
+    }
+    @keyframes bubbleRise {
+      0%   { transform:translateY(0) scale(1);     opacity:0.8; }
+      100% { transform:translateY(-100px) scale(1.4); opacity:0; }
+    }
+    .ripple-ring {
+      position:absolute; border-radius:50%;
+      border:2px solid rgba(0,198,212,0.22);
+      pointer-events:none;
+      animation:rippleExpand ease-out infinite;
+    }
+    @keyframes rippleExpand {
+      0%   { transform:scale(0.2); opacity:0.8; }
+      100% { transform:scale(3);   opacity:0;   }
+    }
+    .float-hex-el {
+      position:absolute; opacity:0.07; pointer-events:none;
+      animation:hexDrift ease-in-out infinite alternate;
+    }
+    @keyframes hexDrift {
+      0%   { transform:translateY(0)   rotate(0deg);  }
+      100% { transform:translateY(-22px) rotate(18deg); }
+    }
+    .mol-float {
+      position:absolute; pointer-events:none; opacity:0;
+      animation:molFloat ease-in-out infinite;
+    }
+    @keyframes molFloat {
+      0%,100% { transform:translateY(0)   rotate(0deg);  opacity:0.10; }
+      50%      { transform:translateY(-18px) rotate(14deg); opacity:0.22; }
+    }
+    .title-glow-line {
+      display:block; width:50px; height:2px; border-radius:1px;
+      background:linear-gradient(90deg,var(--aqua),var(--blue-mid));
+      margin:0.5rem auto 0;
+      animation:lineGlow 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes lineGlow {
+      0%   { box-shadow:0 0 3px rgba(0,198,212,0.4);  width:35px; }
+      100% { box-shadow:0 0 12px rgba(0,198,212,0.9); width:60px; }
+    }
+    .title-glow-line.left { margin:0.5rem 0 0; }
+    .water-level {
+      position:absolute; bottom:0; left:0; right:0;
+      height:0%;
+      background:linear-gradient(180deg,rgba(0,198,212,0.12),rgba(0,198,212,0.05));
+      transition:height 0.5s cubic-bezier(0.23,1,0.32,1);
+      pointer-events:none;
+    }
+    .type-card:hover .water-level { height:30%; }
+    .app-water {
+      position:absolute; bottom:0; left:0; right:0; height:0%;
+      background:linear-gradient(180deg,rgba(0,198,212,0.10),rgba(59,159,212,0.05));
+      transition:height 0.6s cubic-bezier(0.23,1,0.32,1);
+      pointer-events:none;
+      border-radius:0 0 16px 16px;
+    }
+    .app-card:hover .app-water { height:45%; }
+    #cta-section {
+      background:linear-gradient(135deg,var(--blue-deep),#0d3a6e);
+      padding:50px 0;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    #cta-section::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,198,212,0.1), transparent);
+    }
+    #cta-section h2 { color:#fff; font-size:clamp(1.5rem,3vw,2.2rem); margin-bottom:0.6rem; position:relative; z-index:1; }
+    #cta-section p  { color:rgba(255,255,255,0.6); max-width:450px; margin:0 auto 1.5rem; font-size:0.9rem; line-height:1.6; position:relative; z-index:1; }
+    .cta-btns { display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
+    .cta-ring {
+      position:absolute;
+      border-radius:50%;
+      border:1px solid rgba(0,198,212,0.12);
+      pointer-events:none;
+    }
+    #scrollTop {
+      position:fixed; bottom:1.8rem; right:1.8rem;
+      width:42px; height:42px;
+      background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));
+      color:#fff; border:none; border-radius:50%;
+      cursor:pointer; font-size:1.1rem;
+      display:none; align-items:center; justify-content:center;
+      box-shadow:0 4px 16px rgba(21,101,168,0.4);
+      z-index:999; transition:transform 0.3s;
+    }
+    #scrollTop:hover { transform:scale(1.1) translateY(-3px); }
+    #scrollTop.show  { display:flex; }
+    @media(max-width:480px){ section{ padding:40px 0; } }
+  </style>
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <!-- HERO (unchanged) -->
+  <section id="hero">
+    <canvas id="three-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-scanline"></div>
+    <div class="hero-content">
+      <div class="hero-badge" id="heroBadge">🏭 Sewage Treatment Plants</div>
+      <h1 class="hero-title" id="heroTitle">Advanced STP<br/><span class="line2">Solutions for Pune</span></h1>
+      <p class="hero-sub" id="heroSub">MBR-based &amp; conventional Sewage Treatment Plants in civil and MS fabrication — designed, erected and commissioned for housing societies, commercial complexes &amp; factories.</p>
+      <div class="hero-ctas" id="heroCtas">
+        <a href="#contact-cta" class="btn-primary">Get STP Quote</a>
+        <a href="#types" class="btn-outline">Explore Types</a>
+      </div>
+      <div class="hero-stats" id="heroStats">
+        <div class="hero-stat"><div class="num">50+</div><div class="lbl">STP Installed</div></div>
+        <div class="stat-div"></div>
+        <div class="hero-stat"><div class="num">CPCB</div><div class="lbl">Compliant</div></div>
+        <div class="stat-div"></div>
+        <div class="hero-stat"><div class="num">Civil</div><div class="lbl">&amp; MS Fab</div></div>
+        <div class="stat-div"></div>
+        <div class="hero-stat"><div class="num">AMC</div><div class="lbl">Available</div></div>
+      </div>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#eaf3fb"/></svg>
+  </section>
+
+  <!-- WHAT IS STP (unchanged) -->
+  <section id="what" style="position:relative;overflow:hidden;">
+    <div class="water-drops-layer" id="whatDrops"></div>
+    <div class="ripple-ring" style="width:160px;height:160px;top:10%;right:5%;animation-duration:4s;animation-delay:0s;"></div>
+    <div class="ripple-ring" style="width:100px;height:100px;bottom:15%;left:3%;animation-duration:5s;animation-delay:1.5s;"></div>
+    <div class="float-hex-el" style="top:8%;left:2%;animation-duration:7s;"><svg width="60" height="70" viewBox="0 0 100 115" fill="none"><path d="M50 2L97 27.5V77.5L50 103L3 77.5V27.5L50 2Z" stroke="#00c6d4" stroke-width="2"/></svg></div>
+    <div class="float-hex-el" style="bottom:5%;right:2%;animation-duration:9s;animation-delay:2s;"><svg width="45" height="53" viewBox="0 0 100 115" fill="none"><path d="M50 2L97 27.5V77.5L50 103L3 77.5V27.5L50 2Z" stroke="#1565a8" stroke-width="2"/></svg></div>
+    <div class="mol-float" id="mol1" style="top:60%;right:8%;animation-duration:6s;"><svg width="45" height="36" viewBox="0 0 60 48" fill="none"><circle cx="30" cy="24" r="8" fill="rgba(0,198,212,0.5)"/><circle cx="10" cy="14" r="5" fill="rgba(59,159,212,0.5)"/><circle cx="50" cy="14" r="5" fill="rgba(59,159,212,0.5)"/><line x1="30" y1="24" x2="10" y2="14" stroke="rgba(0,198,212,0.4)" stroke-width="1.5"/><line x1="30" y1="24" x2="50" y2="14" stroke="rgba(0,198,212,0.4)" stroke-width="1.5"/></svg></div>
+    <div class="container">
+      <div class="what-grid">
+        <div class="what-left" id="whatLeft">
+          <span class="section-label">About STP</span>
+          <h2 class="section-title">What is a Sewage<br/>Treatment Plant?</h2><span class="title-glow-line left"></span>
+          <div class="what-desc"><p>A Sewage Treatment Plant (STP) is a facility designed to remove contaminants from wastewater generated by homes, commercial complexes and industries before it is safely discharged or reused.</p><p>At Topfield Water Solutions, we design and commission STP plants using MBR (Membrane BioReactor) technology as well as conventional SBR and MBBR processes — available in both civil construction and MS fabricated formats.</p><p>Our plants comply fully with CPCB &amp; MPCB norms, and are used across Pune's leading housing societies, hospitals and commercial complexes.</p></div>
+        </div>
+        <div class="stp-diagram" id="stpDiagram">
+          <div class="diagram-title">⚙️ STP Treatment Stages</div>
+          <div class="diagram-stages" id="diagStages">
+            <div class="diag-stage"><div class="diag-num">1</div><div class="diag-info"><h4>Screening &amp; Grit Removal</h4><p>Removes large solids, rags, grit</p></div></div>
+            <div class="diag-arrow">↓</div>
+            <div class="diag-stage"><div class="diag-num">2</div><div class="diag-info"><h4>Primary Settling Tank</h4><p>Settleable solids separated</p></div></div>
+            <div class="diag-arrow">↓</div>
+            <div class="diag-stage"><div class="diag-num">3</div><div class="diag-info"><h4>Biological Treatment</h4><p>Microbes break down organics</p></div></div>
+            <div class="diag-arrow">↓</div>
+            <div class="diag-stage"><div class="diag-num">4</div><div class="diag-info"><h4>Secondary Clarifier</h4><p>Sludge separated from water</p></div></div>
+            <div class="diag-arrow">↓</div>
+            <div class="diag-stage"><div class="diag-num">5</div><div class="diag-info"><h4>Disinfection &amp; Outlet</h4><p>Chlorination / UV — compliant</p></div></div>
+          </div>
+          <div class="flow-bar"><div class="flow-bar-fill" id="flowFill"></div></div>
+          <div class="bubble-rise" style="width:8px;height:8px;left:20%;bottom:20%;animation-duration:3s;animation-delay:0s;"></div>
+          <div class="bubble-rise" style="width:5px;height:5px;left:40%;bottom:15%;animation-duration:2.5s;animation-delay:0.8s;"></div>
+          <div class="bubble-rise" style="width:10px;height:10px;left:65%;bottom:25%;animation-duration:3.5s;animation-delay:0.4s;"></div>
+          <div class="bubble-rise" style="width:6px;height:6px;left:80%;bottom:10%;animation-duration:2.8s;animation-delay:1.2s;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES OF STP (unchanged) -->
+  <section id="types" style="position:relative;overflow:hidden;">
+    <div class="water-drops-layer" id="typesDrops"></div>
+    <div class="ripple-ring" style="width:180px;height:180px;top:5%;left:45%;animation-duration:6s;animation-delay:0.5s;"></div>
+    <div class="ripple-ring" style="width:120px;height:120px;bottom:10%;right:5%;animation-duration:4.5s;animation-delay:2s;"></div>
+    <div class="mol-float" style="top:15%;right:3%;animation-duration:8s;animation-delay:1s;"><svg width="50" height="40" viewBox="0 0 60 48" fill="none"><circle cx="30" cy="24" r="8" fill="rgba(0,198,212,0.4)"/><circle cx="10" cy="14" r="5" fill="rgba(59,159,212,0.4)"/><circle cx="50" cy="14" r="5" fill="rgba(59,159,212,0.4)"/><line x1="30" y1="24" x2="10" y2="14" stroke="rgba(0,198,212,0.3)" stroke-width="1.5"/><line x1="30" y1="24" x2="50" y2="14" stroke="rgba(0,198,212,0.3)" stroke-width="1.5"/></svg></div>
+    <div class="container">
+      <div style="text-align:center;" id="typesHeader"><span class="section-label">Our STP Range</span><h2 class="section-title">Types of STP We Design<br/>&amp; Install</h2><span class="title-glow-line"></span><p class="section-desc" style="margin:0 auto;">We offer multiple STP technologies to suit different capacities, site conditions and effluent quality requirements.</p></div>
+      <div class="types-grid">
+        <div class="type-card" style="transition-delay:0.05s"><div class="type-card-top"><div class="tc-bg bg-mbr"></div><div class="tc-icon-wrap">🧫</div><div class="tc-badge"><b>MBR</b></div><svg class="tc-wave" viewBox="0 0 400 28" preserveAspectRatio="none"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div><div class="water-level"></div><div class="type-card-body"><h3>MBR – Membrane BioReactor</h3><p>Combines biological treatment with membrane ultrafiltration. Highest quality effluent for reuse.</p><div class="tc-tags"><span class="tc-tag">Ultra-High Quality</span><span class="tc-tag">Compact</span><span class="tc-tag">Reuse-Ready</span></div></div></div>
+        <div class="type-card" style="transition-delay:0.10s"><div class="type-card-top"><div class="tc-bg bg-sbb"></div><div class="tc-icon-wrap">⚗️</div><div class="tc-badge"><b>SBR</b></div><svg class="tc-wave" viewBox="0 0 400 28" preserveAspectRatio="none"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div><div class="water-level"></div><div class="type-card-body"><h3>SBR – Sequential Batch Reactor</h3><p>Fill-and-draw activated sludge process. Highly flexible for variable flow loads.</p><div class="tc-tags"><span class="tc-tag">Flexible</span><span class="tc-tag">Variable Flow</span><span class="tc-tag">Cost-Effective</span></div></div></div>
+        <div class="type-card" style="transition-delay:0.15s"><div class="type-card-top"><div class="tc-bg bg-mbbr"></div><div class="tc-icon-wrap">🔬</div><div class="tc-badge"><b>MBBR</b></div><svg class="tc-wave" viewBox="0 0 400 28" preserveAspectRatio="none"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div><div class="water-level"></div><div class="type-card-body"><h3>MBBR – Moving Bed BioReactor</h3><p>Plastic media carriers for biofilm growth. Low energy, low maintenance, easily scalable.</p><div class="tc-tags"><span class="tc-tag">Low Energy</span><span class="tc-tag">Scalable</span><span class="tc-tag">Low Maintenance</span></div></div></div>
+        <div class="type-card" style="transition-delay:0.05s"><div class="type-card-top"><div class="tc-bg bg-ext"></div><div class="tc-icon-wrap">🔄</div><div class="tc-badge"><b>ASP</b></div><svg class="tc-wave" viewBox="0 0 400 28" preserveAspectRatio="none"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div><div class="water-level"></div><div class="type-card-body"><h3>Extended Aeration / ASP</h3><p>Conventional activated sludge process with extended aeration. Proven, easy to operate.</p><div class="tc-tags"><span class="tc-tag">Proven Tech</span><span class="tc-tag">Easy Operation</span><span class="tc-tag">Large Capacity</span></div></div></div>
+        <div class="type-card" style="transition-delay:0.10s"><div class="type-card-top"><div class="tc-bg bg-stp_uv"></div><div class="tc-icon-wrap">☀️</div><div class="tc-badge"><b>STP+UF</b></div><svg class="tc-wave" viewBox="0 0 400 28" preserveAspectRatio="none"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div><div class="water-level"></div><div class="type-card-body"><h3>STP with UF Polishing</h3><p>Conventional STP with an ultrafiltration polishing stage. Cleaner effluent for reuse.</p><div class="tc-tags"><span class="tc-tag">Reuse-Grade</span><span class="tc-tag">Flushing Water</span><span class="tc-tag">Garden Use</span></div></div></div>
+        <div class="type-card" style="transition-delay:0.15s"><div class="type-card-top"><div class="tc-bg bg-civil"></div><div class="tc-icon-wrap">🏗️</div><div class="tc-badge"><b>Civil / MS</b></div><svg class="tc-wave" viewBox="0 0 400 28" preserveAspectRatio="none"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg></div><div class="water-level"></div><div class="type-card-body"><h3>Civil &amp; MS Fabricated STP</h3><p>RCC civil construction or MS prefab — above/below ground as per site.</p><div class="tc-tags"><span class="tc-tag">Civil RCC</span><span class="tc-tag">MS Fabricated</span><span class="tc-tag">Above / Below Ground</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REPLACED PROCESS SECTION WITH ATTACHED DESIGN ===== -->
+  <section id="process-3d" style="position:relative;">
+    <!-- Background bubbles (preserved) -->
+    <div class="bubble-rise" style="width:10px;height:10px;left:10%;bottom:10%;animation-duration:4s;animation-delay:0s;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.5),rgba(0,198,212,0.2));"></div>
+    <div class="bubble-rise" style="width:7px;height:7px;left:30%;bottom:5%;animation-duration:3s;animation-delay:1s;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.5),rgba(0,198,212,0.2));"></div>
+    <div class="bubble-rise" style="width:12px;height:12px;left:55%;bottom:8%;animation-duration:5s;animation-delay:0.5s;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.5),rgba(0,198,212,0.2));"></div>
+    <div class="bubble-rise" style="width:6px;height:6px;left:75%;bottom:12%;animation-duration:3.5s;animation-delay:1.8s;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.5),rgba(0,198,212,0.2));"></div>
+    <div class="bubble-rise" style="width:9px;height:9px;left:90%;bottom:6%;animation-duration:4.2s;animation-delay:0.3s;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.5),rgba(0,198,212,0.2));"></div>
+
+    <div class="container">
+      <div style="text-align:center;" id="proc3dHeader">
+        <span class="section-label">Treatment Process</span>
+        <h2 class="section-title">How Sewage Becomes<br/>Clean Water</h2><span class="title-glow-line"></span>
+        <p class="section-desc" style="margin:0 auto;">A multi-stage biological and physical process that transforms raw sewage into treated water compliant with discharge norms.</p>
+      </div>
+
+      <!-- New stepped design (bootstrap row structure, keeping all original content) -->
+      <div class="work-process pb-3 pt-2">
+        <!-- Step 1 left -->
+        <div class="row mb-2">
+          <div class="col-md-5">
+            <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+              <div class="row">
+                <div class="col-5">
+                  <div class="process-step"><p class="m-0 p-0">Stage</p><h2 class="m-0 p-0">01</h2></div>
+                </div>
+                <div class="col-7">
+                  <h5>Raw Sewage Inlet</h5>
+                  <p><small>Wastewater enters from drains</small></p>
+                </div>
+              </div>
+              <div class="process-line-l"></div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5"><div class="process-point-right"></div></div>
+        </div>
+        <!-- Step 2 right -->
+        <div class="row mb-2">
+          <div class="col-md-5"><div class="process-point-left"></div></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5">
+            <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+              <div class="row">
+                <div class="col-5">
+                  <div class="process-step"><p class="m-0 p-0">Stage</p><h2 class="m-0 p-0">02</h2></div>
+                </div>
+                <div class="col-7">
+                  <h5>Screening</h5>
+                  <p><small>Coarse & fine screens remove solids</small></p>
+                </div>
+              </div>
+              <div class="process-line-r"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Step 3 left -->
+        <div class="row mb-2">
+          <div class="col-md-5">
+            <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+              <div class="row">
+                <div class="col-5">
+                  <div class="process-step"><p class="m-0 p-0">Stage</p><h2 class="m-0 p-0">03</h2></div>
+                </div>
+                <div class="col-7">
+                  <h5>Aeration Tank</h5>
+                  <p><small>Aerobic bacteria digest organic matter</small></p>
+                </div>
+              </div>
+              <div class="process-line-l"></div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5"><div class="process-point-right"></div></div>
+        </div>
+        <!-- Step 4 right -->
+        <div class="row mb-2">
+          <div class="col-md-5"><div class="process-point-left"></div></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5">
+            <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+              <div class="row">
+                <div class="col-5">
+                  <div class="process-step"><p class="m-0 p-0">Stage</p><h2 class="m-0 p-0">04</h2></div>
+                </div>
+                <div class="col-7">
+                  <h5>Clarifier / Membrane</h5>
+                  <p><small>Solids separated from treated liquid</small></p>
+                </div>
+              </div>
+              <div class="process-line-r"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Step 5 left (last) -->
+        <div class="row">
+          <div class="col-md-5">
+            <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+              <div class="row">
+                <div class="col-5">
+                  <div class="process-step"><p class="m-0 p-0">Stage</p><h2 class="m-0 p-0">05</h2></div>
+                </div>
+                <div class="col-7">
+                  <h5>Treated Water Out</h5>
+                  <p><small>Safe for discharge or reuse</small></p>
+                </div>
+              </div>
+              <div class="process-line-l"></div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5"><div class="process-point-right process-last"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATIONS (unchanged) -->
+  <section id="applications" style="position:relative;overflow:hidden;">
+    <div class="water-drops-layer" id="appsDrops"></div>
+    <div class="ripple-ring" style="width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:7s;animation-delay:0s;"></div>
+    <div class="float-hex-el" style="bottom:5%;left:5%;animation-duration:8s;"><svg width="70" height="82" viewBox="0 0 100 115" fill="none"><path d="M50 2L97 27.5V77.5L50 103L3 77.5V27.5L50 2Z" stroke="#00c6d4" stroke-width="2"/></svg></div>
+    <div class="container">
+      <div style="text-align:center;" id="appsHeader"><span class="section-label">Applications</span><h2 class="section-title">Where We Install<br/>STP Plants</h2><span class="title-glow-line"></span><p class="section-desc" style="margin:0 auto;">Our STP systems are deployed across a wide range of applications in and around Pune.</p></div>
+      <div class="apps-grid">
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🏠</div><h3>Housing Societies</h3><p>Residential complexes with 50–500+ flats requiring MPCB compliance.</p></div>
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🏢</div><h3>Commercial Complexes</h3><p>Office parks, malls, IT campuses and mixed-use developments.</p></div>
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🏭</div><h3>Factories &amp; Industries</h3><p>Industrial wastewater treatment before discharge or reuse.</p></div>
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🏥</div><h3>Hospitals</h3><p>Specialised treatment for healthcare facility wastewater.</p></div>
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🏨</div><h3>Hotels &amp; Resorts</h3><p>Compact systems for hospitality facilities with space constraints.</p></div>
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🏫</div><h3>Schools &amp; Institutes</h3><p>Educational institutions needing compliant wastewater management.</p></div>
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🌳</div><h3>Townships &amp; Villas</h3><p>Large-scale STP for integrated townships and villa projects.</p></div>
+        <div class="app-card"><div class="app-water"></div><div class="app-icon">🔄</div><h3>Water Recycling</h3><p>Treated water reused for flushing, landscaping and horticulture.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECS & COMPLIANCE (unchanged) -->
+  <section id="specs" style="position:relative;overflow:hidden;">
+    <div class="ripple-ring" style="width:250px;height:250px;top:10%;right:-60px;animation-duration:8s;animation-delay:0s;"></div>
+    <div class="mol-float" style="bottom:10%;left:2%;animation-duration:7s;animation-delay:2s;"><svg width="60" height="48" viewBox="0 0 60 48" fill="none"><circle cx="30" cy="24" r="8" fill="rgba(0,198,212,0.3)"/><circle cx="10" cy="14" r="5" fill="rgba(59,159,212,0.3)"/><circle cx="50" cy="14" r="5" fill="rgba(59,159,212,0.3)"/><line x1="30" y1="24" x2="10" y2="14" stroke="rgba(0,198,212,0.25)" stroke-width="1.5"/><line x1="30" y1="24" x2="50" y2="14" stroke="rgba(0,198,212,0.25)" stroke-width="1.5"/></svg></div>
+    <div class="container">
+      <div id="specsHeader"><span class="section-label">Specifications</span><h2 class="section-title">Technical Specs &amp;<br/>Compliance</h2><span class="title-glow-line left"></span></div>
+      <div class="specs-layout">
+        <div><table class="spec-table" id="specTable"><tr><td>Capacity Range</td><td>5 KLD to 5000 KLD+</td></tr><tr><td>Technology Options</td><td>MBR, SBR, MBBR, ASP, Extended Aeration</td></tr><tr><td>Construction Type</td><td>Civil RCC / MS Fabricated / FRP</td></tr><tr><td>Outlet BOD</td><td>&lt; 10 mg/L (MBR) / &lt; 30 mg/L (Conventional)</td></tr><tr><td>Outlet TSS</td><td>&lt; 5 mg/L (MBR) / &lt; 30 mg/L</td></tr><tr><td>Treated Water Use</td><td>Flushing, Irrigation, Discharge</td></tr><tr><td>Warranty</td><td>1 Year Equipment + AMC Available</td></tr><tr><td>Commissioning</td><td>4–12 Weeks (Design to Handover)</td></tr></table></div>
+        <div class="compliance-badges"><div class="comp-badge"><div class="comp-badge-icon">🏛️</div><div class="comp-badge-text"><h4>CPCB Compliant</h4><p>All plants designed to meet Central Pollution Control Board norms</p></div></div><div class="comp-badge"><div class="comp-badge-icon">🌿</div><div class="comp-badge-text"><h4>MPCB Approved</h4><p>Maharashtra Pollution Control Board consent facilitation</p></div></div><div class="comp-badge"><div class="comp-badge-icon">💧</div><div class="comp-badge-text"><h4>IS Standards</h4><p>Designed as per BIS standards for wastewater treatment</p></div></div><div class="comp-badge"><div class="comp-badge-icon">📋</div><div class="comp-badge-text"><h4>Complete Documentation</h4><p>O&amp;M manuals, as-built drawings, test reports included</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA (unchanged) -->
+  <section id="cta-section" id="contact-cta">
+    <div class="cta-ring" style="width:300px;height:300px;top:-150px;left:-100px;"></div>
+    <div class="cta-ring" style="width:240px;height:240px;bottom:-80px;right:-60px;"></div>
+    <canvas id="ctaCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;"></canvas>
+    <div class="bubble-rise" style="width:10px;height:10px;left:15%;bottom:0;animation-duration:4s;animation-delay:0s;background:radial-gradient(circle,rgba(255,255,255,0.4),rgba(0,198,212,0.2));"></div>
+    <div class="bubble-rise" style="width:7px;height:7px;left:35%;bottom:0;animation-duration:3s;animation-delay:1s;background:radial-gradient(circle,rgba(255,255,255,0.4),rgba(0,198,212,0.2));"></div>
+    <div class="bubble-rise" style="width:12px;height:12px;left:60%;bottom:0;animation-duration:5s;animation-delay:0.5s;background:radial-gradient(circle,rgba(255,255,255,0.4),rgba(0,198,212,0.2));"></div>
+    <div class="bubble-rise" style="width:8px;height:8px;left:80%;bottom:0;animation-duration:3.8s;animation-delay:2s;background:radial-gradient(circle,rgba(255,255,255,0.4),rgba(0,198,212,0.2));"></div>
+    <div class="container" id="ctaContent" style="position:relative;z-index:2;"><h2>Ready to Install Your STP?</h2><p>We visit your site, assess your requirements and deliver a fully customized STP — designed, installed and maintained by our dedicated team.</p><div class="cta-btns"><a href="../../contact/index.html" class="btn-primary">Get Free Site Survey</a><a href="tel:9673850505" class="btn-outline">📞 Call: 9673850505</a></div></div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- scripts (unchanged, plus AOS init) -->
+  <script>
+    fetch('../../header/header.html').then(r=>r.text()).then(html=>{document.getElementById('header-placeholder').innerHTML=html;const s=document.createElement('script');s.src='../../header/header.js';document.head.appendChild(s);}).catch(()=>{});
+    fetch('../../footer/footer.html').then(r=>r.text()).then(html=>{document.getElementById('footer-placeholder').innerHTML=html;const s=document.createElement('script');s.src='../../footer/footer.js';document.head.appendChild(s);}).catch(()=>{});
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    (function initHeroThree(){ /* ... unchanged ... */ 
+      const canvas = document.getElementById('three-canvas');
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+      renderer.setClearColor(0x050c1c,1);
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth/canvas.clientHeight, 0.1, 200);
+      camera.position.set(0,8,20);
+      camera.lookAt(0,0,0);
+      function resizeHero(){ const w=canvas.parentElement.clientWidth, h=canvas.parentElement.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+      resizeHero(); window.addEventListener('resize', resizeHero);
+      scene.add(new THREE.AmbientLight(0x0a2342,4));
+      const dirLight = new THREE.DirectionalLight(0x00c6d4,3); dirLight.position.set(5,10,8); scene.add(dirLight);
+      const pLight1 = new THREE.PointLight(0x00c6d4,4,40); pLight1.position.set(-8,3,0); scene.add(pLight1);
+      const pLight2 = new THREE.PointLight(0x1565a8,3,40); pLight2.position.set(8,3,0); scene.add(pLight2);
+      const starGeo = new THREE.BufferGeometry(); const starCount = 800; const starPos = new Float32Array(starCount*3); for(let i=0;i<starCount*3;i++) starPos[i]=(Math.random()-0.5)*120; starGeo.setAttribute('position',new THREE.BufferAttribute(starPos,3)); const starMat = new THREE.PointsMaterial({ color:0x3b9fd4, size:0.12, transparent:true, opacity:0.5 }); scene.add(new THREE.Points(starGeo,starMat));
+      const waterGeo = new THREE.PlaneGeometry(50,50,64,64); const waterMat = new THREE.MeshStandardMaterial({ color:0x0a4f8a, metalness:0.2, roughness:0.3, transparent:true, opacity:0.85, wireframe:false }); const water = new THREE.Mesh(waterGeo,waterMat); water.rotation.x = -Math.PI/2.2; water.position.y = -3; scene.add(water);
+      const wPos = waterGeo.attributes.position; const wCount = wPos.count; const origY = new Float32Array(wCount); for(let i=0;i<wCount;i++) origY[i]=wPos.getY(i);
+      const bubbles = []; const bubbleMat = new THREE.MeshStandardMaterial({ color:0x00c6d4, transparent:true, opacity:0.55, metalness:0.5, roughness:0.2 }); for(let i=0;i<28;i++){ const r = 0.1+Math.random()*0.35; const geo = new THREE.SphereGeometry(r,12,12); const m = new THREE.Mesh(geo,bubbleMat.clone()); m.material.opacity = 0.2+Math.random()*0.5; m.position.set((Math.random()-0.5)*22, -2+Math.random()*8, (Math.random()-0.5)*14); m.userData = { speed:0.3+Math.random()*0.6, amp:0.4+Math.random()*0.8, offset:Math.random()*Math.PI*2, xDrift:(Math.random()-0.5)*0.008, startY:m.position.y }; scene.add(m); bubbles.push(m); }
+      const ringMat = new THREE.MeshStandardMaterial({ color:0x00c6d4, transparent:true, opacity:0.18, wireframe:true }); for(let i=0;i<4;i++){ const geo = new THREE.TorusGeometry(3+i*1.5,0.04,8,60); const mesh = new THREE.Mesh(geo,ringMat.clone()); mesh.rotation.x = Math.PI/2+(i*0.15); mesh.position.y = -1+i*0.5; mesh.userData.rotSpeed = 0.002+i*0.001; scene.add(mesh); bubbles.push(mesh); }
+      const flowGeo = new THREE.BufferGeometry(); const flowCount = 400; const flowPos = new Float32Array(flowCount*3); const flowVel = []; for(let i=0;i<flowCount;i++){ flowPos[i*3]=(Math.random()-0.5)*30; flowPos[i*3+1]=(Math.random()-0.5)*12; flowPos[i*3+2]=(Math.random()-0.5)*20; flowVel.push({ vx:(Math.random()-0.5)*0.02, vy:(Math.random()-0.5)*0.01, vz:(Math.random()-0.5)*0.02 }); } flowGeo.setAttribute('position',new THREE.BufferAttribute(flowPos,3)); const flowMat = new THREE.PointsMaterial({ color:0x7eeeff, size:0.08, transparent:true, opacity:0.6 }); const flowPoints = new THREE.Points(flowGeo,flowMat); scene.add(flowPoints);
+      let t=0; function animate(){ requestAnimationFrame(animate); t+=0.012; for(let i=0;i<wCount;i++){ const x=wPos.getX(i), z=wPos.getZ(i); wPos.setY(i, origY[i] + Math.sin(x*0.4+t)*0.3 + Math.cos(z*0.35+t*0.9)*0.25 + Math.sin((x+z)*0.2+t*1.2)*0.15); } wPos.needsUpdate=true; waterGeo.computeVertexNormals(); for(let i=0;i<bubbles.length;i++){ const b=bubbles[i], ud=b.userData; if(ud.speed!==undefined && ud.startY!==undefined){ b.position.y = ud.startY + Math.sin(t*ud.speed+ud.offset)*ud.amp; b.position.x += ud.xDrift; if(b.position.x>11) b.position.x=-11; if(b.position.x<-11) b.position.x=11; b.rotation.x += 0.01; b.rotation.z += 0.008; } else if(ud.rotSpeed){ b.rotation.z += ud.rotSpeed; b.rotation.y += ud.rotSpeed*0.5; } } const fp=flowGeo.attributes.position; for(let i=0;i<flowCount;i++){ let x=fp.getX(i)+flowVel[i].vx; let y=fp.getY(i)+flowVel[i].vy; let z=fp.getZ(i)+flowVel[i].vz; if(x>15) x=-15; if(x<-15) x=15; if(y>6) y=-6; if(y<-6) y=6; if(z>10) z=-10; if(z<-10) z=10; fp.setXYZ(i,x,y,z); } fp.needsUpdate=true; camera.position.x = Math.sin(t*0.06)*1.5; camera.position.y = 8 + Math.sin(t*0.04)*0.5; camera.lookAt(0,0,0); pLight1.intensity = 3 + Math.sin(t*1.2)*1.5; pLight2.intensity = 2.5 + Math.cos(t*0.9)*1.2; renderer.render(scene,camera); } animate();
+    })();
+
+    // GSAP animations (unchanged, include the new process steps)
+    gsap.set(['#heroBadge','#heroTitle','#heroSub','#heroCtas','#heroStats'],{y:-30,opacity:0});
+    gsap.timeline({ defaults:{ ease:'power3.out' } }).to('#heroBadge',{opacity:1,y:0,duration:0.8,delay:0.5}).to('#heroTitle',{opacity:1,y:0,duration:1},'-=0.4').to('#heroSub',{opacity:1,y:0,duration:0.8},'-=0.5').to('#heroCtas',{opacity:1,y:0,duration:0.7},'-=0.4').to('#heroStats',{opacity:1,y:0,duration:0.7},'-=0.3');
+    gsap.from('#whatLeft',{opacity:0,x:-60,duration:1,scrollTrigger:{trigger:'#what',start:'top 80%'}});
+    gsap.from('#stpDiagram',{opacity:0,x:60,duration:1,scrollTrigger:{trigger:'#what',start:'top 80%'}});
+    ScrollTrigger.create({ trigger:'#diagStages', start:'top 75%', onEnter:()=>{ gsap.to('.diag-stage',{opacity:1,x:0,duration:0.5,stagger:0.12}); document.getElementById('flowFill').style.width='100%'; } });
+    gsap.from('#typesHeader',{opacity:0,y:40,duration:0.8,scrollTrigger:{trigger:'#types',start:'top 80%'}});
+    gsap.to('.type-card',{opacity:1,y:0,duration:0.7,stagger:0.1,scrollTrigger:{trigger:'.types-grid',start:'top 80%'}});
+    gsap.from('#proc3dHeader',{opacity:0,y:40,duration:0.8,scrollTrigger:{trigger:'#process-3d',start:'top 80%'}});
+    gsap.from('#appsHeader',{opacity:0,y:40,duration:0.8,scrollTrigger:{trigger:'#applications',start:'top 80%'}});
+    ScrollTrigger.create({ trigger:'.apps-grid', start:'top 80%', onEnter:()=> gsap.to('.app-card',{opacity:1,scale:1,duration:0.6,stagger:0.07,ease:'back.out(1.3)'}) });
+    gsap.set('.app-card',{opacity:0,scale:0.88});
+    gsap.from('#specsHeader',{opacity:0,y:40,duration:0.8,scrollTrigger:{trigger:'#specs',start:'top 80%'}});
+    ScrollTrigger.create({ trigger:'#specTable', start:'top 80%', onEnter:()=> gsap.to('#specTable tr',{opacity:1,x:0,duration:0.5,stagger:0.08}) });
+    gsap.to('.comp-badge',{opacity:1,x:0,duration:0.6,stagger:0.1,scrollTrigger:{trigger:'.compliance-badges',start:'top 80%'}});
+    gsap.from('#ctaContent',{opacity:0,y:50,duration:1,scrollTrigger:{trigger:'#cta-section',start:'top 80%'}});
+    gsap.to('.cta-ring',{scale:1.15,duration:4,repeat:-1,yoyo:true,ease:'sine.inOut',stagger:1});
+
+    // scroll top
+    const scrollBtn=document.getElementById('scrollTop');
+    window.addEventListener('scroll',()=> scrollBtn.classList.toggle('show', window.scrollY>500));
+
+    // spawn drops (unchanged)
+    function spawnWaterDrops(containerId, count=10){ const el=document.getElementById(containerId); if(!el) return; for(let i=0;i<count;i++){ const d=document.createElement('div'); d.className='w-drop'; const size=6+Math.random()*16; d.style.cssText=`width:${size}px;height:${size*1.35}px;left:${Math.random()*95}%;bottom:${-size}px;animation-duration:${5+Math.random()*8}s;animation-delay:${Math.random()*6}s;opacity:${0.3+Math.random()*0.5};`; el.appendChild(d); } }
+    spawnWaterDrops('whatDrops',10); spawnWaterDrops('typesDrops',8); spawnWaterDrops('appsDrops',12);
+
+    document.querySelectorAll('.ripple-ring').forEach((ring,i)=>{ ring.style.animation='none'; gsap.fromTo(ring,{scale:0.2,opacity:0.7},{scale:3,opacity:0,duration:4+i*0.8,repeat:-1,delay:i*1.2,ease:'power1.out'}); });
+    document.querySelectorAll('.float-hex-el').forEach((hex,i)=>{ gsap.to(hex,{ y:i%2===0?-30:25, rotation:i%2===0?20:-18, duration:7+i*1.5, repeat:-1, yoyo:true, ease:'sine.inOut', delay:i*0.8 }); });
+    document.querySelectorAll('.mol-float').forEach((mol,i)=>{ mol.style.animation='none'; gsap.to(mol,{ opacity:0.25, y:-25, rotation:15, duration:5+i*1.2, repeat:-1, yoyo:true, ease:'sine.inOut', delay:i*1.5 }); });
+    document.querySelectorAll('.bubble-rise').forEach((b,i)=>{ b.style.animation='none'; gsap.to(b,{ y:-(70+Math.random()*70), opacity:0, scale:1.4, x:(Math.random()-0.5)*30, duration:2.5+Math.random()*2.5, repeat:-1, delay:Math.random()*3, ease:'power1.out' }); });
+    ScrollTrigger.create({ trigger:'#what', start:'top 75%', onEnter:()=>{ document.querySelectorAll('.pipe-flow-inner').forEach(p=>{ gsap.to(p,{ width:'100%', duration:2, ease:'power2.out', delay:0.3 }); }); } });
+    ScrollTrigger.create({ trigger:'#types', start:'top 70%', onEnter:()=>{ document.querySelectorAll('.water-level').forEach((wl,i)=>{ gsap.to(wl,{ height:'30%', duration:1.2, ease:'power2.out', delay:0.3+i*0.1 }); gsap.to(wl,{ height:'0%', duration:1, ease:'power2.in', delay:2.5+i*0.1 }); }); } });
+    ScrollTrigger.create({ trigger:'#process-3d', start:'top 75%', onEnter:()=>{ gsap.from('.proc-bubble',{ scale:0.5, opacity:0, duration:0.8, stagger:0.15, ease:'back.out(1.5)', delay:0.2 }); } });
+    document.querySelectorAll('.app-card').forEach(card=>{ const water = card.querySelector('.app-water'); card.addEventListener('mouseenter',()=>{ gsap.to(water,{ height:'45%', duration:0.5, ease:'power2.out' }); }); card.addEventListener('mouseleave',()=>{ gsap.to(water,{ height:'0%', duration:0.4, ease:'power2.in' }); }); });
+    document.querySelectorAll('.type-card').forEach(card=>{ const water = card.querySelector('.water-level'); card.addEventListener('mouseenter',()=>{ gsap.to(water,{ height:'30%', duration:0.5, ease:'power2.out' }); }); card.addEventListener('mouseleave',()=>{ gsap.to(water,{ height:'0%', duration:0.4, ease:'power2.in' }); }); });
+    document.querySelectorAll('.comp-badge').forEach((b,i)=>{ b.addEventListener('mouseenter',()=>{ gsap.to(b,{ x:8, duration:0.25, ease:'power2.out' }); gsap.to(b,{ x:0, duration:0.25, ease:'power2.in', delay:0.25 }); }); });
+
+    (function initCtaCanvas(){ const canvas = document.getElementById('ctaCanvas'); if(!canvas) return; const ctx = canvas.getContext('2d'); let W,H; function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; } resize(); window.addEventListener('resize',resize); const particles=[]; for(let i=0;i<50;i++){ particles.push({ x:Math.random()*1200, y:Math.random()*300, r:1+Math.random()*2, vx:(Math.random()-0.5)*0.5, vy:(Math.random()-0.5)*0.3, life:Math.random(), speed:0.004+Math.random()*0.004 }); } function drawCta(){ ctx.clearRect(0,0,W,H); particles.forEach(p=>{ p.life+=p.speed; if(p.life>1){ p.life=0; p.x=Math.random()*W; p.y=Math.random()*H; } const a = Math.sin(p.life*Math.PI); p.x+=p.vx; p.y+=p.vy; if(p.x<0) p.x=W; if(p.x>W) p.x=0; if(p.y<0) p.y=H; if(p.y>H) p.y=0; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(0,198,212,${a*0.6})`; ctx.shadowBlur=5; ctx.shadowColor='rgba(0,198,212,0.8)'; ctx.fill(); }); requestAnimationFrame(drawCta); } drawCta(); })();
+
+    document.getElementById('hero').addEventListener('click',function(e){ const rect = this.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top; for(let i=0;i<3;i++){ const ring = document.createElement('div'); ring.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:10px;height:10px;border-radius:50%;border:2px solid rgba(0,198,212,0.8);transform:translate(-50%,-50%);pointer-events:none;z-index:7;`; this.appendChild(ring); gsap.to(ring,{ scale:18+i*6, opacity:0, duration:1.5+i*0.3, ease:'power2.out', delay:i*0.15, onComplete:()=>ring.remove() }); } });
+    ScrollTrigger.create({ trigger:'#hero', start:'top top', onEnter:()=>{ document.querySelectorAll('.hero-stat .num').forEach(s=>{ gsap.from(s,{ opacity:0, y:20, duration:0.8, ease:'back.out(1.5)', delay:1.2 }); }); } });
+    document.querySelectorAll('.proc-bubble').forEach((b,i)=>{ gsap.to(b,{ boxShadow:`0 0 0 ${10+i*2}px rgba(0,198,212,0.06), 0 0 0 ${5+i}px rgba(0,198,212,0.1)`, duration:1.8+i*0.3, repeat:-1, yoyo:true, ease:'sine.inOut', delay:i*0.4 }); });
+    ScrollTrigger.create({ trigger:'#diagStages', start:'top 75%', onEnter:()=>{ gsap.to('.diag-stage',{ borderColor:'rgba(0,198,212,0.35)', duration:0.6, stagger:0.12, yoyo:true, repeat:1, ease:'sine.inOut', delay:0.8 }); } });
+
+    // AOS init for new process boxes
+    AOS.init();
+  </script>
+</body>
+</html>
