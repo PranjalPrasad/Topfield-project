@@ -13,9 +13,9 @@
       --aqua:       #00c6d4;
       --teal:       #00a896;
       --white:      #f8fbff;
-      --card-img-h:  140px;          /* reduced further */
-      --card-radius: 14px;            /* smaller */
-      --card-gap:    0.9rem;          /* compact */
+      --card-img-h:  140px;
+      --card-radius: 14px;
+      --card-gap:    0.9rem;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,22 +26,65 @@
       background: var(--white);
       color: var(--blue-deep);
       overflow-x: hidden;
-      font-size: 14px;                /* smaller base */
+      font-size: 14px;
     }
 
     h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    /* ══════════════════════════════════════════════════════
+       CURVY SECTION DIVIDERS
+    ══════════════════════════════════════════════════════ */
+    .section-divider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      margin: 0;
+    }
+    .section-divider svg {
+      display: block;
+      width: 100%;
+    }
 
     /* ── HERO (compact) ── */
     .hero {
       position: relative;
       width: 100%;
-      min-height: 55vh;                /* reduced */
+      min-height: 55vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 1rem 40px;         /* smaller */
+      padding: 40px 1rem 40px;
+    }
+
+    /* ── HERO MEDIA BACKGROUND (NEW) ── */
+    .hero-media-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    /* Video background */
+    .hero-media-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Image background (shown when no video) */
+    .hero-media-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Fallback gradient (shown when no video/image loaded) */
+    .hero-media-bg .hero-bg-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0a1628 0%, #0d3a6e 50%, #0a7fa8 100%);
+      z-index: -1;
     }
 
     .hero-fallback {
@@ -89,7 +132,7 @@
       z-index: 3;
       text-align: center;
       padding: 0 1rem;
-      max-width: 720px;                 /* narrower */
+      max-width: 720px;
     }
 
     .hero-badge {
@@ -97,22 +140,22 @@
       background: rgba(0,198,212,0.2);
       border: 1px solid rgba(0,198,212,0.5);
       color: #7eeeff;
-      font-size: 0.65rem;                /* smaller */
+      font-size: 0.65rem;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
-      padding: 4px 14px;                 /* smaller */
+      padding: 4px 14px;
       border-radius: 30px;
-      margin-bottom: 0.8rem;              /* less */
+      margin-bottom: 0.8rem;
       animation: fadeSlideDown 1s ease 0.2s both;
     }
 
     .hero h1 {
-      font-size: clamp(1.6rem, 3.8vw, 3rem);  /* smaller */
+      font-size: clamp(1.6rem, 3.8vw, 3rem);
       font-weight: 900;
       color: #fff;
       line-height: 1.1;
-      margin-bottom: 0.6rem;                 /* reduced */
+      margin-bottom: 0.6rem;
       animation: fadeSlideDown 1s ease 0.4s both;
     }
 
@@ -124,10 +167,10 @@
     }
 
     .hero-sub {
-      font-size: clamp(0.8rem, 1.6vw, 0.95rem);  /* smaller */
+      font-size: clamp(0.8rem, 1.6vw, 0.95rem);
       color: rgba(255,255,255,0.75);
-      max-width: 520px;                        /* reduced */
-      margin: 0 auto 1.2rem;                    /* less */
+      max-width: 520px;
+      margin: 0 auto 1.2rem;
       line-height: 1.6;
       font-weight: 300;
       animation: fadeSlideDown 1s ease 0.6s both;
@@ -135,7 +178,7 @@
 
     .hero-ctas {
       display: flex;
-      gap: 0.6rem;                           /* smaller */
+      gap: 0.6rem;
       justify-content: center;
       flex-wrap: wrap;
       animation: fadeSlideDown 1s ease 0.8s both;
@@ -144,10 +187,10 @@
     .btn-primary {
       background: linear-gradient(135deg, #00c6d4, #0a7fa8);
       color: #fff;
-      padding: 8px 24px;                     /* compact */
+      padding: 8px 24px;
       border-radius: 30px;
       font-weight: 600;
-      font-size: 0.85rem;                    /* smaller */
+      font-size: 0.85rem;
       text-decoration: none;
       transition: transform 0.3s, box-shadow 0.3s;
       box-shadow: 0 4px 16px rgba(0,198,212,0.4);
@@ -175,13 +218,13 @@
     .hero-stats {
       display: flex;
       justify-content: center;
-      gap: 1rem;                           /* reduced */
+      gap: 1rem;
       flex-wrap: wrap;
-      margin-top: 1.5rem;                   /* less */
-      padding: 0.8rem 1.2rem;               /* compact */
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.2rem;
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px;                   /* smaller */
+      border-radius: 14px;
       backdrop-filter: blur(12px);
       animation: fadeSlideDown 1s ease 1s both;
     }
@@ -189,13 +232,13 @@
     .hero-stat { text-align: center; color: #fff; }
     .hero-stat .num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;                      /* smaller */
+      font-size: 1.6rem;
       font-weight: 700;
       color: #7eeeff;
       line-height: 1;
     }
     .hero-stat .lbl {
-      font-size: 0.65rem;                       /* smaller */
+      font-size: 0.65rem;
       opacity: 0.7;
       letter-spacing: 0.8px;
       text-transform: uppercase;
@@ -203,35 +246,35 @@
     }
     .hero-stat-divider {
       width: 1px;
-      height: 30px;                            /* shorter */
+      height: 30px;
       background: rgba(255,255,255,0.2);
       align-self: center;
     }
 
-    /* ── SHARED SECTION (compact) ── */
-    section { padding: 40px 0; }                /* reduced from 50px */
+    /* ── SHARED SECTION (40px spacing) ── */
+    section { padding: 40px 0; }
     .container { max-width: 1060px; margin: 0 auto; padding: 0 1.2rem; }
 
     .section-label {
       display: block;
-      font-size: 0.62rem;                       /* smaller */
+      font-size: 0.62rem;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--blue-light);
-      margin-bottom: 0.3rem;                     /* less */
+      margin-bottom: 0.3rem;
     }
     .section-title {
-      font-size: clamp(1.4rem, 2.8vw, 2rem);     /* reduced */
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
       font-weight: 700;
       color: var(--blue-deep);
       line-height: 1.2;
-      margin-bottom: 0.5rem;                     /* less */
+      margin-bottom: 0.5rem;
     }
     .section-desc {
       color: #5a7a9a;
-      font-size: 0.85rem;                         /* smaller */
-      max-width: 500px;                           /* narrower */
+      font-size: 0.85rem;
+      max-width: 500px;
       line-height: 1.6;
     }
 
@@ -242,7 +285,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: var(--card-gap);
-      margin-top: 1.8rem;                          /* less */
+      margin-top: 1.8rem;
       align-items: stretch;
     }
     @media (max-width: 1100px) { .services-grid { grid-template-columns: repeat(2,1fr); } }
@@ -258,7 +301,7 @@
       flex-direction: column;
       cursor: pointer;
       opacity: 0;
-      transform: translateY(30px);               /* less */
+      transform: translateY(30px);
       transition:
         opacity    0.6s ease,
         transform  0.6s cubic-bezier(0.23,1,0.32,1),
@@ -281,6 +324,19 @@
     }
     .service-card:hover .card-img-bg { transform: scale(1.05); }
 
+    /* ── DUMMY IMAGE PLACEHOLDERS FOR CARDS ── */
+    .card-img img.card-dummy-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
+    }
+    .service-card:hover .card-dummy-img { transform: scale(1.05); }
+
+    /* Gradient fallback shown behind dummy image */
     .bg-stp    { background: linear-gradient(145deg, #052244 0%, #0f6096 45%, #00b4cc 100%); }
     .bg-wtp    { background: linear-gradient(145deg, #043d56 0%, #0882aa 45%, #36d2e8 100%); }
     .bg-ro     { background: linear-gradient(145deg, #0a2342 0%, #1462a0 45%, #3daad4 100%); }
@@ -312,14 +368,14 @@
     .service-card:hover .card-icon-wrap { transform: translateY(-4px); }
 
     .card-icon {
-      width: 48px; height: 48px;               /* smaller */
+      width: 48px; height: 48px;
       border-radius: 12px;
       background: rgba(255,255,255,0.17);
       border: 1.5px solid rgba(255,255,255,0.36);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;                       /* smaller */
+      font-size: 1.5rem;
       box-shadow: 0 5px 18px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.28);
     }
 
@@ -347,17 +403,17 @@
     }
 
     .card-body {
-      padding: 0.9rem 1rem 1.1rem;              /* tighter */
+      padding: 0.9rem 1rem 1.1rem;
       display: flex; flex-direction: column; flex: 1;
     }
     .card-body h3 {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.82rem; font-weight: 700;     /* smaller */
+      font-size: 0.82rem; font-weight: 700;
       color: var(--blue-deep); line-height: 1.25;
       margin-bottom: 0.3rem;
     }
     .card-body p {
-      font-size: 0.72rem; color: #6a8daa;       /* smaller */
+      font-size: 0.72rem; color: #6a8daa;
       line-height: 1.5; flex: 1; margin-bottom: 0.6rem;
     }
     .card-divider {
@@ -369,7 +425,7 @@
       display: block; width: 100%;
       background: var(--blue-deep);
       color: #fff; text-align: center;
-      padding: 7px; border-radius: 8px;          /* smaller */
+      padding: 7px; border-radius: 8px;
       font-size: 0.75rem; font-weight: 600;
       text-decoration: none; letter-spacing: 0.3px;
       transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
@@ -386,7 +442,7 @@
 
     .purifier-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);     /* exactly 3 per row */
+      grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       margin-top: 1.8rem;
     }
@@ -397,7 +453,7 @@
       background: #f0f8ff;
       border: 1px solid #d8ecf8;
       border-radius: 14px;
-      padding: 1.2rem 1rem;                   /* compact */
+      padding: 1.2rem 1rem;
       text-align: center;
       opacity: 0; transform: translateY(25px);
       transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s, border-color 0.3s;
@@ -415,7 +471,7 @@
     .purifier-card.visible { opacity: 1; transform: translateY(0); }
 
     .purifier-icon {
-      width: 48px; height: 48px; border-radius: 50%;   /* smaller */
+      width: 48px; height: 48px; border-radius: 50%;
       background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
       display: flex; align-items: center; justify-content: center;
       font-size: 1.3rem; margin: 0 auto 0.6rem;
@@ -423,7 +479,7 @@
     }
     .purifier-card h3 {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem; font-weight: 700;            /* smaller */
+      font-size: 0.8rem; font-weight: 700;
       color: var(--blue-deep); margin-bottom: 0.3rem;
     }
     .purifier-card p { font-size: 0.7rem; color: #6a8daa; line-height: 1.4; margin:0; }
@@ -454,7 +510,7 @@
     }
     .how-step.visible { opacity: 1; transform: translateY(0); }
     .how-bubble {
-      width: 56px; height: 56px; border-radius: 50%;    /* smaller */
+      width: 56px; height: 56px; border-radius: 50%;
       margin: 0 auto 0.8rem;
       background: rgba(0,198,212,0.1);
       border: 2px solid rgba(0,198,212,0.35);
@@ -479,13 +535,13 @@
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 2rem; margin-top: 1.8rem;                /* reduced */
+      gap: 2rem; margin-top: 1.8rem;
     }
     @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 
     .contact-info-item { display: flex; gap: 0.7rem; align-items: flex-start; margin-bottom: 1.2rem; }
     .contact-info-item .icon-wrap {
-      width: 38px; height: 38px; border-radius: 8px;   /* smaller */
+      width: 38px; height: 38px; border-radius: 8px;
       background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; flex-shrink: 0;
@@ -494,8 +550,8 @@
     .contact-info-item .text span  { font-size: 0.82rem; color: var(--blue-deep); font-weight: 500; }
 
     .contact-form {
-      background: #fff; border-radius: 18px;            /* smaller */
-      padding: 1.5rem;                                    /* compact */
+      background: #fff; border-radius: 18px;
+      padding: 1.5rem;
       box-shadow: 0 6px 22px rgba(10,35,66,0.08);
     }
     .contact-form h3 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--blue-deep); }
@@ -503,7 +559,7 @@
     .form-group input,
     .form-group textarea,
     .form-group select {
-      width: 100%; padding: 10px 12px;                  /* smaller */
+      width: 100%; padding: 10px 12px;
       border: 1.5px solid #d0e4f0; border-radius: 8px;
       font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
       color: var(--blue-deep); background: #f8fbff; outline: none;
@@ -516,7 +572,7 @@
       box-shadow: 0 0 0 3px rgba(59,159,212,0.15);
       background: #fff;
     }
-    .form-group textarea { resize: vertical; min-height: 75px; } /* shorter */
+    .form-group textarea { resize: vertical; min-height: 75px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
     @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
 
@@ -557,6 +613,91 @@
       .hero-stat-divider { display: none; }
     }
     @media (max-width: 480px) { section { padding: 32px 0; } }
+
+    /* ══════════════════════════════════════════════════════
+       CREATIVE CURVY NAVY/BLUE BORDERS BETWEEN SECTIONS
+    ══════════════════════════════════════════════════════ */
+
+    /* Border between hero → plants */
+    .divider-hero-plants {
+      position: relative;
+      height: 70px;
+      background: #eaf3fb;
+      overflow: hidden;
+      margin-top: -2px;
+    }
+    .divider-hero-plants::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -10%; width: 120%;
+      height: 100%;
+      background: #0a2342;
+      border-radius: 0 0 55% 55% / 0 0 90% 90%;
+    }
+
+    /* SVG curvy divider wrapper */
+    .curvy-divider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      display: block;
+    }
+    .curvy-divider svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ══ Decorative curved border stripe between plants & domestic ══ */
+    .border-stripe-1 {
+      position: relative;
+      width: 100%;
+      height: 64px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .border-stripe-1::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #eaf3fb;
+      clip-path: ellipse(58% 100% at 50% 0%);
+    }
+    .border-stripe-1::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -5%; width: 110%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent 0%, #1565a8 20%, #00c6d4 50%, #1565a8 80%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 2px 16px rgba(21,101,168,0.35);
+    }
+
+    /* ══ Decorative curved border stripe between domestic & contact ══ */
+    .border-stripe-2 {
+      position: relative;
+      width: 100%;
+      height: 64px;
+      overflow: hidden;
+      background: #f0f8ff;
+    }
+    .border-stripe-2::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #fff;
+      clip-path: ellipse(60% 100% at 50% 0%);
+    }
+    .border-stripe-2::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -5%; width: 110%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent 0%, #0a2342 20%, #3b9fd4 50%, #0a2342 80%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 2px 16px rgba(10,35,66,0.3);
+    }
   </style>
 
   <link rel="stylesheet" href="../../header/header.css"/>
@@ -567,8 +708,44 @@
   <div id="header-placeholder"></div>
 
   <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
+  <!--
+    HOW TO USE HERO BACKGROUND:
+    ─────────────────────────────────────────────────────────────────────────────
+    OPTION A – VIDEO BACKGROUND:
+      Replace the <video> src with your video file path.
+      Example: <source src="assets/hero-video.mp4" type="video/mp4"/>
+      The video will autoplay, loop, and be muted by default.
+
+    OPTION B – IMAGE BACKGROUND:
+      Replace the <img> src with your image file path.
+      Example: src="assets/hero-bg.jpg"
+      Comment out or remove the <video> block if using only an image.
+
+    OPTION C – GRADIENT ONLY (default):
+      Comment out both <video> and <img> tags.
+      The .hero-bg-fallback gradient will show automatically.
+    ─────────────────────────────────────────────────────────────────────────────
+  -->
   <section class="hero" id="home">
-    <div class="hero-fallback"></div>
+
+    <!-- ── MEDIA BACKGROUND LAYER (video / image / gradient) ── -->
+    <div class="hero-media-bg">
+      <!-- GRADIENT FALLBACK (always visible behind media) -->
+      <div class="hero-bg-fallback"></div>
+
+      <!-- VIDEO BACKGROUND — replace src with your video file path -->
+      <!--
+      <video autoplay muted loop playsinline>
+        <source src="YOUR-VIDEO-FILE.mp4" type="video/mp4"/>
+      </video>
+      -->
+
+      <!-- IMAGE BACKGROUND — replace src with your image file path -->
+      <!--
+      <img src="YOUR-IMAGE-FILE.jpg" alt="Water Treatment Plant Background"/>
+      -->
+    </div>
+
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-badge">🏭 Water Treatment Plants</div>
@@ -593,6 +770,18 @@
     </svg>
   </section>
 
+  <!-- ══ CURVY DIVIDER 1: Hero → Plants ══ -->
+  <div class="curvy-divider" style="background:#eaf3fb; margin-top:0;">
+    <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:56px;">
+      <!-- Navy fill wave -->
+      <path d="M0,0 C200,56 400,0 720,28 C1040,56 1280,8 1440,28 L1440,0 Z" fill="#0a2342" opacity="0.08"/>
+      <!-- Blue border line wave -->
+      <path d="M0,28 C200,0 500,56 720,28 C940,0 1200,56 1440,28" fill="none" stroke="#1565a8" stroke-width="2.5" opacity="0.5"/>
+      <!-- Aqua thin line -->
+      <path d="M0,34 C300,8 600,52 900,28 C1100,14 1280,42 1440,30" fill="none" stroke="#00c6d4" stroke-width="1.2" opacity="0.45"/>
+    </svg>
+  </div>
+
   <!-- ══════════════════════════════════════ PLANTS ══════════════════════════════════ -->
   <section id="plants-section">
     <div class="container">
@@ -608,8 +797,9 @@
         <div class="service-card" style="transition-delay: 0.05s">
           <div class="card-img">
             <div class="card-img-bg bg-stp"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1581092334247-ddef2a41a41d?w=400&h=200&fit=crop&auto=format" alt="Sewage Treatment Plant" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">🏭</div></div>
-            <!-- <div class="card-badge"><b>STP</b><small>Civil &amp; MS</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -617,15 +807,15 @@
             <h3>Sewage Treatment Plants (STP)</h3>
             <p>MBR-based STP in civil and MS fabrication for housing societies, commercial complexes &amp; factories. Compliant with CPCB norms.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
         <!-- WTP -->
         <div class="service-card" style="transition-delay: 0.10s">
           <div class="card-img">
             <div class="card-img-bg bg-wtp"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1548502499-ef49f0a14374?w=400&h=200&fit=crop&auto=format" alt="Water Softening Plant" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">💧</div></div>
-            <!-- <div class="card-badge"><b>WTP</b><small>Softening</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -633,15 +823,15 @@
             <h3>Water Softening Plants (WTP)</h3>
             <p>Ion exchange resin-based water softening plants for hard water treatment in housing societies, commercial complexes and factories.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
         <!-- RO -->
         <div class="service-card" style="transition-delay: 0.15s">
           <div class="card-img">
             <div class="card-img-bg bg-ro"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop&auto=format" alt="RO Plant" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">🔵</div></div>
-            <!-- <div class="card-badge"><b>RO</b><small>+UV Available</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -649,15 +839,15 @@
             <h3>RO Reverse Osmosis Plants</h3>
             <p>Drinking water filtration systems with and without UV for pure, safe water supply. Available in all capacities for domestic and industrial use.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
         <!-- ETP -->
         <div class="service-card" style="transition-delay: 0.20s">
           <div class="card-img">
             <div class="card-img-bg bg-etp"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop&auto=format" alt="Effluent Treatment Plant" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">⚗️</div></div>
-            <!-- <div class="card-badge"><b>ETP</b><small>Chemical Based</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -665,7 +855,6 @@
             <h3>Effluent Treatment Plants (ETP)</h3>
             <p>Chemical-based effluent treatment plants designed for industrial wastewater compliance, ensuring safe discharge as per pollution control norms.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
       </div>
@@ -676,8 +865,9 @@
         <div class="service-card" style="transition-delay: 0.05s">
           <div class="card-img">
             <div class="card-img-bg bg-mbr"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1581093458791-9d15482442f6?w=400&h=200&fit=crop&auto=format" alt="MBR Technology" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">🧫</div></div>
-            <!-- <div class="card-badge"><b>MBR</b><small>STP with UF</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -685,15 +875,15 @@
             <h3>STP with UF / MBR Technology</h3>
             <p>Advanced STP with Ultrafiltration membrane technology for superior effluent quality. Ideal for water reuse and where space is limited.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
         <!-- Chemical Dosing -->
         <div class="service-card" style="transition-delay: 0.10s">
           <div class="card-img">
             <div class="card-img-bg bg-chem"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1532094349884-543559eff4b4?w=400&h=200&fit=crop&auto=format" alt="Chemical Dosing System" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">🧪</div></div>
-            <!-- <div class="card-badge"><b>CHEM</b><small>Dosing Systems</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -701,15 +891,15 @@
             <h3>Chemical Dosing Systems</h3>
             <p>Automated chemical dosing systems for chlorination, anti-scalant, coagulant and pH correction — designed for precision and reliability.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
         <!-- UV / Ozone -->
         <div class="service-card" style="transition-delay: 0.15s">
           <div class="card-img">
             <div class="card-img-bg bg-uv"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1559825481-12a05cc00344?w=400&h=200&fit=crop&auto=format" alt="UV Ozone Disinfection" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">☀️</div></div>
-            <!-- <div class="card-badge"><b>UV/O₃</b><small>Disinfection</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -717,15 +907,15 @@
             <h3>UV &amp; Ozone Disinfection Systems</h3>
             <p>Ultra-violet disinfection systems and ozone generators for chemical-free, highly effective water sterilization in drinking and process water.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
         <!-- Fabricated Plants -->
         <div class="service-card" style="transition-delay: 0.20s">
           <div class="card-img">
             <div class="card-img-bg bg-fab"></div>
+            <!-- DUMMY IMAGE — replace src with real image when available -->
+            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1565799557186-c3d5d100a25c?w=400&h=200&fit=crop&auto=format" alt="Fabricated Plants and Tanks" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-icon-wrap"><div class="card-icon">🔩</div></div>
-            <!-- <div class="card-badge"><b>FAB</b><small>MS/FRP Tanks</small></div> -->
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
@@ -733,12 +923,29 @@
             <h3>Fabricated Plants, Tanks &amp; Vessels</h3>
             <p>Pressure sand filters, activated carbon filters, dual media filters, MS tanks, FRP vessels and custom-fabricated water treatment equipment.</p>
             <div class="card-divider"></div>
-            <a href="#contact" class="card-cta">Enquire Now →</a>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ══ CURVY DIVIDER 2: Plants → Domestic ══ -->
+  <div class="curvy-divider" style="background:#fff;">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+      <!-- Background fill from eaf3fb to white -->
+      <path d="M0,0 L1440,0 L1440,35 C1100,70 800,0 540,42 C340,70 150,20 0,40 Z" fill="#eaf3fb"/>
+      <!-- Navy thick curvy border -->
+      <path d="M0,40 C180,70 420,8 720,38 C1000,66 1250,12 1440,36" fill="none" stroke="#0a2342" stroke-width="3" opacity="0.18"/>
+      <!-- Blue mid curvy border -->
+      <path d="M0,44 C200,16 480,68 720,42 C960,18 1220,62 1440,40" fill="none" stroke="#1565a8" stroke-width="2.2" opacity="0.35"/>
+      <!-- Aqua fine line -->
+      <path d="M0,48 C280,24 560,64 860,40 C1080,22 1300,56 1440,44" fill="none" stroke="#00c6d4" stroke-width="1.2" opacity="0.5"/>
+      <!-- Small decorative dots -->
+      <circle cx="360" cy="56" r="3" fill="#1565a8" opacity="0.3"/>
+      <circle cx="720" cy="38" r="4" fill="#00c6d4" opacity="0.4"/>
+      <circle cx="1080" cy="52" r="3" fill="#1565a8" opacity="0.3"/>
+    </svg>
+  </div>
 
   <!-- ══════════════════════════════════════ DOMESTIC PURIFIERS (3 per row, compact) ══════ -->
   <section id="domestic">
@@ -783,42 +990,23 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════ HOW IT WORKS ══════════════════════════════ -->
-  <section id="how">
-    <div class="container">
-      <div style="text-align: center;" class="reveal">
-        <span class="section-label">Our Process</span>
-        <h2 class="section-title">How We Deliver<br/>Your Plant</h2>
-        <p class="section-desc" style="margin: 0 auto;">A streamlined, transparent process — from understanding your needs to handing over a fully commissioned, running plant.</p>
-      </div>
-      <div class="how-grid">
-        <div class="how-step" style="transition-delay:0.05s">
-          <div class="how-bubble">🔍</div>
-          <div class="how-num">Step 01</div>
-          <h3>Site Survey</h3>
-          <p>Our engineers assess water quality, capacity needs and site conditions to design the right solution.</p>
-        </div>
-        <div class="how-step" style="transition-delay:0.15s">
-          <div class="how-bubble">📐</div>
-          <div class="how-num">Step 02</div>
-          <h3>Custom Design</h3>
-          <p>We design a fully customized plant layout tailored to your application, space and budget.</p>
-        </div>
-        <div class="how-step" style="transition-delay:0.25s">
-          <div class="how-bubble">🏗️</div>
-          <div class="how-num">Step 03</div>
-          <h3>Erection &amp; Installation</h3>
-          <p>Our skilled team erects, installs and integrates all plant components at your site with precision.</p>
-        </div>
-        <div class="how-step" style="transition-delay:0.35s">
-          <div class="how-bubble">✅</div>
-          <div class="how-num">Step 04</div>
-          <h3>Commissioning &amp; AMC</h3>
-          <p>Full commissioning, performance testing, operator training and optional AMC for ongoing care.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ══ CURVY DIVIDER 3: Domestic → Contact ══ -->
+  <div class="curvy-divider" style="background:#f0f8ff;">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+      <!-- Background fill white to f0f8ff -->
+      <path d="M0,0 L1440,0 L1440,45 C1200,10 900,65 600,35 C350,10 150,58 0,35 Z" fill="#fff"/>
+      <!-- Navy double wave border -->
+      <path d="M0,35 C240,65 520,10 780,38 C1020,62 1260,16 1440,40" fill="none" stroke="#0a2342" stroke-width="3.5" opacity="0.14"/>
+      <path d="M0,40 C200,14 500,66 800,38 C1050,16 1280,58 1440,36" fill="none" stroke="#0a2342" stroke-width="1.2" opacity="0.1"/>
+      <!-- Blue curvy accent -->
+      <path d="M0,44 C300,20 600,68 900,40 C1100,22 1280,56 1440,42" fill="none" stroke="#1565a8" stroke-width="2" opacity="0.4"/>
+      <!-- Aqua sparkle line -->
+      <path d="M0,50 C350,28 700,62 1050,42 C1180,34 1320,50 1440,46" fill="none" stroke="#00c6d4" stroke-width="1.2" opacity="0.5"/>
+      <!-- Decorative diamond shapes on the line -->
+      <polygon points="480,36 484,40 480,44 476,40" fill="#1565a8" opacity="0.25"/>
+      <polygon points="960,40 964,44 960,48 956,44" fill="#00c6d4" opacity="0.35"/>
+    </svg>
+  </div>
 
   <!-- ══════════════════════════════════════ CONTACT ══════════════════════════════════ -->
   <section id="contact">

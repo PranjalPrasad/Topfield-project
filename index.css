@@ -938,7 +938,7 @@ section { padding: 40px 0; margin: 0; }
 .projects-marquee-wrap { overflow: hidden; margin-top: 2rem; }
 .projects-marquee {
   display: flex; gap: 1rem;
-  animation: marquee 45s linear infinite;
+animation: marquee 120s linear infinite;
   width: max-content;
 }
 .projects-marquee:hover { animation-play-state: paused; }
@@ -1265,4 +1265,327 @@ section { padding: 40px 0; margin: 0; }
     transform: none;
   }
 }
+/* ══════════════════════════════════════════════════════════
+   PRODUCTS OFFERED SECTION  —  #products-offered
+   Add this block to the END of index.css
+   ══════════════════════════════════════════════════════════ */
 
+#products-offered {
+  position: relative;
+  background: linear-gradient(160deg, #eaf6fd 0%, #f5fbff 55%, #e0f4fb 100%);
+  padding: 2.5rem 0 1rem;
+  overflow: hidden;
+}
+
+/* Animated background blobs */
+.po-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: poBlobDrift 12s ease-in-out infinite alternate;
+}
+.po-blob-1 { width: 300px; height: 300px; background: rgba(2,136,209,0.09);   top: -80px;  left: -70px;  animation-delay: 0s; }
+.po-blob-2 { width: 220px; height: 220px; background: rgba(0,198,212,0.11);   top: 40%;    right: -50px; animation-delay: 3s; }
+.po-blob-3 { width: 180px; height: 180px; background: rgba(79,195,247,0.09);  bottom: -50px; left: 40%;  animation-delay: 6s; }
+@keyframes poBlobDrift {
+  0%   { transform: translate(0,0) scale(1); }
+  100% { transform: translate(28px,18px) scale(1.06); }
+}
+
+/* Floating drops */
+.po-drop { position: absolute; font-size: 0.9rem; opacity: 0.13; pointer-events: none; animation: poDropFloat 7s ease-in-out infinite; }
+.po-drop-1 { top: 8%;    left: 6%;   animation-duration: 6s; animation-delay: 0s;   }
+.po-drop-2 { top: 18%;   right: 8%;  animation-duration: 8s; animation-delay: 1.5s; }
+.po-drop-3 { bottom: 20%; left: 12%; animation-duration: 7s; animation-delay: 3s;   }
+.po-drop-4 { bottom: 10%; right: 10%;animation-duration: 9s; animation-delay: 0.8s; }
+@keyframes poDropFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg);    opacity: 0.13; }
+  50%       { transform: translateY(-12px) rotate(8deg); opacity: 0.22; }
+}
+
+/* Container */
+.po-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header */
+.po-header {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.po-header.po-header-visible,
+.po-header.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tabs */
+.po-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.po-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.38rem 1rem;
+  border-radius: 50px;
+  border: 2px solid rgba(2,136,209,0.22);
+  background: rgba(255,255,255,0.72);
+  color: #2c3e50;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+.po-tab-icon { font-size: 0.85rem; }
+.po-tab:hover {
+  background: rgba(227,242,253,0.95);
+  border-color: #0288d1;
+  color: #01579b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2,136,209,0.13);
+}
+.po-tab.active {
+  background: linear-gradient(135deg, #0288d1, #01579b);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(2,136,209,0.28);
+  transform: translateY(-2px);
+}
+
+/* Panels */
+.po-panel { display: none; }
+.po-panel.active {
+  display: block;
+  animation: poPanelFadeIn 0.38s ease;
+}
+@keyframes poPanelFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SINGLE ROW GRID ── */
+.po-cards-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.85rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(2,136,209,0.3) transparent;
+}
+.po-cards-grid::-webkit-scrollbar { height: 4px; }
+.po-cards-grid::-webkit-scrollbar-track { background: transparent; }
+.po-cards-grid::-webkit-scrollbar-thumb { background: rgba(2,136,209,0.25); border-radius: 4px; }
+
+/* Individual Card */
+.po-card {
+  position: relative;
+  background: rgba(255,255,255,0.90);
+  border-radius: 14px;
+  border: 1px solid rgba(79,195,247,0.22);
+  box-shadow: 0 3px 12px rgba(0,100,150,0.07);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+  transition-delay: var(--po-delay, 0s);
+  /* Each card takes equal space, min 180px to avoid squash */
+  flex: 1 1 0;
+  min-width: 180px;
+  max-width: 240px;
+}
+.po-card.po-card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.po-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0,100,150,0.13);
+  border-color: rgba(2,136,209,0.38);
+}
+
+/* Glow */
+.po-card-glow {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 30% 20%, rgba(79,195,247,0.10) 0%, transparent 65%);
+  opacity: 0; transition: opacity 0.3s ease;
+  pointer-events: none; border-radius: 14px;
+}
+.po-card:hover .po-card-glow { opacity: 1; }
+
+/* Top accent */
+.po-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, #4FC3F7, #0288D1, #4FC3F7);
+  border-radius: 14px 14px 0 0;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.po-card:hover::before,
+.po-card.po-card-visible::before { opacity: 1; }
+
+/* Card image */
+.po-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+}
+.po-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.po-card:hover .po-card-img { transform: scale(1.07); }
+
+/* Badge — now on image */
+.po-card-badge {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  background: linear-gradient(135deg, #0288d1, #01579b);
+  color: #fff;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.16rem 0.5rem;
+  border-radius: 50px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 8px rgba(2,136,209,0.35);
+  z-index: 2;
+}
+
+/* Card body */
+.po-card-body {
+  padding: 0.75rem 0.9rem 0.85rem;
+}
+
+/* Icon + title row */
+.po-card-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.4rem;
+}
+.po-card-icon {
+  font-size: 1.15rem;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 9px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.po-card:hover .po-card-icon { transform: scale(1.1) rotate(-3deg); }
+
+.po-card-body h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #01579b;
+  line-height: 1.25;
+  margin: 0;
+}
+.po-card-body p {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.76rem;
+  color: #546e7a;
+  line-height: 1.55;
+  margin-bottom: 0.6rem;
+}
+
+/* Feature list */
+.po-feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+.po-feature-list li {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.72rem;
+  color: #37474f;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.po-feature-list li::before {
+  content: '✓';
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px;
+  background: linear-gradient(135deg, #4FC3F7, #0288D1);
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 700;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Bottom wave */
+.po-wave-bottom { display: block; width: 100%; margin-top: 1.5rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .po-card { min-width: 170px; }
+}
+
+@media (max-width: 900px) {
+  .po-cards-grid {
+    /* Allow wrapping into 2 columns on tablet */
+    flex-wrap: wrap;
+  }
+  .po-card {
+    flex: 1 1 calc(50% - 0.85rem);
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  #products-offered { padding: 2rem 0 0.8rem; }
+  .po-tabs { gap: 0.4rem; }
+  .po-tab { padding: 0.35rem 0.8rem; font-size: 0.78rem; }
+  .po-card-img-wrap { height: 110px; }
+}
+
+@media (max-width: 576px) {
+  .po-cards-grid {
+    flex-wrap: wrap;
+  }
+  .po-card {
+    flex: 1 1 100%;
+    min-width: unset;
+    max-width: unset;
+  }
+  .po-tab-icon { display: none; }
+  .po-tab { padding: 0.32rem 0.7rem; font-size: 0.75rem; }
+  .po-card-img-wrap { height: 140px; }
+}
+
+@media (max-width: 380px) {
+  .po-container { padding: 0 0.75rem; }
+}
+/* ══════════════════════════════════════════════════════════
+   END PRODUCTS OFFERED
+   ══════════════════════════════════════════════════════════ */

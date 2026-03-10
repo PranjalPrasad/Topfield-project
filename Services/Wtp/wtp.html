@@ -29,7 +29,7 @@
   --teal:   #00b89a;
   --gold:   #e8c96a;
   --white:  #f4faff;
-  --card-r: 16px;        /* reduced */
+  --card-r: 16px;
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -39,17 +39,27 @@ body{
   background:var(--white);
   color:var(--navy);
   overflow-x:hidden;
-  font-size:14px;          /* smaller base */
+  font-size:14px;
 }
 h1,h2,h3{font-family:'Playfair Display',serif;}
 h4{font-family:'Josefin Sans',sans-serif;}
 
 /* ═══════════════════════════════════════════
-   HERO (compact)
+   SECTION SPACING — 40px between sections
+═══════════════════════════════════════════ */
+section + section {
+  margin-top: 0;
+}
+section {
+  padding: 40px 0;
+}
+
+/* ═══════════════════════════════════════════
+   HERO (reduced padding only)
 ═══════════════════════════════════════════ */
 #hero{
   position:relative;
-  min-height:75vh;          /* reduced */
+  min-height:75vh;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
   background:var(--navy);
@@ -59,19 +69,32 @@ h4{font-family:'Josefin Sans',sans-serif;}
   width:100%!important;height:100%!important;
   z-index:0;
 }
+
+/* ── VIDEO BACKGROUND ── */
+.hero-bg-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:1;
+  opacity:0.38;
+  pointer-events:none;
+}
+
 .hero-veil{
-  position:absolute;inset:0;z-index:1;
+  position:absolute;inset:0;z-index:2;
   background:
     radial-gradient(ellipse 60% 70% at 70% 40%, rgba(0,212,232,0.07) 0%, transparent 60%),
-    linear-gradient(170deg,rgba(4,17,31,0.78) 0%,rgba(8,28,56,0.65) 50%,rgba(0,60,100,0.4) 100%);
+    linear-gradient(170deg,rgba(4,17,31,0.82) 0%,rgba(8,28,56,0.70) 50%,rgba(0,60,100,0.48) 100%);
 }
 .hero-veil::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:40%;
   background:linear-gradient(to top,rgba(4,17,31,0.97),transparent);
 }
-/* Scanlines */
 .scanlines{
-  position:absolute;inset:0;z-index:2;pointer-events:none;
+  position:absolute;inset:0;z-index:3;pointer-events:none;
   background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,212,232,0.013) 3px,rgba(0,212,232,0.013) 4px);
 }
 .hero-wave{
@@ -81,12 +104,12 @@ h4{font-family:'Josefin Sans',sans-serif;}
 /* Crystal floaters */
 .cryst-particle{position:absolute;border-radius:2px;pointer-events:none;z-index:4;}
 
-/* Hero content */
+/* Hero content — reduced padding */
 .hero-content{
   position:relative;z-index:5;
   text-align:center;
   max-width:840px;
-  padding:70px 2rem 40px;   /* reduced */
+  padding:40px 2rem 30px;
 }
 .hero-kicker{
   display:inline-flex;align-items:center;gap:0.4rem;
@@ -137,7 +160,7 @@ h4{font-family:'Josefin Sans',sans-serif;}
 /* Stats bar */
 .hero-stats{
   display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;
-  margin-top:2.5rem;
+  margin-top:2rem;
   padding:1rem 2rem;
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.1);
@@ -156,9 +179,8 @@ h4{font-family:'Josefin Sans',sans-serif;}
 .stat-pipe{width:1px;height:32px;background:rgba(255,255,255,0.13);align-self:center;}
 
 /* ═══════════════════════════════════════════
-   SHARED LAYOUT (compact)
+   SHARED LAYOUT
 ═══════════════════════════════════════════ */
-section{padding:48px 0;}            /* reduced from 88px */
 .container{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
 
 .lbl{
@@ -182,7 +204,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 }
 
 /* ═══════════════════════════════════════════
-   WHAT IS HARD WATER (compact)
+   WHAT IS HARD WATER
 ═══════════════════════════════════════════ */
 #what{background:#eaf4fb;position:relative;overflow:hidden;}
 #what::before{
@@ -254,7 +276,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 .ion-note{font-size:0.65rem;color:rgba(255,255,255,0.5);margin-left:4px;}
 
 /* ═══════════════════════════════════════════
-   RESIN SIMULATOR (compact)
+   RESIN SIMULATOR
 ═══════════════════════════════════════════ */
 #simulator{background:#fff;position:relative;overflow:hidden;}
 #simulator::before{
@@ -313,7 +335,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 
 /* Vessel graphic */
 .vessel-graphic{
-  position:relative;height:240px;          /* reduced */
+  position:relative;height:240px;
   display:flex;align-items:center;justify-content:center;
   margin-bottom:0.8rem;
 }
@@ -423,7 +445,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 .feat-body p{font-size:0.7rem;color:#7a9ab8;line-height:1.5;}
 
 /* ═══════════════════════════════════════════
-   HOW IT WORKS (4-step timeline) compact
+   HOW IT WORKS (4-step timeline)
 ═══════════════════════════════════════════ */
 #how{background:#eaf4fb;position:relative;overflow:hidden;}
 #how::before{
@@ -492,7 +514,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 .how-card:hover .how-card-water{height:40%;}
 
 /* ═══════════════════════════════════════════
-   APPLICATIONS (compact)
+   APPLICATIONS
 ═══════════════════════════════════════════ */
 #applications{background:#fff;position:relative;overflow:hidden;}
 #applications::before{
@@ -542,7 +564,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 .app-card p{font-size:0.68rem;color:#7a9ab8;line-height:1.5;}
 
 /* ═══════════════════════════════════════════
-   SPECS (dark card grid) compact
+   SPECS (dark card grid)
 ═══════════════════════════════════════════ */
 #specs{
   background:linear-gradient(135deg,var(--navy),#0d3870);
@@ -579,7 +601,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 .spec-card p{font-size:0.7rem;color:rgba(255,255,255,0.52);line-height:1.5;}
 
 /* ═══════════════════════════════════════════
-   CTA (compact)
+   CTA
 ═══════════════════════════════════════════ */
 #cta-sec{
   background:#eaf4fb;position:relative;overflow:hidden;
@@ -645,7 +667,7 @@ section{padding:48px 0;}            /* reduced from 88px */
 #scrollTop:hover{transform:scale(1.1) translateY(-2px);}
 #scrollTop.show{display:flex;}
 
-@media(max-width:480px){section{padding:42px 0;}}
+@media(max-width:480px){section{padding:30px 0;}}
 </style>
 </head>
 <body>
@@ -654,6 +676,19 @@ section{padding:48px 0;}            /* reduced from 88px */
 <!-- ══════════════════════════ HERO ══════════════════════════ -->
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
+
+  <!-- ── Video Background ── -->
+  <video
+    class="hero-bg-video"
+    src="/video/hero-section.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    onerror="this.style.display='none';"
+  ></video>
+
   <div class="hero-veil"></div>
   <div class="scanlines"></div>
 
@@ -1255,7 +1290,7 @@ document.querySelectorAll('.bbl').forEach((b,i)=>{
 });
 
 /* ═══════════════════════════════════════════
-   RESIN SIMULATOR (unchanged logic)
+   RESIN SIMULATOR
 ═══════════════════════════════════════════ */
 const COLS=6,ROWS=9,TOTAL=COLS*ROWS;
 const beads=[];
@@ -1368,4 +1403,3 @@ window.addEventListener('scroll',()=>stb.classList.toggle('show',scrollY>500));
 </script>
 </body>
 </html>
-```

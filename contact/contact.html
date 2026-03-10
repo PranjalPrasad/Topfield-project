@@ -48,7 +48,7 @@
     }
 
     /* ═══════════════════════════════════
-       HERO SECTION (balanced size - not too small)
+       HERO SECTION WITH VIDEO BACKGROUND
     ═══════════════════════════════════ */
     .contact-hero {
       position: relative;
@@ -58,6 +58,18 @@
       justify-content: center;
       overflow: hidden;
       padding: 70px 1.5rem 50px;       /* comfortable padding */
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.3;
+      pointer-events: none;
     }
 
     .hero-bg {
@@ -519,6 +531,12 @@
     }
     .field-wrap .field-input { padding-left: 36px; }
 
+    /* Product dropdown specific style - minimized height */
+    .product-select {
+      max-height: 45px;
+      overflow-y: auto;
+    }
+
     /* Submit button */
     .btn-submit {
       width: 100%;
@@ -687,6 +705,12 @@
 
   <!-- ═══════════════════════════════════════════ HERO (balanced size) ═══════════════════ -->
   <section class="contact-hero" id="home">
+    <!-- Dummy Video Background -->
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://player.vimeo.com/external/322470332.sd.mp4?s=338c48e2b9c1f9139f23a8a6b62cd3c3d1e5f2d1&profile_id=139&oauth2_token_id=57447761" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    
     <div class="hero-bg"></div>
     <div class="hero-blob blob-1"></div>
     <div class="hero-blob blob-2"></div>
@@ -864,6 +888,33 @@
                 <span class="field-icon">✉️</span>
                 <input class="field-input" type="email" placeholder="your@email.com"/>
               </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Products Interested In</label>
+              <select class="field-select product-select">
+                <option value="" disabled selected>Select a product…</option>
+                <option>Sewage Treatment Plants (STP) for housing societies, commercial complexes & factories</option>
+                <option>Water Softening Plants (WTP) for hard water</option>
+                <option>RO Reverse Osmosis Plants with/without UV</option>
+                <option>Effluent Treatment Plants (ETP)</option>
+                <option>STP with UF / MBR</option>
+                <option>Swimming Pool & Waterbodies Operation & Maintenance AMC</option>
+                <option>Chemicals - Sodium Hypochlorite, Culture, TCC (90), Granular, PAC, SMBS, Anti Scalant</option>
+                <option>Repair / Refurbishment of STP / WTP / ETP Plants</option>
+                <option>Tank Cleaning of STP / WTP / ETP Plants</option>
+                <option>Spares - MS Vessel, FRP Vessel, Sand Media, Carbon Media, Resin, RO Membrane, Cartridge Filters</option>
+                <option>Domestic Purifiers - RO+UV, UF, 7 Stage Gravity, Alkaline</option>
+                <option>Residential Softeners</option>
+                <option>MBR Based Sewage Treatment Plant (Civil & MS Fabrication)</option>
+                <option>Chemical Based Effluent Treatment Plant</option>
+                <option>Other Biological Treatment Systems</option>
+                <option>Chemical Dosing Systems</option>
+                <option>Pressure Sand / Activated Carbon / Dual Media Filters</option>
+                <option>Ultra Violet Disinfection Systems</option>
+                <option>Ozone Generators</option>
+                <option>Fabricated Plants / Equipments / MS Tanks / Vessels</option>
+              </select>
             </div>
 
             <div class="field-group">

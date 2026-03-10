@@ -257,76 +257,43 @@
   flex-shrink: 0;
 }
 
-/* Contact Bubble with Animation */
-.tf-contact-bubble {
-  position: relative;
-  padding: 0.4rem 1.2rem;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  border-radius: 50px;
-  border: 1px solid rgba(2,136,209,0.3);
-  overflow: hidden;
-}
-
-.tf-bubble-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.bubble {
-  position: absolute;
-  background: rgba(255,255,255,0.6);
-  border-radius: 50%;
-  animation: bubbleRise 3s infinite;
-}
-
-.bubble-1 {
-  width: 15px;
-  height: 15px;
-  bottom: -15px;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.bubble-2 {
-  width: 20px;
-  height: 20px;
-  bottom: -20px;
-  left: 40%;
-  animation-delay: 0.5s;
-}
-
-.bubble-3 {
-  width: 12px;
-  height: 12px;
-  bottom: -12px;
-  left: 70%;
-  animation-delay: 1s;
-}
-
-@keyframes bubbleRise {
-  0% { transform: translateY(0) scale(1); opacity: 0.6; }
-  100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
-}
-
-.tf-phone-link {
+/* Brochure Download Button */
+.tf-brochure-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #01579b;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: linear-gradient(135deg, #0288d1, #01579b);
+  color: #ffffff;
   text-decoration: none;
   font-family: 'Nunito', sans-serif;
   font-weight: 700;
-  position: relative;
-  z-index: 2;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(2,136,209,0.3);
+  flex-shrink: 0;
 }
 
-.tf-phone-text {
-  font-size: 1rem;
-  letter-spacing: 0.3px;
+.tf-brochure-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(2,136,209,0.45);
+  background: linear-gradient(135deg, #039be5, #0277bd);
+}
+
+.tf-brochure-text {
+  white-space: nowrap;
+}
+
+/* WhatsApp Button */
+.tf-whatsapp-btn {
+  background: linear-gradient(135deg, #e8faf0, #c8f0d8) !important;
+  border: 1px solid rgba(37,211,102,0.35) !important;
+}
+
+.tf-whatsapp-btn:hover {
+  background: linear-gradient(135deg, #c8f0d8, #a8e6bc) !important;
+  box-shadow: 0 4px 12px rgba(37,211,102,0.35) !important;
 }
 
 /* Ripple Button */
@@ -493,8 +460,12 @@
     font-size: 0.9rem;
   }
 
-  .tf-phone-text {
-    font-size: 0.9rem;
+  .tf-brochure-text {
+    display: none;
+  }
+
+  .tf-brochure-btn {
+    padding: 0.5rem 0.7rem;
   }
 }
 
@@ -609,13 +580,12 @@
     display: flex;
   }
 
-  /* Hide phone text on tablet */
-  .tf-contact-bubble .tf-phone-text {
+  .tf-brochure-text {
     display: none;
   }
 
-  .tf-contact-bubble {
-    padding: 0.5rem 0.7rem;
+  .tf-brochure-btn {
+    padding: 0.5rem 0.65rem;
   }
 
   .tf-header-actions {
@@ -689,7 +659,7 @@
     max-width: 140px;
   }
 
-  .tf-contact-bubble {
+  .tf-brochure-btn {
     padding: 0.4rem 0.6rem;
   }
 
