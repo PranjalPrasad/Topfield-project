@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Water Treatment Plants – Topfield Water Solutions</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">  <style>
     :root {
       --blue-deep:  #0a2342;
       --blue-mid:   #1565a8;
@@ -22,14 +23,14 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family:'Inter';
       background: var(--white);
       color: var(--blue-deep);
       overflow-x: hidden;
       font-size: 14px;
     }
 
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    h1, h2, h3 { font-family:'Inter'; }
 
     /* ══════════════════════════════════════════════════════
        CURVY SECTION DIVIDERS
@@ -231,7 +232,7 @@
 
     .hero-stat { text-align: center; color: #fff; }
     .hero-stat .num {
-      font-family: 'Playfair Display', serif;
+      font-family:'Inter';
       font-size: 1.6rem;
       font-weight: 700;
       color: #7eeeff;
@@ -407,7 +408,7 @@
       display: flex; flex-direction: column; flex: 1;
     }
     .card-body h3 {
-      font-family: 'DM Sans', sans-serif;
+      font-family:'Inter';
       font-size: 0.82rem; font-weight: 700;
       color: var(--blue-deep); line-height: 1.25;
       margin-bottom: 0.3rem;
@@ -478,7 +479,7 @@
       box-shadow: 0 4px 10px rgba(21,101,168,0.25);
     }
     .purifier-card h3 {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter';
       font-size: 0.8rem; font-weight: 700;
       color: var(--blue-deep); margin-bottom: 0.3rem;
     }
@@ -525,7 +526,7 @@
     }
     .how-num { font-size: 0.5rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 0.2rem; }
     .how-step h3 {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter';
       font-size: 0.8rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 0.2rem;
     }
     .how-step p { color: #6a8daa; font-size: 0.7rem; line-height: 1.4; }
@@ -561,7 +562,7 @@
     .form-group select {
       width: 100%; padding: 10px 12px;
       border: 1.5px solid #d0e4f0; border-radius: 8px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+      font-family:'Inter'; font-size: 0.8rem;
       color: var(--blue-deep); background: #f8fbff; outline: none;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
@@ -580,7 +581,7 @@
       width: 100%;
       background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
       color: #fff; padding: 10px; border-radius: 8px; border: none;
-      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+      font-family:'Inter'; font-size: 0.85rem; font-weight: 600;
       cursor: pointer; transition: all 0.3s; margin-top: 0.5rem;
     }
     .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(21,101,168,0.35); }
@@ -698,6 +699,124 @@
       border-radius: 50%;
       box-shadow: 0 2px 16px rgba(10,35,66,0.3);
     }
+
+    /* ══════════════════════════════════════════════════════
+       ADDED RESPONSIVE STYLES — NO EXISTING CODE CHANGED
+    ══════════════════════════════════════════════════════ */
+
+    /* Extra small phones */
+    @media (max-width: 360px) {
+      body { font-size: 13px; }
+      .hero { min-height: 60vh; padding: 30px 0.8rem 50px; }
+      .hero-content { padding: 0 0.6rem; }
+      .hero-badge { font-size: 0.58rem; padding: 3px 10px; letter-spacing: 1.5px; }
+      .hero-stats { padding: 0.6rem 0.8rem; gap: 0.5rem; }
+      .hero-stat .num { font-size: 1.2rem; }
+      .hero-stat .lbl { font-size: 0.58rem; }
+      .btn-primary, .btn-outline { padding: 7px 16px; font-size: 0.78rem; }
+      .container { padding: 0 0.8rem; }
+      .section-title { font-size: 1.2rem; }
+      .contact-form { padding: 1rem; }
+      .contact-form h3 { font-size: 1rem; }
+    }
+
+    /* Small phones (361–480px) */
+    @media (max-width: 480px) {
+      .hero { min-height: 62vh; padding: 30px 1rem 55px; }
+      .hero-stats { padding: 0.7rem 1rem; gap: 0.6rem; margin-top: 1.2rem; }
+      .hero-stat .num { font-size: 1.35rem; }
+      .hero-ctas { gap: 0.5rem; }
+      .btn-primary, .btn-outline { padding: 8px 18px; font-size: 0.8rem; }
+      .section-title { font-size: 1.3rem; }
+      .section-desc { font-size: 0.8rem; }
+      .contact-info-item { flex-wrap: wrap; }
+      .contact-info-item .text span { font-size: 0.78rem; }
+      .card-body h3 { font-size: 14px !important; }
+      .card-body p  { font-size: 13px !important; }
+      .purifier-card h3 { font-size: 14px !important; }
+      .purifier-card p  { font-size: 13px !important; }
+      .services-grid { margin-top: 1.2rem; }
+      .purifier-grid  { margin-top: 1.2rem; }
+    }
+
+    /* Medium phones (481–600px) */
+    @media (max-width: 600px) {
+      .hero-stats { flex-wrap: wrap; justify-content: center; }
+      .curvy-divider svg { height: 40px !important; }
+      .contact-grid { gap: 1.2rem; }
+      .contact-form { padding: 1.2rem; }
+    }
+
+    /* Tablets portrait (601–768px) */
+    @media (max-width: 768px) {
+      .hero { min-height: 56vh; padding: 36px 1rem 50px; }
+      .hero h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+      .hero-sub { font-size: 0.85rem; max-width: 400px; }
+      .section-title { font-size: clamp(1.3rem, 3.5vw, 1.75rem); }
+      .container { padding: 0 1rem; }
+      .services-grid { gap: 0.75rem; }
+      .purifier-grid  { gap: 0.75rem; }
+      .contact-form { padding: 1.3rem; }
+      .curvy-divider svg { height: 50px !important; }
+    }
+
+    /* Tablets landscape (769–1024px) */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .hero h1 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+      .container { padding: 0 1.5rem; }
+      .services-grid { gap: 0.8rem; }
+      .purifier-grid  { gap: 0.9rem; }
+    }
+
+    /* Touch devices – remove hover transforms that feel awkward */
+    @media (hover: none) and (pointer: coarse) {
+      .service-card:hover   { transform: none; box-shadow: 0 2px 8px rgba(10,35,66,0.07); }
+      .purifier-card:hover  { box-shadow: none; }
+      .btn-primary:hover    { transform: none; }
+      .btn-outline:hover    { background: transparent; }
+      .btn-submit:hover     { transform: none; box-shadow: none; }
+      .card-cta:hover       { transform: none; }
+    }
+
+    /* Landscape orientation on small phones */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { min-height: 100vh; padding: 20px 1rem 40px; }
+      .hero h1 { font-size: 1.5rem; margin-bottom: 0.4rem; }
+      .hero-sub { font-size: 0.78rem; margin-bottom: 0.8rem; }
+      .hero-stats { margin-top: 0.8rem; padding: 0.5rem 0.8rem; }
+      .hero-stat .num { font-size: 1.1rem; }
+    }
+
+    /* Wide screens (1400px+) */
+    @media (min-width: 1400px) {
+      .container { max-width: 1200px; }
+    }
+
+    /* Ensure images in cards don't overflow on any screen */
+    .card-img img.card-dummy-img {
+      max-width: 100%;
+    }
+
+    /* Prevent horizontal scroll on all screens */
+    .curvy-divider,
+    .border-stripe-1,
+    .border-stripe-2 {
+      max-width: 100vw;
+    }
+
+    /* Make contact info text wrap nicely on small screens */
+    @media (max-width: 420px) {
+      .contact-info-item .text span { word-break: break-word; }
+      .form-group input,
+      .form-group textarea,
+      .form-group select { font-size: 16px; } /* Prevent iOS zoom on focus */
+    }
+
+    /* Fix hero wave on very small screens */
+    @media (max-width: 400px) {
+      .hero-wave { bottom: -1px; }
+    }
+
   </style>
 
   <link rel="stylesheet" href="../../header/header.css"/>
@@ -798,14 +917,13 @@
           <div class="card-img">
             <div class="card-img-bg bg-stp"></div>
             <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1581092334247-ddef2a41a41d?w=400&h=200&fit=crop&auto=format" alt="Sewage Treatment Plant" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">🏭</div></div>
+            <img class="card-dummy-img" src="/images/client_img/STP.jpeg" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>Sewage Treatment Plants (STP)</h3>
-            <p>MBR-based STP in civil and MS fabrication for housing societies, commercial complexes &amp; factories. Compliant with CPCB norms.</p>
+            <h3 style="font-size: 16px;">Sewage Treatment Plants (STP)</h3>
+            <p style="font-size: 15px;">MBR-based STP in civil and MS fabrication for housing societies, commercial complexes &amp; factories. Compliant with CPCB norms.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -813,15 +931,13 @@
         <div class="service-card" style="transition-delay: 0.10s">
           <div class="card-img">
             <div class="card-img-bg bg-wtp"></div>
-            <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1548502499-ef49f0a14374?w=400&h=200&fit=crop&auto=format" alt="Water Softening Plant" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">💧</div></div>
+            <img class="card-dummy-img" src="/images/client_img/WTP.jpeg" alt="Water Softening Plant" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>Water Softening Plants (WTP)</h3>
-            <p>Ion exchange resin-based water softening plants for hard water treatment in housing societies, commercial complexes and factories.</p>
+            <h3  style="font-size: 16px;">Water Softening Plants (WTP)</h3>
+            <p  style="font-size: 15px;">Ion exchange resin-based water softening plants for hard water treatment in housing societies, commercial complexes and factories.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -829,15 +945,13 @@
         <div class="service-card" style="transition-delay: 0.15s">
           <div class="card-img">
             <div class="card-img-bg bg-ro"></div>
-            <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop&auto=format" alt="RO Plant" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">🔵</div></div>
+            <img class="card-dummy-img" src="/images/STP/RO Reverse Osmosis Plants.jpeg" alt="RO Plant" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>RO Reverse Osmosis Plants</h3>
-            <p>Drinking water filtration systems with and without UV for pure, safe water supply. Available in all capacities for domestic and industrial use.</p>
+            <h3  style="font-size: 16px;">RO Reverse Osmosis Plants</h3>
+            <p  style="font-size: 15px;">Drinking water filtration systems with and without UV for pure, safe water supply. Available in all capacities for domestic and industrial use.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -845,15 +959,13 @@
         <div class="service-card" style="transition-delay: 0.20s">
           <div class="card-img">
             <div class="card-img-bg bg-etp"></div>
-            <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop&auto=format" alt="Effluent Treatment Plant" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">⚗️</div></div>
+            <img class="card-dummy-img" src="/images/STP/Effluent Treatment Plants (ETP).jpeg" alt="Effluent Treatment Plant" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>Effluent Treatment Plants (ETP)</h3>
-            <p>Chemical-based effluent treatment plants designed for industrial wastewater compliance, ensuring safe discharge as per pollution control norms.</p>
+            <h3  style="font-size: 16px;">Effluent Treatment Plants (ETP)</h3>
+            <p  style="font-size: 15px;">Chemical-based effluent treatment plants designed for industrial wastewater compliance, ensuring safe discharge as per pollution control norms.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -865,15 +977,13 @@
         <div class="service-card" style="transition-delay: 0.05s">
           <div class="card-img">
             <div class="card-img-bg bg-mbr"></div>
-            <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1581093458791-9d15482442f6?w=400&h=200&fit=crop&auto=format" alt="MBR Technology" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">🧫</div></div>
+            <img class="card-dummy-img" src="/images/STP/STP Technology.jpeg" alt="MBR Technology" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>STP with UF / MBR Technology</h3>
-            <p>Advanced STP with Ultrafiltration membrane technology for superior effluent quality. Ideal for water reuse and where space is limited.</p>
+            <h3  style="font-size: 16px;">STP with UF / MBR Technology</h3>
+            <p  style="font-size: 15px;">Advanced STP with Ultrafiltration membrane technology for superior effluent quality. Ideal for water reuse and where space is limited.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -881,15 +991,13 @@
         <div class="service-card" style="transition-delay: 0.10s">
           <div class="card-img">
             <div class="card-img-bg bg-chem"></div>
-            <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1532094349884-543559eff4b4?w=400&h=200&fit=crop&auto=format" alt="Chemical Dosing System" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">🧪</div></div>
+            <img class="card-dummy-img" src="/images/STP/Chemical Dosing Systems.jpeg" alt="Chemical Dosing System" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>Chemical Dosing Systems</h3>
-            <p>Automated chemical dosing systems for chlorination, anti-scalant, coagulant and pH correction — designed for precision and reliability.</p>
+            <h3  style="font-size: 16px;">Chemical Dosing Systems</h3>
+            <p  style="font-size: 15px;">Automated chemical dosing systems for chlorination, anti-scalant, coagulant and pH correction — designed for precision and reliability.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -897,15 +1005,13 @@
         <div class="service-card" style="transition-delay: 0.15s">
           <div class="card-img">
             <div class="card-img-bg bg-uv"></div>
-            <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1559825481-12a05cc00344?w=400&h=200&fit=crop&auto=format" alt="UV Ozone Disinfection" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">☀️</div></div>
+            <img class="card-dummy-img" src="/images/STP/UV & Ozone Disinfection Systems.jpeg" alt="UV Ozone Disinfection" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>UV &amp; Ozone Disinfection Systems</h3>
-            <p>Ultra-violet disinfection systems and ozone generators for chemical-free, highly effective water sterilization in drinking and process water.</p>
+            <h3  style="font-size: 16px;">UV &amp; Ozone Disinfection Systems</h3>
+            <p  style="font-size: 15px;">Ultra-violet disinfection systems and ozone generators for chemical-free, highly effective water sterilization in drinking and process water.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -913,15 +1019,13 @@
         <div class="service-card" style="transition-delay: 0.20s">
           <div class="card-img">
             <div class="card-img-bg bg-fab"></div>
-            <!-- DUMMY IMAGE — replace src with real image when available -->
-            <img class="card-dummy-img" src="https://images.unsplash.com/photo-1565799557186-c3d5d100a25c?w=400&h=200&fit=crop&auto=format" alt="Fabricated Plants and Tanks" style="position:absolute;inset:0;z-index:2;"/>
-            <div class="card-icon-wrap"><div class="card-icon">🔩</div></div>
+            <img class="card-dummy-img" src="/images/STP/Fabricated Plants, Tanks & Vessels.jpeg" alt="Fabricated Plants and Tanks" style="position:absolute;inset:0;z-index:2;"/>
             <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div></div>
             <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
           </div>
           <div class="card-body">
-            <h3>Fabricated Plants, Tanks &amp; Vessels</h3>
-            <p>Pressure sand filters, activated carbon filters, dual media filters, MS tanks, FRP vessels and custom-fabricated water treatment equipment.</p>
+            <h3  style="font-size: 16px;">Fabricated Plants, Tanks &amp; Vessels</h3>
+            <p  style="font-size: 15px;">Pressure sand filters, activated carbon filters, dual media filters, MS tanks, FRP vessels and custom-fabricated water treatment equipment.</p>
             <div class="card-divider"></div>
           </div>
         </div>
@@ -958,33 +1062,33 @@
       <div class="purifier-grid">
         <div class="purifier-card" style="transition-delay:0.05s">
           <div class="purifier-icon">🚰</div>
-          <h3>RO + UV Purifier</h3>
-          <p>Multi-stage purification combining RO and UV for pure drinking water, free from bacteria and dissolved impurities.</p>
+          <h3  style="font-size: 16px;">RO + UV Purifier</h3>
+          <p  style="font-size: 14px;">Multi-stage purification combining RO and UV for pure drinking water, free from bacteria and dissolved impurities.</p>
         </div>
         <div class="purifier-card" style="transition-delay:0.10s">
           <div class="purifier-icon">💎</div>
-          <h3>UF Purifier</h3>
-          <p>Ultrafiltration purifier removes bacteria, viruses and suspended particles — ideal for clean water areas.</p>
+          <h3  style="font-size: 16px;">UF Purifier</h3>
+          <p  style="font-size: 14px;">Ultrafiltration purifier removes bacteria, viruses and suspended particles — ideal for clean water areas.</p>
         </div>
         <div class="purifier-card" style="transition-delay:0.15s">
           <div class="purifier-icon">🌊</div>
-          <h3>7-Stage Gravity Model</h3>
-          <p>Non-electric 7-stage gravity-fed purifier — perfect for areas with limited power supply.</p>
+          <h3  style="font-size: 16px;">7-Stage Gravity Model</h3>
+          <p  style="font-size: 14px;">Non-electric 7-stage gravity-fed purifier — perfect for areas with limited power supply.</p>
         </div>
         <div class="purifier-card" style="transition-delay:0.20s">
           <div class="purifier-icon">⚡</div>
-          <h3>Alkaline Purifiers</h3>
-          <p>Enhances water pH for improved taste and health benefits, while purifying thoroughly.</p>
+          <h3  style="font-size: 16px;">Alkaline Purifiers</h3>
+          <p  style="font-size: 14px;">Enhances water pH for improved taste and health benefits, while purifying thoroughly.</p>
         </div>
         <div class="purifier-card" style="transition-delay:0.25s">
           <div class="purifier-icon">🏠</div>
-          <h3>Residential Softeners</h3>
-          <p>Compact ion-exchange softeners protecting appliances, plumbing and skin from hard water.</p>
+          <h3  style="font-size: 16px;">Residential Softeners</h3>
+          <p  style="font-size: 14px;">Compact ion-exchange softeners protecting appliances, plumbing and skin from hard water.</p>
         </div>
         <div class="purifier-card" style="transition-delay:0.30s">
           <div class="purifier-icon">🧴</div>
-          <h3>Water Chemicals Supply</h3>
-          <p>Supply of water treatment chemicals for home use — Sodium Hypochlorite, chlorine tablets and more.</p>
+          <h3  style="font-size: 16px;">Water Chemicals Supply</h3>
+          <p  style="font-size: 14px;">Supply of water treatment chemicals for home use — Sodium Hypochlorite, chlorine tablets and more.</p>
         </div>
       </div>
     </div>

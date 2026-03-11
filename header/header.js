@@ -22,14 +22,20 @@
     }
 
     setupEventListeners() {
-      // Mobile menu toggle
+      // Mobile menu toggle - FIXED: Added null checks and proper event binding
       if (this.mobileTrigger && this.nav) {
-        this.mobileTrigger.addEventListener('click', (e) => this.toggleMobileMenu(e));
+        this.mobileTrigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleMobileMenu(e);
+        });
       }
 
       // Nav close button inside panel
       if (this.navClose) {
-        this.navClose.addEventListener('click', (e) => this.toggleMobileMenu(e));
+        this.navClose.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleMobileMenu(e);
+        });
       }
 
       // Dropdown handling for all devices
@@ -69,27 +75,29 @@
         const link = dropdown.querySelector('.tf-nav-link');
 
         // Use a flag to prevent adding duplicate listeners on resize
-        if (link.dataset.dropdownInit === 'true') return;
-        link.dataset.dropdownInit = 'true';
+        if (link && link.dataset.dropdownInit === 'true') return;
+        if (link) link.dataset.dropdownInit = 'true';
 
         // Add click handler
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
+        if (link) {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
 
-          // For mobile (<= 992px) - toggle dropdown
-          if (window.innerWidth <= 992) {
-            // Close other dropdowns first
-            this.dropdowns.forEach(d => {
-              if (d !== dropdown && d.classList.contains('active')) {
-                d.classList.remove('active');
-              }
-            });
+            // For mobile (<= 992px) - toggle dropdown
+            if (window.innerWidth <= 992) {
+              // Close other dropdowns first
+              this.dropdowns.forEach(d => {
+                if (d !== dropdown && d.classList.contains('active')) {
+                  d.classList.remove('active');
+                }
+              });
 
-            // Toggle current dropdown
-            dropdown.classList.toggle('active');
-          }
-        });
+              // Toggle current dropdown
+              dropdown.classList.toggle('active');
+            }
+          });
+        }
 
         // Handle mouseenter for desktop
         dropdown.addEventListener('mouseenter', () => {
@@ -202,9 +210,11 @@
         if (this.mobileTrigger) {
           this.mobileTrigger.classList.remove('active');
           const spans = this.mobileTrigger.querySelectorAll('span');
-          spans[0].style.transform = 'none';
-          spans[1].style.opacity = '1';
-          spans[2].style.transform = 'none';
+          if (spans.length) {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+          }
         }
 
         // Remove body lock
@@ -222,10 +232,12 @@
 
     handleScroll() {
       // Add shadow on scroll
-      if (window.scrollY > 10) {
-        this.header.style.boxShadow = '0 8px 30px rgba(0,100,150,0.15)';
-      } else {
-        this.header.style.boxShadow = '0 8px 30px rgba(0,100,150,0.1)';
+      if (this.header) {
+        if (window.scrollY > 10) {
+          this.header.style.boxShadow = '0 8px 30px rgba(0,100,150,0.15)';
+        } else {
+          this.header.style.boxShadow = '0 8px 30px rgba(0,100,150,0.1)';
+        }
       }
     }
   }

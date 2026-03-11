@@ -13,7 +13,7 @@
   top: 0;
   width: 100%;
   background: linear-gradient(135deg, #ffffff 0%, #f5fbff 100%);
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Inter';
   z-index: 1000;
   box-shadow: 0 8px 30px rgba(0, 100, 150, 0.1);
   border-bottom: 3px solid transparent;
@@ -86,7 +86,7 @@
 }
 
 .tf-brand-name {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Inter';
   font-size: 1.8rem;
   font-weight: 800;
   background: linear-gradient(135deg, #01579b, #0288d1);
@@ -107,7 +107,7 @@
 }
 
 .tf-brand-tagline {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Inter';
   font-size: 0.75rem;
   color: #546e7a;
   letter-spacing: 0.5px;
@@ -139,7 +139,7 @@
   gap: 0.3rem;
   padding: 0.7rem 1.2rem;
   color: #2c3e50;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Inter';
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
@@ -227,7 +227,7 @@
   padding: 0.8rem 1.5rem;
   color: #2c3e50;
   text-decoration: none;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Inter';
   font-size: 0.95rem;
   font-weight: 600;
   transition: background-color 0.3s, color 0.3s, border-left-color 0.3s;
@@ -266,7 +266,7 @@
   background: linear-gradient(135deg, #0288d1, #01579b);
   color: #ffffff;
   text-decoration: none;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Inter';
   font-weight: 700;
   font-size: 0.9rem;
   border-radius: 50px;
@@ -436,7 +436,7 @@
   .tf-nav-link {
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Inter';
 
   }
 

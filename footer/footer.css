@@ -14,7 +14,7 @@
   --aqua-dim   : rgba(0, 198, 212, 0.15);
   --white-dim  : rgba(255, 255, 255, 0.55);
   --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body   : 'Jost', sans-serif;
+  --font-body   : 'Inter';
   --transition  : 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
