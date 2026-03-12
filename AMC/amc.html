@@ -883,33 +883,7 @@
 
   <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
   <section class="hero" id="home">
-    <!-- ═══════════════════════════════════════════════════════════
-         HERO BACKGROUND — choose ONE option:
-
-         OPTION A — Video background:
-           Uncomment the <video> tag below and set src="your-video.mp4"
-           Comment out the <img> tag and the .hero-fallback div.
-
-         OPTION B — Image background:
-           Uncomment the <img> tag below and set src="your-image.jpg"
-           Comment out the <video> tag and the .hero-fallback div.
-
-         OPTION C — Keep default gradient (no media):
-           Leave both <video> and <img> commented out.
-         ═══════════════════════════════════════════════════════════ -->
-
-    <!-- OPTION A: Video background — replace src with your video file path -->
-    <!--
-    <video class="hero-bg-video" autoplay muted loop playsinline>
-      <source src="your-video.mp4" type="video/mp4">
-    </video>
-    -->
-
-    <!-- OPTION B: Image background — replace src with your image file path -->
-    <!--
-    <img class="hero-bg-image" src="your-image.jpg" alt=""/>
-    -->
-
+    
     <!-- OPTION C: Default gradient fallback (remove this if using video or image above) -->
     <div class="hero-fallback"></div>
 
@@ -942,149 +916,149 @@
   </section>
 
   <!-- ══════════════════════════════════════ WHAT WE COVER ════════════════════════════ -->
-  <section id="covers">
-    <div class="container">
-      <div style="text-align: center;" class="reveal">
-        <span class="section-label">AMC Coverage</span>
-        <h2 class="section-title">Systems We Maintain</h2>
-        <p class="section-desc" style="margin: 0 auto;">We provide Annual Maintenance Contracts for all types of water treatment systems — keeping them operating at peak performance throughout the year.</p>
-      </div>
+<section id="covers">
+  <div class="container">
+    <div style="text-align: center;" class="reveal">
+      <span class="section-label">AMC Coverage</span>
+      <h2 class="section-title">Systems We Maintain</h2>
+      <p class="section-desc" style="margin: 0 auto;">We provide Annual Maintenance Contracts for all types of water treatment systems — keeping them operating at peak performance throughout the year.</p>
+    </div>
 
-      <div class="services-grid">
-        <!-- STP -->
-        <div class="service-card" style="transition-delay: 0.05s">
-          <div class="card-img">
-            <div class="card-img-bg bg-stp" id="cardBg-stp" style="background-image: url('/images/client_img/STP.jpeg');"></div>
-            <div class="card-badge"><b>STP</b><small>AMC Available</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-stp">🖼 Change Image</label>
-              <input type="file" id="cardFile-stp" accept="image/*" data-target="cardBg-stp"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+    <div class="services-grid">
+      <!-- STP -->
+      <div class="service-card" style="transition-delay: 0.05s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-stp" style="background-image: url('/images/client_img/STP.jpeg'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>STP</b><small>AMC Available</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-stp">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-stp" accept="image/*" data-target="cardBg-stp"/>
           </div>
-          <div class="card-body">
-            <h3>Sewage Treatment Plants (STP)</h3>
-            <p>Regular inspection, cleaning, chemical dosing, sludge management and equipment servicing to keep your STP compliant and efficient all year.</p>
-          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
         </div>
-        <!-- WTP -->
-        <div class="service-card" style="transition-delay: 0.10s">
-          <div class="card-img">
-            <div class="card-img-bg bg-wtp" id="cardBg-wtp" style="background-image: url('/images/client_img/WTP.jpeg');"></div>
-            <div class="card-badge"><b>WTP</b><small>AMC Available</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-wtp">🖼 Change Image</label>
-              <input type="file" id="cardFile-wtp" accept="image/*" data-target="cardBg-wtp"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-          </div>
-          <div class="card-body">
-            <h3>Water Softening Plants (WTP)</h3>
-            <p>Resin regeneration, valve servicing, salt management and performance testing — ensuring consistent soft water delivery without interruption.</p>
-          </div>
-        </div>
-        <!-- ETP -->
-        <div class="service-card" style="transition-delay: 0.15s">
-          <div class="card-img">
-            <div class="card-img-bg bg-repair" id="cardBg-etp" style="background-image: url('');"></div>
-            <div class="card-badge"><b>ETP</b><small>AMC Available</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-etp">🖼 Change Image</label>
-              <input type="file" id="cardFile-etp" accept="image/*" data-target="cardBg-etp"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-          </div>
-          <div class="card-body">
-            <h3>Effluent Treatment Plants (ETP)</h3>
-            <p>Chemical dosing calibration, equipment checks, effluent quality monitoring and compliance support to maintain CPCB standards at all times.</p>
-          </div>
-        </div>
-        <!-- RO -->
-        <div class="service-card" style="transition-delay: 0.20s">
-          <div class="card-img">
-            <div class="card-img-bg bg-ro" id="cardBg-ro" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop&auto=format');"></div>
-            <div class="card-badge"><b>RO</b><small>AMC Available</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-ro">🖼 Change Image</label>
-              <input type="file" id="cardFile-ro" accept="image/*" data-target="cardBg-ro"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-          </div>
-          <div class="card-body">
-            <h3>RO Reverse Osmosis Plants</h3>
-            <p>Membrane performance checks, filter replacements, antiscalant dosing and water quality testing — maintaining pure water output every day.</p>
-          </div>
+        <div class="card-body">
+          <h3>Sewage Treatment Plants (STP)</h3>
+          <p>Regular inspection, cleaning, chemical dosing, sludge management and equipment servicing to keep your STP compliant and efficient all year.</p>
         </div>
       </div>
-
-      <div class="services-grid" style="margin-top: var(--card-gap);">
-        <!-- Pool -->
-        <div class="service-card" style="transition-delay: 0.05s">
-          <div class="card-img">
-            <div class="card-img-bg bg-pool" id="cardBg-pool" style="background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=400&h=200&fit=crop&auto=format');"></div>
-            <div class="card-badge"><b>POOL</b><small>AMC Available</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-pool">🖼 Change Image</label>
-              <input type="file" id="cardFile-pool" accept="image/*" data-target="cardBg-pool"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+      <!-- WTP -->
+      <div class="service-card" style="transition-delay: 0.10s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-wtp" style="background-image: url('/images/client_img/WTP.jpeg'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>WTP</b><small>AMC Available</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-wtp">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-wtp" accept="image/*" data-target="cardBg-wtp"/>
           </div>
-          <div class="card-body">
-            <h3>Swimming Pool &amp; Waterbodies</h3>
-            <p>Regular chemical balancing, filter backwashing, pump servicing and water quality testing — crystal-clear, hygienic water for residents every day.</p>
-          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
         </div>
-        <!-- Tank Cleaning -->
-        <div class="service-card" style="transition-delay: 0.10s">
-          <div class="card-img">
-            <div class="card-img-bg bg-tank" id="cardBg-tank" style="background-image: url('https://images.unsplash.com/photo-1581093577421-f561a654a353?w=400&h=200&fit=crop&auto=format');"></div>
-            <div class="card-badge"><b>TANK</b><small>Cleaning Included</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-tank">🖼 Change Image</label>
-              <input type="file" id="cardFile-tank" accept="image/*" data-target="cardBg-tank"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-          </div>
-          <div class="card-body">
-            <h3>Tank Cleaning Services</h3>
-            <p>Scheduled professional tank cleaning for STP, WTP and ETP systems — with well-equipped, dedicated manpower for thorough, safe cleaning.</p>
-          </div>
+        <div class="card-body">
+          <h3>Water Softening Plants (WTP)</h3>
+          <p>Resin regeneration, valve servicing, salt management and performance testing — ensuring consistent soft water delivery without interruption.</p>
         </div>
-        <!-- Repair & Refurbishment -->
-        <div class="service-card" style="transition-delay: 0.15s">
-          <div class="card-img">
-            <div class="card-img-bg bg-chem" id="cardBg-repair" style="background-image: url('https://images.unsplash.com/photo-1581093577421-f561a654a353?w=400&h=200&fit=crop&auto=format');"></div>
-            <div class="card-badge"><b>R&amp;R</b><small>Repair Included</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-repair">🖼 Change Image</label>
-              <input type="file" id="cardFile-repair" accept="image/*" data-target="cardBg-repair"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+      </div>
+      <!-- ETP -->
+      <div class="service-card" style="transition-delay: 0.15s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-etp" style="background-image: url('/images/amc.jpg'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>ETP</b><small>AMC Available</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-etp">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-etp" accept="image/*" data-target="cardBg-etp"/>
           </div>
-          <div class="card-body">
-            <h3>Repair &amp; Refurbishment</h3>
-            <p>Breakdown response, equipment repair and refurbishment of STP, WTP and ETP plants — restoring optimal performance and extending operational life.</p>
-          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
         </div>
-        <!-- Spares Supply -->
-        <div class="service-card" style="transition-delay: 0.20s">
-          <div class="card-img">
-            <div class="card-img-bg bg-spares" id="cardBg-spares" style="background-image: url('https://images.unsplash.com/photo-1581093577421-f561a654a353?w=400&h=200&fit=crop&auto=format');"></div>
-            <div class="card-badge"><b>SPARE</b><small>Parts Included</small></div>
-            <div class="card-img-changer">
-              <label for="cardFile-spares">🖼 Change Image</label>
-              <input type="file" id="cardFile-spares" accept="image/*" data-target="cardBg-spares"/>
-            </div>
-            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+        <div class="card-body">
+          <h3>Effluent Treatment Plants (ETP)</h3>
+          <p>Chemical dosing calibration, equipment checks, effluent quality monitoring and compliance support to maintain CPCB standards at all times.</p>
+        </div>
+      </div>
+      <!-- RO -->
+      <div class="service-card" style="transition-delay: 0.20s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-ro" style="background-image: url('/images/Residential-Reverse-Osmosis-Plant.webp'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>RO</b><small>AMC Available</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-ro">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-ro" accept="image/*" data-target="cardBg-ro"/>
           </div>
-          <div class="card-body">
-            <h3>Spares &amp; Consumables Supply</h3>
-            <p>Supply of all required spares — RO membranes, cartridge filters, resin, sand media, carbon media, chemicals and more — as part of your AMC plan.</p>
-          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>RO Reverse Osmosis Plants</h3>
+          <p>Membrane performance checks, filter replacements, antiscalant dosing and water quality testing — maintaining pure water output every day.</p>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="services-grid" style="margin-top: var(--card-gap);">
+      <!-- Pool -->
+      <div class="service-card" style="transition-delay: 0.05s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-pool" style="background-image: url('/images/Swimming\ Pool\ &\ Waterbodies.jpeg'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>POOL</b><small>AMC Available</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-pool">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-pool" accept="image/*" data-target="cardBg-pool"/>
+          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Swimming Pool &amp; Waterbodies</h3>
+          <p>Regular chemical balancing, filter backwashing, pump servicing and water quality testing — crystal-clear, hygienic water for residents every day.</p>
+        </div>
+      </div>
+      <!-- Tank Cleaning -->
+      <div class="service-card" style="transition-delay: 0.10s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-tank" style="background-image: url('/images/Tank\ Cleaning\ Services.jpeg'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>TANK</b><small>Cleaning Included</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-tank">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-tank" accept="image/*" data-target="cardBg-tank"/>
+          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Tank Cleaning Services</h3>
+          <p>Scheduled professional tank cleaning for STP, WTP and ETP systems — with well-equipped, dedicated manpower for thorough, safe cleaning.</p>
+        </div>
+      </div>
+      <!-- Repair & Refurbishment -->
+      <div class="service-card" style="transition-delay: 0.15s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-repair" style="background-image: url('/images/Repair\ &\ Refurbishment.jpeg'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>R&amp;R</b><small>Repair Included</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-repair">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-repair" accept="image/*" data-target="cardBg-repair"/>
+          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Repair &amp; Refurbishment</h3>
+          <p>Breakdown response, equipment repair and refurbishment of STP, WTP and ETP plants — restoring optimal performance and extending operational life.</p>
+        </div>
+      </div>
+      <!-- Spares Supply -->
+      <div class="service-card" style="transition-delay: 0.20s">
+        <div class="card-img">
+          <div class="card-img-bg" id="cardBg-spares" style="background-image: url('/images/Spares\ &\ Consumables\ Supply.jpg'); background-size:cover; background-position:center;"></div>
+          <div class="card-badge"><b>SPARE</b><small>Parts Included</small></div>
+          <div class="card-img-changer">
+            <!-- <label for="cardFile-spares">🖼 Change Image</label> -->
+            <input type="file" id="cardFile-spares" accept="image/*" data-target="cardBg-spares"/>
+          </div>
+          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Spares &amp; Consumables Supply</h3>
+          <p>Supply of all required spares — RO membranes, cartridge filters, resin, sand media, carbon media, chemicals and more — as part of your AMC plan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- ══════════════════════════════════════ WHY US ════════════════════════════════════ -->
   <section id="why">
