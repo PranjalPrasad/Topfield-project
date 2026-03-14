@@ -412,10 +412,10 @@ section { padding: 40px 0; margin: 0; }
 .about-card-main {
   background: linear-gradient(135deg, var(--blue-deep) 0%, #1565a8 100%);
   border-radius: 16px;
-  padding: 1.4rem 1.6rem;
+  padding: 0;
   color: #fff;
   position: relative;
-  overflow: hidden;
+  overflow: hidden;  
   box-shadow: 0 14px 40px rgba(10,35,66,0.2);
   animation: cardEntrance 1s ease 0.6s both;
   margin-bottom: 0.8rem;
@@ -3655,4 +3655,176 @@ animation: marquee 120s linear infinite;
 }
 /* ══════════════════════════════════════════════════════════
    END ADDITIONAL RESPONSIVE FIXES
-   ══════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════ *//* ── ABOUT CARD MAIN — REDESIGNED LAYOUT ── */
+.about-card-main {
+  background: #1a3a5c;
+  border-radius: 20px;
+  padding: 0;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(10,35,66,0.3);
+  animation: cardEntrance 1s ease 0.6s both;
+  margin-bottom: 0.8rem;
+}
+
+.about-card-inner {
+  display: flex;
+  align-items: stretch;
+  min-height: 210px;
+  position: relative;
+}
+
+/* ── LEFT: Photo ── */
+.about-founder-img-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 42%;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 20px 0 0 20px;
+}
+
+.about-founder-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.about-card-main:hover .about-founder-img {
+  transform: scale(1.04);
+}
+
+/* ── THIN DIAGONAL WEDGE — sits only at the boundary between photo and text ── */
+/* .about-founder-img-glow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(42% - 18px);
+  width: 44px;
+  z-index: 4;
+  pointer-events: none;
+  background: #3b9fd4;
+  clip-path: polygon(38% 0, 100% 0, 62% 100%, 0% 100%);
+} */
+
+/* ── RIGHT: Text content ── */
+.about-card-text-side {
+  flex: 1;
+  padding: 1.6rem 1.5rem 1.5rem 1.8rem;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #1a3a5c;
+}
+
+/* decorative large quote marks top-right */
+.about-card-text-side::after {
+  content: '\201C';
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 3.5rem;
+  color: rgba(59,159,212,0.15);
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.about-quote-icon {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: #3b9fd4;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-weight: 900;
+  display: block;
+}
+
+.about-card-text-side p {
+  font-size: 0.88rem !important;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.9) !important;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body);
+  margin-bottom: 1.1rem;
+  opacity: 1 !important;
+}
+
+.about-founder-row {
+  margin-top: 0;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.about-founder-name  {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  font-family: var(--font-body);
+}
+.about-founder-title {
+  font-size: 0.75rem;
+  opacity: 0.55;
+  color: #fff;
+  margin-top: 3px;
+  font-family: var(--font-body);
+}
+
+.about-founder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,198,212,0.12);
+  border: 1px solid rgba(0,198,212,0.45);
+  color: #7eeeff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 5px 14px;
+  border-radius: 50px;
+  margin-top: 0.6rem;
+  font-family: var(--font-body);
+  width: fit-content;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .about-card-inner { flex-direction: column; min-height: auto; }
+
+  .about-founder-img-wrap {
+    width: 100%;
+    height: 200px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* wedge becomes a horizontal stripe at the bottom of the image */
+  .about-founder-img-glow {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 44px;
+    clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .about-card-text-side {
+    padding: 1.3rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-founder-img-wrap { height: 175px; }
+  .about-card-text-side { padding: 1.1rem 1rem; }
+}
