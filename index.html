@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
   <title>Topfield Water Solutions – Total Water Solution & Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,12 +11,19 @@
   <link rel="stylesheet" href="index.css"/>
   <link rel="stylesheet" href="../header/header.css"/>
   <link rel="stylesheet" href="../footer/footer.css"/>
+  <style>
+    /* Critical responsive fixes - added to ensure no horizontal scroll */
+    body { overflow-x: hidden; width: 100%; position: relative; }
+    img, video, svg { max-width: 100%; height: auto; }
+    .container, .po-container { width: 100%; max-width: 100%; box-sizing: border-box; }
+    * { box-sizing: border-box; }
+  </style>
 </head>
 <body>
 
   <div id="header-placeholder"></div>
 
-  <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
+  <!-- HERO SECTION -->
   <section class="hero" id="home">
     <div class="hero-fallback"></div>
     <video class="hero-video-el" src="/video/hero-section.mp4" poster="/video/hero-section.mp4" autoplay muted loop playsinline preload="auto"></video>
@@ -35,7 +42,7 @@
     </svg>
   </section>
 
-  <!-- ══════════════════════════════════════ ABOUT ════════════════════════════════════ -->
+  <!-- ABOUT SECTION -->
   <section id="about">
     <div class="about-drops">
       <div class="drop"></div><div class="drop"></div><div class="drop"></div><div class="drop"></div><div class="drop"></div>
@@ -60,29 +67,28 @@
             <div class="about-desc-dot" style="animation-delay: 0.4s;"></div>
             <p class="section-desc" style="font-size: 18px;">We design, erect, commission water treatment plants, waste water treatment plants &amp; reverse osmosis plants, and also take AMC for these systems by providing spares and services for all types of applications — domestic to industrial.</p>
           </div>
-          <div class="about-cta-wrap">
-          </div>
+          <div class="about-cta-wrap"></div>
         </div>
         <div class="about-visual reveal-right">
-         <div class="about-card-main">
-  <div class="about-card-inner">
-    <div class="about-founder-img-wrap" style="border-radius: 16px 0 0 16px;">
-      <img src="/images/pic/client Img.jpeg" alt="Prem Adhe" class="about-founder-img" onerror="this.src='https://placehold.co/180x220/0a2342/ffffff?text=Prem+Adhe'"/>
-      <div class="about-founder-img-glow"></div>
-    </div>
-    <div class="about-card-text-side">
-      <div class="about-quote-icon">"</div>
-      <p style="font-size:16px;">"We don't just treat water — we engineer solutions that sustain communities, protect industries, and restore the purity that nature intended."</p>
-      <div class="about-founder-row">
-        <div>
-          <div class="about-founder-name" style="font-size: 18px;">Prem Adhe</div>
-          <div class="about-founder-title" style="font-size: 15px;">Founder, Topfield Water Solutions</div>
-          <div class="about-founder-badge">💧 Water Purification Expert</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          <div class="about-card-main">
+            <div class="about-card-inner">
+              <div class="about-founder-img-wrap" style="border-radius: 16px 0 0 16px;">
+                <img src="/images/pic/client Img.jpeg" alt="Prem Adhe" class="about-founder-img" onerror="this.src='https://placehold.co/180x220/0a2342/ffffff?text=Prem+Adhe'"/>
+                <div class="about-founder-img-glow"></div>
+              </div>
+              <div class="about-card-text-side">
+                <div class="about-quote-icon">"</div>
+                <p style="font-size:16px;">"We don't just treat water — we engineer solutions that sustain communities, protect industries, and restore the purity that nature intended."</p>
+                <div class="about-founder-row">
+                  <div>
+                    <div class="about-founder-name" style="font-size: 18px;">Prem Adhe</div>
+                    <div class="about-founder-title" style="font-size: 15px;">Founder, Topfield Water Solutions</div>
+                    <div class="about-founder-badge">💧 Water Purification Expert</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="about-accent-cards">
             <div class="about-accent-card"><span class="icon">🏗️</span><span class="val" style="font-size:35px;">25+</span><span class="key">Projects</span></div>
             <div class="about-accent-card"><span class="icon">🔧</span><span class="val" style="font-size:30px;">AMC</span><span class="key">Maintenance</span></div>
@@ -93,157 +99,149 @@
       </div>
     </div>
   </section>
-  <!-- ══════════════════════════════════════ SERVICES ════════════════════════════════ -->
-<section id="services">
-  <div class="container">
-    <div style="text-align: center;" class="reveal">
-      <span class="section-label">What We Do</span>
-      <h2 class="section-title">Our Services</h2>
-      <p class="section-desc" style="margin: 0 auto;font-size:18px;">Comprehensive water treatment services for housing societies, commercial complexes, factories and industrial plants.</p>
+
+  <!-- SERVICES SECTION -->
+  <section id="services">
+    <div class="container">
+      <div style="text-align: center;" class="reveal">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-desc" style="margin: 0 auto;font-size:18px;">Comprehensive water treatment services for housing societies, commercial complexes, factories and industrial plants.</p>
+      </div>
+      <div class="services-grid">
+        <!-- 1 STP -->
+        <div class="service-card" style="transition-delay: 0.05s">
+          <div class="card-img">
+            <div class="card-img-bg bg-stp">
+              <img src="/images/client_img/STP.jpeg" alt="Sewage Treatment Plant" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Sewage Treatment Plants (STP)</h3>
+            <p style="font-size: 15px;">Complete STP solutions for housing societies, commercial complexes &amp; factories — design, installation and commissioning.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+        <!-- 2 WTP -->
+        <div class="service-card" style="transition-delay: 0.10s">
+          <div class="card-img">
+            <div class="card-img-bg bg-wtp">
+              <img src="/images/index page img/wtp.jpeg" alt="Water Softening Plant" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Water Softening Plants (WTP)</h3>
+            <p style="font-size: 15px;">Effective hard water treatment for housing societies, commercial complexes and factories using ion-exchange technology.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+        <!-- 3 RO -->
+        <div class="service-card" style="transition-delay: 0.15s">
+          <div class="card-img">
+            <div class="card-img-bg bg-ro">
+              <img src="/images/index page img/RO Plants.jpeg" alt="Reverse Osmosis Plant" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Reverse Osmosis (RO) Plants</h3>
+            <p style="font-size: 15px;">RO Reverse Osmosis Plants for drinking water filtration systems with and without UV — for homes and industries.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+        <!-- 4 Pool -->
+        <div class="service-card" style="transition-delay: 0.20s">
+          <div class="card-img">
+            <div class="card-img-bg bg-pool">
+              <img src="/images/WaterBodies Operation & AMC - Tithe ha photo add kara.jpeg" alt="Waterbody AMC" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Waterbodies Operation &amp; AMC</h3>
+            <p style="font-size: 15px;">Swimming pool and waterbodies operation, maintenance and Annual Maintenance Contracts for consistent performance.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+        <!-- 5 Chemical -->
+        <div class="service-card" style="transition-delay: 0.25s">
+          <div class="card-img">
+            <div class="card-img-bg bg-chem">
+              <img src="/images/our work/dumping/chemicals.jpeg" alt="Chemical Supply" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Chemical Supply</h3>
+            <p style="font-size: 15px;">Supply of all water treatment chemicals — Sodium Hypochlorite, TCC (90), Granular PAC, SMBS, Anti Scalant and more.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+        <!-- 6 Repair -->
+        <div class="service-card" style="transition-delay: 0.30s">
+          <div class="card-img">
+            <div class="card-img-bg bg-repair">
+              <img src="/images/our work/ETA plant/6.jpeg" alt="Plant Repair" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Plant Repair &amp; Refurbishment</h3>
+            <p style="font-size: 15px;">Repair and refurbishment of STP, WTP, ETP Plants to restore optimal performance and extend operational lifespan.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+        <!-- 7 Tank -->
+        <div class="service-card" style="transition-delay: 0.35s">
+          <div class="card-img">
+            <div class="card-img-bg bg-tank">
+              <img src="/images/index page img/tank-cleaning-services.jpg" alt="Tank Cleaning" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Tank Cleaning Services</h3>
+            <p style="font-size: 15px;">Professional tank cleaning for STP, WTP, ETP Plants with well-equipped, dedicated manpower for thorough service.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+        <!-- 8 Spares -->
+        <div class="service-card" style="transition-delay: 0.40s">
+          <div class="card-img">
+            <div class="card-img-bg bg-spares">
+              <img src="/images/" alt="Spares and Components" class="card-real-img" onerror="this.style.display='none'"/>
+            </div>
+            <div class="card-img-overlay"></div>
+            <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
+            <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 style="font-size: 18px;">Spares &amp; Components</h3>
+            <p style="font-size: 15px;">Supply of MS vessels, FRP vessels, sand media, carbon media, Resin, RO membranes, cartridge filters and more.</p>
+            <div class="card-divider"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="services-grid">
+  </section>
 
-      <!-- 1 STP -->
-      <div class="service-card" style="transition-delay: 0.05s">
-        <div class="card-img">
-          <div class="card-img-bg bg-stp">
-            <img src="/images/client_img/STP.jpeg" alt="Sewage Treatment Plant" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Sewage Treatment Plants (STP)</h3>
-          <p style="font-size: 15px;">Complete STP solutions for housing societies, commercial complexes &amp; factories — design, installation and commissioning.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-      <!-- 2 WTP -->
-      <div class="service-card" style="transition-delay: 0.10s">
-        <div class="card-img">
-          <div class="card-img-bg bg-wtp">
-            <img src="/images/index page img/wtp.jpeg" alt="Water Softening Plant" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Water Softening Plants (WTP)</h3>
-          <p style="font-size: 15px;">Effective hard water treatment for housing societies, commercial complexes and factories using ion-exchange technology.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-      <!-- 3 RO -->
-      <div class="service-card" style="transition-delay: 0.15s">
-        <div class="card-img">
-          <div class="card-img-bg bg-ro">
-            <img src="/images/index page img/RO Plants.jpeg" alt="Reverse Osmosis Plant" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Reverse Osmosis (RO) Plants</h3>
-          <p style="font-size: 15px;">RO Reverse Osmosis Plants for drinking water filtration systems with and without UV — for homes and industries.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-      <!-- 4 Pool -->
-      <div class="service-card" style="transition-delay: 0.20s">
-        <div class="card-img">
-          <div class="card-img-bg bg-pool">
-            <img src="/images/index page img/Waterbodies Operation & AMC.jpeg" alt="Waterbody AMC" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Waterbodies Operation &amp; AMC</h3>
-          <p style="font-size: 15px;">Swimming pool and waterbodies operation, maintenance and Annual Maintenance Contracts for consistent performance.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-      <!-- 5 Chemical -->
-      <div class="service-card" style="transition-delay: 0.25s">
-        <div class="card-img">
-          <div class="card-img-bg bg-chem">
-            <img src="/images/index page img/chemicals.jpeg" alt="Chemical Supply" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Chemical Supply</h3>
-          <p style="font-size: 15px;">Supply of all water treatment chemicals — Sodium Hypochlorite, TCC (90), Granular PAC, SMBS, Anti Scalant and more.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-      <!-- 6 Repair -->
-      <div class="service-card" style="transition-delay: 0.30s">
-        <div class="card-img">
-          <div class="card-img-bg bg-repair">
-            <img src="/images/index page img/refurbishment.jpg" alt="Plant Repair" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Plant Repair &amp; Refurbishment</h3>
-          <p style="font-size: 15px;">Repair and refurbishment of STP, WTP, ETP Plants to restore optimal performance and extend operational lifespan.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-      <!-- 7 Tank -->
-      <div class="service-card" style="transition-delay: 0.35s">
-        <div class="card-img">
-          <div class="card-img-bg bg-tank">
-            <img src="/images/index page img/tank-cleaning-services.jpg" alt="Tank Cleaning" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Tank Cleaning Services</h3>
-          <p style="font-size: 15px;">Professional tank cleaning for STP, WTP, ETP Plants with well-equipped, dedicated manpower for thorough service.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-      <!-- 8 Spares -->
-      <div class="service-card" style="transition-delay: 0.40s">
-        <div class="card-img">
-          <div class="card-img-bg bg-spares">
-            <img src="/images/index page img/Spares.jpeg" alt="Spares and Components" class="card-real-img" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-img-overlay"></div>
-          <div class="card-dots"><div class="card-dot active"></div><div class="card-dot"></div><div class="card-dot"></div><div class="card-dot"></div></div>
-          <svg class="card-wave" viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,16 C120,28 280,4 400,16 L400,28 L0,28 Z" fill="#fff"/></svg>
-        </div>
-        <div class="card-body">
-          <h3 style="font-size: 18px;">Spares &amp; Components</h3>
-          <p style="font-size: 15px;">Supply of MS vessels, FRP vessels, sand media, carbon media, Resin, RO membranes, cartridge filters and more.</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-  <!-- ════════════════════ BANNER ════════════════════ -->
+  <!-- BANNER SECTION -->
   <section id="banner">
     <svg class="banner-wave-top" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,40 C360,0 1080,80 1440,40 L1440,0 L0,0 Z" fill="#eaf3fb"/>
@@ -262,9 +260,7 @@
       </div>
       <div class="banner-text-side">
         <div class="banner-eyebrow">Pure &amp; Natural</div>
-        <h2 class="banner-main-title">
-          WATER<br/><span class="highlight">MINERAL</span>
-        </h2>
+        <h2 class="banner-main-title">WATER<br/><span class="highlight">MINERAL</span></h2>
         <p class="banner-tagline">TopField &nbsp;·&nbsp; Premium Quality &nbsp;·&nbsp; Pure &amp; Healthy</p>
         <div class="banner-badges">
           <span class="bnr-badge"><span class="bnr-badge-dot"></span>100% Pure</span>
@@ -276,7 +272,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════ PROJECTS ══════════════════════════════════ -->
+  <!-- PROJECTS SECTION -->
   <section id="projects">
     <div class="container">
       <div style="text-align: center;" class="reveal">
@@ -293,7 +289,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════ WHY US ═════════════════ -->
+  <!-- WHY US SECTION -->
   <section id="why">
     <div class="container" style="position: relative; z-index: 1;">
       <div class="why-heading reveal">
@@ -372,16 +368,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════ PRODUCTS OFFERED ══════════════════════════ -->
-  <section id="products-offered">
-    <!-- Animated water background blobs -->
-    <div class="po-bg-blob po-blob-1"></div>
-    <div class="po-bg-blob po-blob-2"></div>
-    <div class="po-bg-blob po-blob-3"></div>
-    <!-- Floating water drops -->
-    <div class="po-drop po-drop-1">💧</div>
-    <div class="po-drop po-drop-2">💧</div>
-    <div class="po-drop po-drop-3">💧</div><!-- ══════════════════════════════════════ PRODUCTS OFFERED ══════════════════════════ -->
+  <!-- PRODUCTS OFFERED SECTION -->
   <section id="products-offered">
     <div class="po-bg-blob po-blob-1"></div>
     <div class="po-bg-blob po-blob-2"></div>
@@ -417,7 +404,6 @@
 
       <!-- Tab Panels -->
       <div class="po-panels">
-
         <!-- DOMESTIC -->
         <div class="po-panel active" data-panel="domestic">
           <div class="po-cards-grid">
@@ -558,7 +544,7 @@
             <div class="po-card" style="--po-delay:0.15s">
               <div class="po-card-glow"></div>
               <div class="po-card-img-wrap">
-                <img src="/images/index page img/dosing.png"this.src='https://placehold.co/400x200/e3f2fd/0288d1?text=Dosing+Systems'"/>
+                <img src="/images/index page img/dosing.png" alt="Dosing Systems" class="po-card-img" onerror="this.src='https://placehold.co/400x200/e3f2fd/0288d1?text=Dosing+Systems'"/>
               </div>
               <div class="po-card-body">
                 <div class="po-card-icon-row">
@@ -715,7 +701,6 @@
             </div>
           </div>
         </div>
-
       </div><!-- end po-panels -->
     </div><!-- end po-container -->
 
@@ -723,7 +708,6 @@
       <path d="M0,35 C360,70 1080,0 1440,35 L1440,70 L0,70 Z" fill="#f0f8ff"/>
     </svg>
   </section>
-  <!-- ══════════════════════════════════════ END PRODUCTS OFFERED ══════════════════════ -->
 
   <div id="footer-placeholder"></div>
   <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -777,6 +761,5 @@
     });
   })();
   </script>
-
 </body>
 </html>
