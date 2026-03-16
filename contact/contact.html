@@ -11,6 +11,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
 
+  <!-- ═══ EMAILJS SDK — CHANGE 1 OF 3 ═══ -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("RoBH4OrEN0afequri"); 
+  </script>
+  <!-- ═══════════════════════════════════ -->
+
   <link rel="stylesheet" href="../../header/header.css"/>
   <link rel="stylesheet" href="../../footer/footer.css"/>
 
@@ -928,7 +935,7 @@
         <div class="strip-item" id="strip1">
           <span class="strip-icon">📞</span>
           <div class="strip-label">Call Us</div>
-          <div class="strip-value">Prem: 9673850505<br/>    9607129595</div>
+          <div class="strip-value">Prem: 9673850505<br/> 9607129595</div>
         </div>
         <div class="strip-item" id="strip2">
           <span class="strip-icon">✉️</span>
@@ -1019,14 +1026,15 @@
                 <label class="field-label">Your Name</label>
                 <div class="field-wrap">
                   <span class="field-icon">👤</span>
-                  <input class="field-input" type="text" placeholder="Full name"/>
+                  <!-- ═══ CHANGE 2 OF 3: added id and name attributes to all fields ═══ -->
+                  <input class="field-input" id="field_name" name="from_name" type="text" placeholder="Full name"/>
                 </div>
               </div>
               <div class="field-group">
                 <label class="field-label">Phone Number</label>
                 <div class="field-wrap">
                   <span class="field-icon">📞</span>
-                  <input class="field-input" type="tel" placeholder="Mobile number"/>
+                  <input class="field-input" id="field_phone" name="phone" type="tel" placeholder="Mobile number"/>
                 </div>
               </div>
             </div>
@@ -1035,13 +1043,13 @@
               <label class="field-label">Email Address</label>
               <div class="field-wrap">
                 <span class="field-icon">✉️</span>
-                <input class="field-input" type="email" placeholder="your@email.com"/>
+                <input class="field-input" id="field_email" name="from_email" type="email" placeholder="your@email.com"/>
               </div>
             </div>
 
             <div class="field-group">
               <label class="field-label">Products Interested In</label>
-              <select class="field-select product-select">
+              <select class="field-select product-select" id="field_product" name="product">
                 <option value="" disabled selected>Select a product…</option>
                 <option>Sewage Treatment Plants (STP) for housing societies, commercial complexes & factories</option>
                 <option>Water Softening Plants (WTP) for hard water</option>
@@ -1068,7 +1076,7 @@
 
             <div class="field-group">
               <label class="field-label">Service Required</label>
-              <select class="field-select">
+              <select class="field-select" id="field_service" name="service">
                 <option value="" disabled selected>Select a service…</option>
                 <option>Sewage Treatment Plant (STP)</option>
                 <option>Water Softening Plant (WTP)</option>
@@ -1086,10 +1094,11 @@
 
             <div class="field-group">
               <label class="field-label">Your Requirement</label>
-              <textarea class="field-textarea" placeholder="Describe your need — capacity, location, application, current problem…"></textarea>
+              <textarea class="field-textarea" id="field_message" name="message" placeholder="Describe your need — capacity, location, application, current problem…"></textarea>
             </div>
+            <!-- ═══════════════════════════════════════════════════════════════════════ -->
 
-            <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">
+            <button class="btn-submit" id="submitBtn" onclick="handleSubmit(event)">
               <span>Send Enquiry →</span>
             </button>
           </div>
@@ -1433,11 +1442,41 @@
       ease: 'sine.inOut'
     });
 
-    // ── Form submit handler ──
-    function handleSubmit() {
+    // ═══════════════════════════════════════════════════════
+    // CHANGE 3 OF 3: handleSubmit — EmailJS integration
+    // Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID below
+    // ═══════════════════════════════════════════════════════
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      // ── Validation ──
+      const name    = document.getElementById('field_name').value.trim();
+      const phone   = document.getElementById('field_phone').value.trim();
+      const email   = document.getElementById('field_email').value.trim();
+      const product = document.getElementById('field_product').value;
+      const service = document.getElementById('field_service').value;
+      const message = document.getElementById('field_message').value.trim();
+
+      if (!name || !phone || !email || !product || !service || !message) {
+        alert('Please fill in all fields before submitting.');
+        return;
+      }
+
       const btn = document.getElementById('submitBtn');
+
+      // ── Button loading state ──
+      btn.disabled = true;
+      btn.querySelector('span').textContent = 'Sending…';
       gsap.to(btn, { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 });
-      setTimeout(() => {
+
+      // ── Send via EmailJS ──
+      emailjs.send(
+        'service_80yszny',   // ← Replace with your EmailJS Service ID
+        'template_qt3wd7k',  // ← Replace with your EmailJS Template ID
+        { from_name: name, phone: phone, from_email: email, product: product, service: service, message: message }
+      )
+      .then(() => {
+        // ── Success: existing GSAP animation unchanged ──
         gsap.to('#formBody', {
           opacity: 0,
           y: -15,
@@ -1472,9 +1511,17 @@
             }
           }
         });
-      }, 300);
+      })
+      .catch((error) => {
+        // ── Error: restore button ──
+        console.error('EmailJS error:', error);
+        btn.disabled = false;
+        btn.querySelector('span').textContent = 'Send Enquiry →';
+        alert('Something went wrong. Please try again or call us directly on 9673850505.');
+      });
     }
     window.handleSubmit = handleSubmit;
+    // ═══════════════════════════════════════════════════════
 
     // ── Scroll to top ──
     const scrollBtn = document.getElementById('scrollTop');
